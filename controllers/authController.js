@@ -77,12 +77,12 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
           .then(newUser => {
             acLog(`New user created ${newUser.email}`);
 
-            // Send back to client only needed information
             //PENDING: Send back posts or comments later
             //PENDING: Decide to get sign in or just let them enter again
             res.send({
               name: newUser.name,
-              email: newUser.email
+              email: newUser.email,
+              registerDate: newUser.registerDate
             });
           })
           .catch(err => acLog(err));
@@ -94,41 +94,23 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
   }
 };
 
-const postSignInWithEmailAndPassword = async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    acLog("Unsuccesful post sign in with invalid field(s)");
-    return res.status(400).send({ msg: "Invalid input field(s)" });
-  }
-
-  // Check if there is exiting a user
-  try {
-    const existingUser = await User.findOne({ email });
-
-    if (!existingUser) {
-      acLog("Anonymous try to login to unregistered user");
-      return res.status(400).send({ msg: "User is not found" });
+const postSignInWithEmailAndPassword = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err)
     }
 
-    // Check if user input right password
-    bcrypt.compare(password, existingUser.password, (err, isMatch) => {
-      if (!isMatch) {
-        acLog(`${existingUser.email} login with wrong password, access denied`);
+    if (!user) {
+      return res.json({ message: info.message })
+    }
 
-        return res.status(400).send({ msg: "Password is not match" });
-      }
-
-      acLog(`${existingUser.email} login successfully`);
-      res.send({
-        name: existingUser.name,
-        email: existingUser.email
-      });
-    })
-  } catch (err) {
-    acLog(err);
-  }
-}
+    res.send({
+      name: user.name,
+      email: user.email,
+      registerDate: user.registerDate
+    });
+  })(req, res, next);
+};
 
 module.exports = {
   getGoogleOAuth,

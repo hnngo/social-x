@@ -32,6 +32,8 @@ router.get('/logout', isLogin, authController.getLogOut);
 // @Method    POST
 // @Path      /auth/singin
 // @Desc      User sign in
+const passport = require('passport');
+// router.post('/signin', passport.authenticate('local'), authController.postSignInWithEmailAndPassword);
 router.post('/signin', authController.postSignInWithEmailAndPassword);
 
 

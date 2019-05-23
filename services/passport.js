@@ -1,9 +1,12 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const keys = require('../config/keys');
 const acLog = require('../utils/activityLog');
 
+// Google OAuth Strategy
 passport.use(
   new GoogleStrategy({
     clientID: keys.googleClientId,
@@ -36,6 +39,43 @@ passport.use(
           done(null, newUser)
         })
         .catch(err => acLog(err));
+    } catch (err) {
+      acLog(err);
+    }
+  })
+);
+
+// Local Strategy
+passport.use(
+  new LocalStrategy({
+    usernameField: "email",
+    passwordField: "password"
+  }, async (email, password, done) => {
+    if (!email || !password) {
+      acLog("Unsuccesful post sign in with invalid field(s)");
+      return done(null, false, { message: "Invalid field(s)" });
+    }
+
+    // Check if there is exiting a user
+    try {
+      const existingUser = await User.findOne({ email });
+
+      if (!existingUser) {
+        acLog("Anonymous try to login to unregistered user");
+        return done(null, false, { message: "User is not found" });
+      }
+
+      // Check if user input right password
+      bcrypt.compare(password, existingUser.password, (err, isMatch) => {
+        if (err) return done(err);
+        if (!isMatch) {
+          acLog(`${existingUser.email} login with wrong password`);
+          return done(null, false, { message: "Password is not match" });
+        }
+
+        acLog(`${existingUser.email} login successfully`);
+        return done(null, existingUser);
+      })
     } catch (err) {
       acLog(err);
     }
