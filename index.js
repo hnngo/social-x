@@ -16,14 +16,16 @@ require('./services/mongoose');
 require('./services/passport');
 
 // Expres Middlewares
-app.use(express.urlencoded({
-  extended: false
-}));
 app.use(session({
+  //PENDING: Express Session store/ mongo/ redis
   secret: keys.sessionKey,
   resave: false,
   saveUninitialized: true
-}))
+}));
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

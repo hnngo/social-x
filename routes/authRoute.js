@@ -28,4 +28,16 @@ router.get('/current_user', authController.getCurrentUser);
 // @Desc      User log out
 router.get('/logout', isLogin, authController.getLogOut);
 
+
+// @Method    POST
+// @Path      /auth/singin
+// @Desc      User sign in
+router.post('/signin', authController.postSignInWithEmailAndPassword);
+
+
+// @Method    POST
+// @Path      /auth/singup
+// @Desc      Sing up new user with email and pwd
+router.post('/signup', authController.postSignUpWithEmailAndPassword);
+
 module.exports = router;
