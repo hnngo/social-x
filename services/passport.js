@@ -8,7 +8,8 @@ passport.use(
   new GoogleStrategy({
     clientID: keys.googleClientId,
     clientSecret: keys.googleSecretKey,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "/auth/google/callback",
+    proxy: true
   }, async (accessToken, refresToken, profile, done) => {
     try {
       // Check if existing user
