@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
+const { isLogin } = require('../utils/requireMiddleware');
 
 // @Method    GET
 // @Path      /auth/google
@@ -11,22 +12,20 @@ router.get('/google', authController.getGoogleOAuth);
 // @Method    GET
 // @Path      /auth/google/callback
 // @Desc      Google OAuth callback url
-router.get('/google/callback', authController.getGoogleOAuthCallback);
+router.get('/google/callback', authController.getGoogleOAuthCallback, (req, res) => {
+  res.redirect('/');
+});
 
 
 // @Method    GET
 // @Path      /auth/current_user
 // @Desc      Get current user login
-router.get('/current_user', (req, res) => {
-  res.send({ auth: "current_user" });
-});
+router.get('/current_user', authController.getCurrentUser);
 
 
 // @Method    GET
 // @Path      /auth/logout
 // @Desc      User log out
-router.get('/logout', (req, res) => {
-  res.send({ auth: "logout" });
-});
+router.get('/logout', isLogin, authController.getLogOut);
 
 module.exports = router;

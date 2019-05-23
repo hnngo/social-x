@@ -16,7 +16,7 @@ passport.use(
 
       if (existingUser) {
         //TODO: Check if that user has googleId, if not assign the new one
-        acLog(`Google OAuth login: ${profile._json.email}`);
+        acLog(`Google OAuth login ${profile._json.email}`);
 
         return done(null, existingUser);
       }

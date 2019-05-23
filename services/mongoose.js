@@ -9,6 +9,6 @@ mongoose.connect(keys.mongoDbUrl, {
   if (!err) {
     aclog("MongoDB Connected", "Mongoose")
   } else {
-    console.log(err)
+    aclog(err)
   }
 });
