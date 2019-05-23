@@ -1,20 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const authController = require('../controllers/authController');
 
 // @Method    GET
 // @Path      /auth/google
 // @Desc      Google OAuth with passport
-router.get('/google', (req, res) => {
-  res.send({ auth: "google" });
-});
+router.get('/google', authController.getGoogleOAuth);
 
 
 // @Method    GET
 // @Path      /auth/google/callback
 // @Desc      Google OAuth callback url
-router.get('/google/callback', (req, res) => {
-  res.send({ auth: "google/callback" });
-});
+router.get('/google/callback', authController.getGoogleOAuthCallback);
 
 
 // @Method    GET

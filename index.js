@@ -1,8 +1,14 @@
 const express = require('express');
 const authRoute = require('./routes/authRoute');
+const session = require('express-session');
 
 // Create express app
 const app = express();
+
+// Passport Google OAuth init
+require('./services/passport');
+
+// Expres Middlewares
 
 // Setup routes
 app.get('/', (req, res) => {
