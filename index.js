@@ -19,7 +19,7 @@ require('./services/passport');
 app.use(session({
   //PENDING: Express Session store/ mongo/ redis
   secret: keys.sessionKey,
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
 app.use(express.json());
