@@ -96,18 +96,23 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
 
 const postSignInWithEmailAndPassword = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
+    // Check if err then send back to client
     if (err) {
-      return next(err)
+      return res.json({ message: error });
     }
 
     if (!user) {
-      return res.json({ message: info.message })
+      return res.json({ message: info.message });
     }
 
-    res.send({
-      name: user.name,
-      email: user.email,
-      registerDate: user.registerDate
+    // Perform sign in session
+    req.logIn(user, (err) => {
+      if (err) { return next(err); }
+      return res.send({
+        name: user.name,
+        email: user.email,
+        registerDate: user.registerDate
+      })
     });
   })(req, res, next);
 };

@@ -68,13 +68,13 @@ passport.use(
       // Check if user input right password
       bcrypt.compare(password, existingUser.password, (err, isMatch) => {
         if (err) return done(err);
-        if (!isMatch) {
+        if (isMatch) {
+          acLog(`${existingUser.email} login successfully`);
+          return done(null, existingUser);
+        } else {
           acLog(`${existingUser.email} login with wrong password`);
-          return done(null, false, { message: "Password is not match" });
+          return done(null, false, { message: "Password is incorrect" });
         }
-
-        acLog(`${existingUser.email} login successfully`);
-        return done(null, existingUser);
       })
     } catch (err) {
       acLog(err);
@@ -87,7 +87,9 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+  User.findById(id)
+    .then((user) => {
+      done(null, user)
+    })
+    .catch(err => acLog(err));
 });

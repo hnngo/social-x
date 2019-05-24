@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node index.js",
     "client": "npm start --prefix views",
-    "dev": "concurrently \"nodemon index.js\" \"npm run client\""
+    "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix views && npm run build --prefix views"
   },
   "author": "Nhan Ngo",
   "license": "ISC",
