@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const acLog = require('./utils/activityLog');
 const keys = require('./config/keys');
+const path = require('path');
 
 // Create express app
 const app = express();
@@ -30,11 +31,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Setup routes
-app.get('/', (req, res) => {
-  res.send({ route: "index" });
-})
-
 app.use('/auth', authRoute);
+
+// Setup express static build folder
+if (process.env.NODE_ENV === "production") {
+  // Retrieve stuff in build
+  app.use(express.static('views/build'));
+
+  // Load the index.html if no route is found
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, "views", "build", "index.html"));
+  });
+}
 
 // Server listen
 const PORT = process.env.PORT || 5000;

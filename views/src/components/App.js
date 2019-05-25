@@ -2,14 +2,15 @@ import React from 'react';
 import Homepage from './Homepage';
 import Navbar from './Navbar';
 import SignInForm from './forms/SignInForm';
+import SingUpForm from './forms/SingUpForm';
 
 const App = () => {
   return (
     <div>
-      {/* Image Slide here */}
       <Navbar />
-      <SignInForm />
       <Homepage />
+      <SignInForm />
+      <SingUpForm />
     </div>
   );
 }
