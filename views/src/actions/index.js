@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGN_IN_WITH_EMAIL_AND_PWD } from './type';
+// import { SIGN_IN_WITH_EMAIL_AND_PWD } from './type';
 
 export const signInWithEmailAndPassword = ({ email, password }) => {
   return async (dispatch) => {

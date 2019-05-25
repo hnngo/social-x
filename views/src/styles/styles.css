@@ -28,12 +28,22 @@ body {
 }
 
 .nav-container .nav-response .nav-brand p {
-  margin: 0;
+  margin-top: 3px;
   font-size: 40px;
   padding: 5px 0;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   color: #00CBF5;
+  letter-spacing: 0px;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+@media only screen and (max-width: 575px) {
+  .nav-container .nav-response .nav-brand p {
+    font-size: 30px;
+    letter-spacing: -2px;
+  }
 }
 
 .nav-container .nav-response .nav-link ul {
@@ -71,6 +81,65 @@ body {
   width: 100%;
 }
 
+.nav-container .nav-response .nav-small-container i {
+  cursor: pointer;
+  font-size: 32px;
+  color: #00CBF5;
+  padding: 10px 10px;
+}
+
+@-webkit-keyframes slideDown {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 80px;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 80px;
+  }
+}
+
+.nav-container .nav-response .nav-small-container:hover .nav-small-btn {
+  -webkit-animation: slideDown 0.5s ease-in-out forwards;
+          animation: slideDown 0.5s ease-in-out forwards;
+}
+
+.nav-container .nav-response .nav-small-container .nav-small-btn {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+
+.nav-container .nav-response .nav-small-container .nav-small-btn div {
+  height: 40px;
+  width: 100vw;
+  text-align: center;
+  background-color: rgba(0, 204, 245, 0.167);
+  border-bottom: 1px solid #00CBF5;
+  overflow: hidden;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+}
+
+.nav-container .nav-response .nav-small-container .nav-small-btn div p {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  padding: 5px 0;
+  margin: 0;
+  color: #00CBF5;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
 .hp-container .hp-img-container img {
   height: 100vh;
   width: 100%;
@@ -95,11 +164,23 @@ body {
   margin-bottom: 30px;
 }
 
+@media only screen and (max-width: 575px) {
+  .hp-container .hp-content p.main-header {
+    font-size: 32px;
+  }
+}
+
 .hp-container .hp-content p.second-header {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 22px;
   letter-spacing: 5px;
   margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 575px) {
+  .hp-container .hp-content p.second-header {
+    font-size: 18px;
+  }
 }
 
 .hp-container .hp-content .btn-group button {
@@ -114,9 +195,11 @@ body {
   outline: none;
 }
 
-.hp-container .hp-content .btn-group button:hover {
-  -webkit-box-shadow: 0px 0px 13px 0px #58a0ae;
-          box-shadow: 0px 0px 13px 0px #58a0ae;
+@media only screen and (min-width: 576px) {
+  .hp-container .hp-content .btn-group button:hover {
+    -webkit-box-shadow: 0px 0px 13px 0px #58a0ae;
+            box-shadow: 0px 0px 13px 0px #58a0ae;
+  }
 }
 
 .hp-container .hp-content .btn-group button:active {

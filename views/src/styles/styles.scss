@@ -1,17 +1,15 @@
 $theme-colors: (
   "main": #00CBF5,
+  "lightMain": rgba(0, 204, 245, 0.164),
   "darkMain": rgb(0, 213, 255),
   "shadowMain": rgb(88, 160, 174)
 );
 
 $breakpoints: (
-    "phone":        400px,
-    "phone-wide":   480px,
-    "phablet":      560px,
-    "tablet-small": 640px,
+    "phone":        576px,
     "tablet":       768px,
-    "tablet-wide":  1024px,
-    "desktop":      1248px,
+    "tablet-wide":  992px,
+    "desktop":      1200px,
     "desktop-wide": 1440px
 );
 
@@ -26,15 +24,19 @@ $breakpoints: (
 
 // Media querries
 @mixin mq($width, $type: min) {
-    @if map_has_key($breakpoints, $width) {
-        $width: map_get($breakpoints, $width);
-        @if $type == max {
-            $width: $width - 1px;
-        }
-        @media only screen and (#{$type}-width: $width) {
-            @content;
-        }
+  @if map-has-key($map: $breakpoints, $key: $width){
+    $width: map-get($map: $breakpoints, $key: $width);
+    @if $type == max {
+      $width: $width - 1px;
+      @media only screen and (max-width: $width) {
+        @content;
+      }
+    } @else {
+      @media only screen and (min-width: $width) {
+        @content;
+      }
     }
+  }
 };
 
 body {
@@ -51,7 +53,6 @@ body {
   height: 60px;
   position: absolute;
   z-index: 2;
-  // background-color: lightblue;
 
   .nav-response {
     max-width: 1200px;
@@ -62,12 +63,19 @@ body {
     color: white;
 
     .nav-brand p {
-      margin: 0;
+      margin-top: 3px;
       font-size: 40px;
       padding: 5px 0;
       font-family: 'Courier New', Courier, monospace;
       font-weight: bold;
       color: map-get($map: $theme-colors, $key: main);
+      letter-spacing: 0px;
+      transition: 1s;
+
+      @include mq("phone", max) {
+        font-size: 30px;
+        letter-spacing: -2px;
+      }
     }
 
     .nav-link ul {
@@ -103,6 +111,57 @@ body {
         }
       }
     }
+
+    .nav-small-container {
+      i {
+        cursor: pointer;
+        font-size: 32px;
+        color: map-get($map: $theme-colors, $key: main);
+        padding: 10px 10px;
+      }
+
+      @keyframes slideDown {
+        from {
+          height: 0px;
+        }
+
+        to {
+          height: 40px * 2;
+        }
+      }
+
+      &:hover .nav-small-btn {
+        animation: slideDown 0.5s ease-in-out forwards;
+      }
+
+      .nav-small-btn {
+        position: absolute;
+        top: 60px;   // Width of nav height
+        left: 0px;
+        height: 0px;
+        overflow: hidden;
+
+        div {
+          height: 40px;
+          width: 100vw;
+          text-align: center;
+          background-color: rgba(0, 204, 245, 0.167);
+          border-bottom: 1px solid map-get($map: $theme-colors, $key: main);
+          overflow: hidden;
+          transition: 0.6s;
+
+          p {
+            @include fonts();
+            font-size: 18px;
+            padding: 5px 0;
+            margin: 0;
+            color: map-get($map: $theme-colors, $key: main);
+            font-weight: bold;
+            letter-spacing: 1px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -126,6 +185,10 @@ body {
       @include fonts();
       font-size: 50px;
       margin-bottom: 30px;
+
+      @include mq("phone", max) {
+        font-size: 32px;
+      }
     }
 
     p.second-header {
@@ -133,6 +196,10 @@ body {
       font-size: 22px;
       letter-spacing: 5px;
       margin-bottom: 40px;
+
+      @include mq("phone", max) {
+        font-size: 18px;
+      }
     }
 
     .btn-group button {
@@ -145,8 +212,10 @@ body {
       box-shadow: 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
       outline: none;
 
-      &:hover {
-        box-shadow: 0px 0px 13px 0px map-get($map: $theme-colors, $key: shadowMain);
+      @include mq("phone", min) {
+        &:hover {
+          box-shadow: 0px 0px 13px 0px map-get($map: $theme-colors, $key: shadowMain);
+        }
       }
 
       &:active {
