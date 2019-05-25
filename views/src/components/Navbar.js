@@ -1,4 +1,5 @@
 import React from 'react';
+import SignInForm from './forms/SignInForm';
 
 const Navbar = () => {
   return (
@@ -24,6 +25,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="nav-sin-form">
+        <SignInForm />
       </div>
     </div>
   );

@@ -2,17 +2,20 @@ import React from 'react';
 
 const InputField = ({
   input,
-  label,
+  placeholder,
   type,
+  icon,
   meta: { touched, error }
 }) => {
   return (
-    <div>
-      <label>{label}</label>
+    <div className="input-field">
       <div>
-        <input {...input} placeholder={label} type={type} />
-        {touched &&
-          ((error && <span>{error}</span>))}
+        <i className={icon} />
+        <input {...input} placeholder={placeholder} type={type} />
+        <div className="error-text">
+          {touched &&
+            ((error && <span>{error}</span>))}
+        </div>
       </div>
     </div>
   );

@@ -12,27 +12,34 @@ const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 c
 
 const SignInForm = (props) => {
   return (
-    <div>
+    <div className="sin-form-container">
+      <p>Sign In</p>
       <form onSubmit={props.handleSubmit(props.signInWithEmailAndPassword)}>
         <Field
-          label="Email"
           name="email"
           component={InputField}
           type="email"
-          placeholder="email"
+          placeholder="email@test.com"
           validate={isEmail}
+          icon={"fas fa-envelope"}
         />
         <Field
-          label="Password"
           name="password"
           component={InputField}
           type="password"
           placeholder="password"
           validate={minLength}
+          icon={"fas fa-key"}
         />
         <button type="submit">
-          Submit
+          Sign In
         </button>
+        <div className="google-btn">
+          Login with Google
+        </div>
+        <div className="sin-sup-switch">
+          New user? Click here to sign up
+        </div>
       </form>
     </div>
   );

@@ -2,7 +2,8 @@ $theme-colors: (
   "main": #00CBF5,
   "lightMain": rgba(0, 204, 245, 0.164),
   "darkMain": rgb(0, 213, 255),
-  "shadowMain": rgb(88, 160, 174)
+  "shadowMain": rgb(88, 160, 174),
+  "dangerText": rgb(216, 75, 75)
 );
 
 $breakpoints: (
@@ -17,9 +18,25 @@ $breakpoints: (
 @mixin fonts($type: treb) {
   @if $type == lucida {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  } @else if $type == courier {
+    font-family: 'Courier New', Courier, monospace;
   } @else {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
+}
+
+// Mixin for styling text
+@mixin pStyle($fontType: treb, $fontSize: 16px, $fontColor: "black", $letterSpacing: 0px) {
+  @include fonts($fontType);
+  
+  font-size: $fontSize;
+  letter-spacing: $letterSpacing;
+
+  @if map-has-key($map: $theme-colors, $key: $fontColor) {
+    $fontColor: map-get($map: $theme-colors, $key: $fontColor);
+  }
+
+  color: $fontColor;
 }
 
 // Media querries
@@ -63,13 +80,10 @@ body {
     color: white;
 
     .nav-brand p {
+      @include pStyle(courier, 40px, main, 0px);
       margin-top: 3px;
-      font-size: 40px;
       padding: 5px 0;
-      font-family: 'Courier New', Courier, monospace;
       font-weight: bold;
-      color: map-get($map: $theme-colors, $key: main);
-      letter-spacing: 0px;
       transition: 1s;
 
       @include mq("phone", max) {
@@ -84,12 +98,11 @@ body {
       list-style: none;
 
       li {
+        @include pStyle(lucida, 20px, "white", 0px);
         position: relative;
         display: inline;
         margin: 0 15px;
         cursor: pointer;
-        font-size: 20px;
-        @include fonts(lucida);
 
         &::after {
           content: "";
@@ -147,21 +160,25 @@ body {
           text-align: center;
           background-color: rgba(0, 204, 245, 0.167);
           border-bottom: 1px solid map-get($map: $theme-colors, $key: main);
-          overflow: hidden;
           transition: 0.6s;
 
           p {
-            @include fonts();
-            font-size: 18px;
+            @include pStyle(treb, 18px, main, 1px);
             padding: 5px 0;
             margin: 0;
-            color: map-get($map: $theme-colors, $key: main);
             font-weight: bold;
-            letter-spacing: 1px;
           }
         }
       }
     }
+  }
+
+  .nav-sin-form {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 60px;
+    left: 0px;
   }
 }
 
@@ -182,8 +199,7 @@ body {
     color: white;
 
     p.main-header {
-      @include fonts();
-      font-size: 50px;
+      @include pStyle(treb, 50px, white, 0px);
       margin-bottom: 30px;
 
       @include mq("phone", max) {
@@ -192,9 +208,7 @@ body {
     }
 
     p.second-header {
-      @include fonts();
-      font-size: 22px;
-      letter-spacing: 5px;
+      @include pStyle(treb, 22px, white, 5px);
       margin-bottom: 40px;
 
       @include mq("phone", max) {
@@ -203,10 +217,9 @@ body {
     }
 
     .btn-group button {
-      @include fonts();
+      @include pStyle(treb, 16px, white, 0px);
       cursor: pointer;
       border-radius: 20px;
-      font-size: 16px;
       padding: 5px 25px;
       border: 2px map-get($map: $theme-colors, $key: main) solid;
       box-shadow: 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
@@ -232,6 +245,92 @@ body {
         background: map-get($map: $theme-colors, $key: main);
         color: white;
       }
+    }
+  }
+}
+
+.sin-form-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 400px;
+  transform: translate(-50%, -50%);
+  border: 2px map-get($map: $theme-colors, $key: main) solid;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.863);
+  box-shadow: 0px 0px 33px 1px map-get($map: $theme-colors, $key: shadowMain);
+
+  p {
+    @include pStyle(treb, 35px, "main", 2px);
+    text-align: center;
+    margin: 0px;
+    padding: 20px 0;
+  }
+
+  form {
+    padding: 0px 30px;
+    color: white;
+
+    .input-field {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 21px;
+        left: 13px;
+        font-size: 32px;
+        color: map-get($map: $theme-colors, $key: main);
+      }
+
+      input {
+        @include pStyle(treb, 20px, black, 0px);
+        margin: 10px 0px;
+        background: white;
+        border-radius: 20px;
+        width: 100%;
+        padding: 10px 0px;
+        padding-left: 55px;
+        border: 2px map-get($map: $theme-colors, $key: main) solid;
+
+        &::placeholder {
+          @include pStyle(treb, 20px, rgb(202, 202, 202), 2px);
+        }
+      }
+
+      .error-text {
+        @include pStyle(treb, 16px, dangerText, 1px);
+        padding-left: 5px;
+        margin: 0;
+      }
+    }
+
+    button,
+    .google-btn {
+      @include pStyle(treb, 18px, white, 2px);
+      outline: none;
+      margin: 10px 0;
+      width: 100%;
+      border-radius: 20px;
+      border: none;
+      height: 45px;
+      background-color: map-get($map: $theme-colors, $key: main);
+    }
+
+    button {
+      margin-top: 40px;
+    }
+
+    .google-btn {
+      text-align: center;
+      padding: 8px 0;
+      background-color: map-get($map: $theme-colors, $key: dangerText);
+    }
+
+    .sin-sup-switch {
+      @include pStyle(treb, 14px, white, 2px);
+      margin: 20px 0;
+      cursor: pointer;
+      text-align: center;
     }
   }
 }
