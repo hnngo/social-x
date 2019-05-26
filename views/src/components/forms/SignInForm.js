@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { signInWithEmailAndPassword } from '../../actions';
 import InputField from './InputField';
 import { SIGN_UP_FORM } from '../../constants';
@@ -60,10 +60,12 @@ const SignInForm = (props) => {
         >
           Sign In
         </button>
-        <div className="google-btn">
-          <i className="fab fa-google" />
-          Sign in with Google
-        </div>
+        <a href="/auth/google">
+          <div className="google-btn">
+            <i className="fab fa-google" />
+            Sign in with Google
+          </div>
+        </a>
         <div
           className="sin-sup-switch"
           onClick={() => props.handleSwitchForm(SIGN_UP_FORM)}

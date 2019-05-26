@@ -13,7 +13,7 @@ router.get('/google', authController.getGoogleOAuth);
 // @Path      /auth/google/callback
 // @Desc      Google OAuth callback url
 router.get('/google/callback', authController.getGoogleOAuthCallback, (req, res) => {
-  res.redirect('/');
+  res.redirect(`/profile/${req.user._id}`);
 });
 
 

@@ -1,4 +1,5 @@
 import {
+  ACT_FETCH_USER,
   ACT_AUTH_SIGNING_IN,
   ACT_AUTH_SIGN_IN_FAIL,
   ACT_AUTH_SIGN_IN_SUCCESS,
@@ -24,7 +25,12 @@ export default (state = INITIAL_STATE, action) => {
       return { ...INITIAL_STATE, errorMsg: action.payload.message };
     case ACT_AUTH_SIGN_IN_SUCCESS:
     case ACT_AUTH_SIGN_UP_SUCCESS:
-      return { ...INITIAL_STATE, user: action.payload };
+    case ACT_FETCH_USER:
+      if (action.payload) {
+        return { ...INITIAL_STATE, user: action.payload };
+      }
+      
+      return { ...state };
     default:
       return state;
   }

@@ -434,7 +434,11 @@ body {
           box-shadow: inset 0px 0px 13px 3px #58a0ae;
 }
 
-.sin-sup-form-container form .google-btn {
+.sin-sup-form-container form a {
+  text-decoration: none !important;
+}
+
+.sin-sup-form-container form a .google-btn {
   cursor: pointer;
   position: relative;
   text-align: center;
@@ -442,7 +446,7 @@ body {
   background-color: #d84b4b;
 }
 
-.sin-sup-form-container form .google-btn i {
+.sin-sup-form-container form a .google-btn i {
   position: absolute;
   font-size: 26px;
   top: 8px;
@@ -450,14 +454,14 @@ body {
 }
 
 @media only screen and (max-width: 575px) {
-  .sin-sup-form-container form .google-btn i {
+  .sin-sup-form-container form a .google-btn i {
     font-size: 22px;
     top: 8px;
     left: 10px;
   }
 }
 
-.sin-sup-form-container form .google-btn:active {
+.sin-sup-form-container form a .google-btn:active {
   -webkit-box-shadow: inset 0px 0px 13px 3px #a84040;
           box-shadow: inset 0px 0px 13px 3px #a84040;
 }
