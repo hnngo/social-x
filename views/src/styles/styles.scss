@@ -3,7 +3,8 @@ $theme-colors: (
   "lightMain": rgba(0, 204, 245, 0.164),
   "darkMain": rgb(0, 213, 255),
   "shadowMain": rgb(88, 160, 174),
-  "dangerText": rgb(216, 75, 75)
+  "dangerText": rgb(216, 75, 75),
+  "dangerTextShadow": rgb(168, 64, 64)
 );
 
 $breakpoints: (
@@ -176,7 +177,7 @@ body {
   .nav-sin-form {
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 60px);
     top: 60px;
     left: 0px;
   }
@@ -249,7 +250,7 @@ body {
   }
 }
 
-.sin-form-container {
+.sin-sup-form-container {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -284,6 +285,7 @@ body {
 
       input {
         @include pStyle(treb, 20px, black, 0px);
+        outline: none;
         margin: 10px 0px;
         background: white;
         border-radius: 20px;
@@ -318,12 +320,19 @@ body {
 
     button {
       margin-top: 40px;
+      &:active {
+        box-shadow: inset 0px 0px 13px 3px map-get($map: $theme-colors, $key: shadowMain)
+      }
     }
 
     .google-btn {
+      cursor: pointer;
       text-align: center;
       padding: 8px 0;
       background-color: map-get($map: $theme-colors, $key: dangerText);
+      &:active {
+        box-shadow: inset 0px 0px 13px 3px map-get($map: $theme-colors, $key: dangerTextShadow)
+      }
     }
 
     .sin-sup-switch {
@@ -331,6 +340,17 @@ body {
       margin: 20px 0;
       cursor: pointer;
       text-align: center;
+    }
+
+    .form-exit {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+
+      i {
+        font-size: 30px;
+      }
     }
   }
 }

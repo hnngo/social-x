@@ -144,7 +144,7 @@ body {
 .nav-container .nav-sin-form {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   top: 60px;
   left: 0px;
 }
@@ -232,7 +232,7 @@ body {
   color: white;
 }
 
-.sin-form-container {
+.sin-sup-form-container {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -246,7 +246,7 @@ body {
           box-shadow: 0px 0px 33px 1px #58a0ae;
 }
 
-.sin-form-container p {
+.sin-sup-form-container p {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 35px;
   letter-spacing: 2px;
@@ -256,16 +256,16 @@ body {
   padding: 20px 0;
 }
 
-.sin-form-container form {
+.sin-sup-form-container form {
   padding: 0px 30px;
   color: white;
 }
 
-.sin-form-container form .input-field {
+.sin-sup-form-container form .input-field {
   position: relative;
 }
 
-.sin-form-container form .input-field i {
+.sin-sup-form-container form .input-field i {
   position: absolute;
   top: 21px;
   left: 13px;
@@ -273,11 +273,12 @@ body {
   color: #00CBF5;
 }
 
-.sin-form-container form .input-field input {
+.sin-sup-form-container form .input-field input {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   letter-spacing: 0px;
   color: black;
+  outline: none;
   margin: 10px 0px;
   background: white;
   border-radius: 20px;
@@ -287,35 +288,35 @@ body {
   border: 2px #00CBF5 solid;
 }
 
-.sin-form-container form .input-field input::-webkit-input-placeholder {
+.sin-sup-form-container form .input-field input::-webkit-input-placeholder {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
   color: #cacaca;
 }
 
-.sin-form-container form .input-field input:-ms-input-placeholder {
+.sin-sup-form-container form .input-field input:-ms-input-placeholder {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
   color: #cacaca;
 }
 
-.sin-form-container form .input-field input::-ms-input-placeholder {
+.sin-sup-form-container form .input-field input::-ms-input-placeholder {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
   color: #cacaca;
 }
 
-.sin-form-container form .input-field input::placeholder {
+.sin-sup-form-container form .input-field input::placeholder {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
   color: #cacaca;
 }
 
-.sin-form-container form .input-field .error-text {
+.sin-sup-form-container form .input-field .error-text {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 1px;
@@ -324,8 +325,8 @@ body {
   margin: 0;
 }
 
-.sin-form-container form button,
-.sin-form-container form .google-btn {
+.sin-sup-form-container form button,
+.sin-sup-form-container form .google-btn {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
@@ -339,17 +340,28 @@ body {
   background-color: #00CBF5;
 }
 
-.sin-form-container form button {
+.sin-sup-form-container form button {
   margin-top: 40px;
 }
 
-.sin-form-container form .google-btn {
+.sin-sup-form-container form button:active {
+  -webkit-box-shadow: inset 0px 0px 13px 3px #58a0ae;
+          box-shadow: inset 0px 0px 13px 3px #58a0ae;
+}
+
+.sin-sup-form-container form .google-btn {
+  cursor: pointer;
   text-align: center;
   padding: 8px 0;
   background-color: #d84b4b;
 }
 
-.sin-form-container form .sin-sup-switch {
+.sin-sup-form-container form .google-btn:active {
+  -webkit-box-shadow: inset 0px 0px 13px 3px #a84040;
+          box-shadow: inset 0px 0px 13px 3px #a84040;
+}
+
+.sin-sup-form-container form .sin-sup-switch {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 14px;
   letter-spacing: 2px;
@@ -357,5 +369,16 @@ body {
   margin: 20px 0;
   cursor: pointer;
   text-align: center;
+}
+
+.sin-sup-form-container form .form-exit {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.sin-sup-form-container form .form-exit i {
+  font-size: 30px;
 }
 /*# sourceMappingURL=styles.css.map */

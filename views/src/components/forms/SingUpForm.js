@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signUpWithEmailAndPassword } from '../../actions';
 import InputField from './InputField';
+import { SIGN_IN_FORM } from '../../constants';
 
 // Validate process
 const isNotNull = value => value ? undefined : "Please enter the field"
@@ -13,43 +14,56 @@ const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 c
 
 const SignUpForm = (props) => {
   return (
-    <div>
+    <div className="sin-sup-form-container">
+      <p>Sign Up</p>
       <form onSubmit={props.handleSubmit(props.signUpWithEmailAndPassword)}>
         <Field
-          label="Name"
           name="name"
           component={InputField}
           type="text"
-          placeholder="name"
+          placeholder="your name"
           validate={isNotNull}
+          icon={"fas fa-user"}
         />
         <Field
-          label="Email"
           name="email"
           component={InputField}
           type="email"
-          placeholder="email"
+          placeholder="email@test.com"
           validate={isEmail}
+          icon={"fas fa-envelope"}
         />
         <Field
-          label="Password"
           name="password"
           component={InputField}
           type="password"
           placeholder="password"
           validate={minLength}
+          icon={"fas fa-key"}
         />
         <Field
-          label="Confirm Password"
           name="cfpassword"
           component={InputField}
           type="password"
-          placeholder="password"
+          placeholder="confirm password"
           validate={minLength}
+          icon={"fas fa-key"}
         />
         <button type="submit">
-          Submit
+          Confirm
         </button>
+        <div
+          className="sin-sup-switch"
+          onClick={() => props.handleSwitchForm(SIGN_IN_FORM)}
+        >
+          Back to sign in
+        </div>
+        <div
+          className="form-exit"
+          onClick={props.handleExitForm}
+        >
+          <i className="fas fa-times" />
+        </div>
       </form>
     </div>
   );

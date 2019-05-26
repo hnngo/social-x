@@ -3,16 +3,17 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { signInWithEmailAndPassword } from '../../actions';
 import InputField from './InputField';
+import { SIGN_UP_FORM } from '../../constants';
 
 // Validate process
 const isEmail = value =>
-value && /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
-  ? undefined :'Invalid email address';
+  value && /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+    ? undefined : 'Invalid email address';
 const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 characters or more`;
 
 const SignInForm = (props) => {
   return (
-    <div className="sin-form-container">
+    <div className="sin-sup-form-container">
       <p>Sign In</p>
       <form onSubmit={props.handleSubmit(props.signInWithEmailAndPassword)}>
         <Field
@@ -37,8 +38,17 @@ const SignInForm = (props) => {
         <div className="google-btn">
           Login with Google
         </div>
-        <div className="sin-sup-switch">
+        <div
+          className="sin-sup-switch"
+          onClick={() => props.handleSwitchForm(SIGN_UP_FORM)}
+        >
           New user? Click here to sign up
+        </div>
+        <div
+          className="form-exit"
+          onClick={props.handleExitForm}
+        >
+          <i className="fas fa-times" />
         </div>
       </form>
     </div>

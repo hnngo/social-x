@@ -7,6 +7,7 @@ import App from './components/App';
 import rootReducer from './reducers';
 import './styles/styles.css';
 import './styles/bootstrap.min.css';
+import './styles/animate.css';
 import * as serviceWorker from './serviceWorker';
 
 // Test axios
