@@ -246,6 +246,16 @@ body {
           box-shadow: 0px 0px 33px 1px #58a0ae;
 }
 
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container {
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    -webkit-transform: translate(-50%, -60%);
+            transform: translate(-50%, -60%);
+  }
+}
+
 .sin-sup-form-container p {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 35px;
@@ -256,9 +266,24 @@ body {
   padding: 20px 0;
 }
 
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    color: #00CBF5;
+  }
+}
+
 .sin-sup-form-container form {
   padding: 0px 30px;
   color: white;
+}
+
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form {
+    padding: 0px 15px;
+  }
 }
 
 .sin-sup-form-container form .input-field {
@@ -271,6 +296,12 @@ body {
   left: 13px;
   font-size: 32px;
   color: #00CBF5;
+}
+
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form .input-field i {
+    top: 16px;
+  }
 }
 
 .sin-sup-form-container form .input-field input {
@@ -316,6 +347,40 @@ body {
   color: #cacaca;
 }
 
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form .input-field input::-webkit-input-placeholder {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #cacaca;
+  }
+  .sin-sup-form-container form .input-field input:-ms-input-placeholder {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #cacaca;
+  }
+  .sin-sup-form-container form .input-field input::-ms-input-placeholder {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #cacaca;
+  }
+  .sin-sup-form-container form .input-field input::placeholder {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #cacaca;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form .input-field input {
+    padding: 5px 0px;
+    padding-left: 55px;
+  }
+}
+
 .sin-sup-form-container form .input-field .error-text {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 16px;
@@ -323,6 +388,15 @@ body {
   color: #d84b4b;
   padding-left: 5px;
   margin: 0;
+}
+
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form .input-field .error-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #d84b4b;
+  }
 }
 
 .sin-sup-form-container form button,
@@ -340,6 +414,17 @@ body {
   background-color: #00CBF5;
 }
 
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form button,
+  .sin-sup-form-container form .google-btn {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: white;
+    height: 40px;
+  }
+}
+
 .sin-sup-form-container form button {
   margin-top: 40px;
 }
@@ -351,9 +436,25 @@ body {
 
 .sin-sup-form-container form .google-btn {
   cursor: pointer;
+  position: relative;
   text-align: center;
   padding: 8px 0;
   background-color: #d84b4b;
+}
+
+.sin-sup-form-container form .google-btn i {
+  position: absolute;
+  font-size: 26px;
+  top: 8px;
+  left: 12px;
+}
+
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form .google-btn i {
+    font-size: 22px;
+    top: 8px;
+    left: 10px;
+  }
 }
 
 .sin-sup-form-container form .google-btn:active {
@@ -371,6 +472,15 @@ body {
   text-align: center;
 }
 
+@media only screen and (max-width: 575px) {
+  .sin-sup-form-container form .sin-sup-switch {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: white;
+  }
+}
+
 .sin-sup-form-container form .form-exit {
   position: absolute;
   top: 15px;
@@ -380,5 +490,25 @@ body {
 
 .sin-sup-form-container form .form-exit i {
   font-size: 30px;
+}
+
+.sin-sup-form-container .form-loading {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.863);
+  border-radius: 20px;
+  z-index: 5;
+}
+
+.sin-sup-form-container .form-loading .spinner-container {
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 /*# sourceMappingURL=styles.css.map */

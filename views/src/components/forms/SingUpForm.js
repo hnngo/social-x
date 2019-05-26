@@ -13,6 +13,28 @@ const isEmail = value =>
 const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 characters or more`;
 
 const SignUpForm = (props) => {
+  const renderLoading = () => {
+    if (props.isLoading) {
+      return (
+        <div className="form-loading">
+          <div className="spinner-container">
+            <div className="spinner-grow" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+            <div className="spinner-grow" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+            <div className="spinner-grow" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return <div />;
+    }
+  }
+
   return (
     <div className="sin-sup-form-container">
       <p>Sign Up</p>
@@ -65,6 +87,7 @@ const SignUpForm = (props) => {
           <i className="fas fa-times" />
         </div>
       </form>
+      {renderLoading()}
     </div>
   );
 };

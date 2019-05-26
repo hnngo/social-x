@@ -5,13 +5,14 @@ const InputField = ({
   placeholder,
   type,
   icon,
-  meta: { touched, error }
+  meta: { touched, error },
+  disable
 }) => {
   return (
     <div className="input-field">
       <div>
         <i className={icon} />
-        <input {...input} placeholder={placeholder} type={type} />
+        <input {...input} placeholder={placeholder} type={type}/>
         <div className="error-text">
           {touched &&
             ((error && <span>{error}</span>))}

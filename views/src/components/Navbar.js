@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SingUpForm';
 import {
@@ -6,7 +7,7 @@ import {
   SIGN_UP_FORM
 } from '../constants';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [showForm, setShowForm] = useState(false);
 
   const renderForm = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
           <SignInForm
             handleExitForm={() => setShowForm(false)}
             handleSwitchForm={(type) => setShowForm(type)}
+            isLoading={props.isLoading}
           />
         </div>
       );
@@ -25,6 +27,7 @@ const Navbar = () => {
           <SignUpForm
             handleExitForm={() => setShowForm(false)}
             handleSwitchForm={(type) => setShowForm(type)}
+            isLoading={props.isLoading}
           />
         </div>
       );
@@ -52,10 +55,10 @@ const Navbar = () => {
         <div className="nav-small-container d-block d-sm-none">
           <i className="fas fa-bars" />
           <div className="nav-small-btn">
-            <div>
+            <div onClick={() => setShowForm(SIGN_IN_FORM)}>
               <p>Sign In</p>
             </div>
-            <div>
+            <div onClick={() => setShowForm(SIGN_UP_FORM)}>
               <p>Sign Up</p>
             </div>
           </div>
@@ -66,4 +69,10 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = ({ auth }) => {
+  return {
+    isLoading: auth.isLoading
+  }
+}
+
+export default connect(mapStateToProps)(Navbar);
