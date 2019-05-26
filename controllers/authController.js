@@ -3,6 +3,18 @@ const bcrypt = require('bcrypt');
 const acLog = require('../utils/activityLog');
 const User = require('../models/User');
 
+// Helper function to get needed information for user
+const sendUserInfo = (userTag) => {
+  if (userTag) {
+    return {
+      id: userTag._id,
+      name: userTag.name,
+      email: userTag.email,
+      registerDate: userTag.registerDate
+    };
+  }
+}
+
 // @Method    GET
 // @Path      /auth/google
 // @Desc      Google OAuth with passport
@@ -24,7 +36,12 @@ const getGoogleOAuthCallback = passport.authenticate('google');
 // @Path      /auth/current_user
 // @Desc      Get current user login
 const getCurrentUser = (req, res) => {
-  res.send(req.user);
+  // res.send(req.user);
+  if (req.user) {
+    res.send(sendUserInfo(req.user));
+  } else {
+    res.send();
+  }
 };
 
 
@@ -78,11 +95,11 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
             acLog(`New user created ${newUser.email}`);
 
             //PENDING: Send back posts or comments later
-            //PENDING: Decide to get sign in or just let them enter again
-            res.send({
-              name: newUser.name,
-              email: newUser.email,
-              registerDate: newUser.registerDate
+
+            // Sign in with new user created
+            req.logIn(newUser, (err) => {
+              if (err) { return next(err); }
+              return res.send(sendUserInfo(newUser));
             });
           })
           .catch(err => acLog(err));
@@ -108,11 +125,7 @@ const postSignInWithEmailAndPassword = (req, res, next) => {
     // Perform sign in session
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      return res.send({
-        name: user.name,
-        email: user.email,
-        registerDate: user.registerDate
-      })
+      return res.send(sendUserInfo(user))
     });
   })(req, res, next);
 };
