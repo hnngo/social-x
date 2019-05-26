@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SingUpForm';
@@ -9,6 +9,12 @@ import {
 
 const Navbar = (props) => {
   const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    if (props.user) {
+      setShowForm(false);
+    }
+  }, [props.user]);
 
   const renderForm = () => {
     if (showForm === SIGN_IN_FORM) {
@@ -71,7 +77,8 @@ const Navbar = (props) => {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    isLoading: auth.isLoading
+    isLoading: auth.isLoading,
+    user: auth.user
   }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { signUpWithEmailAndPassword } from '../../actions';
 import InputField from './InputField';
 import { SIGN_IN_FORM } from '../../constants';
@@ -38,7 +39,7 @@ const SignUpForm = (props) => {
   return (
     <div className="sin-sup-form-container">
       <p>Sign Up</p>
-      <form onSubmit={props.handleSubmit(props.signUpWithEmailAndPassword)}>
+      <form onSubmit={props.handleSubmit(() => props.signUpWithEmailAndPassword(props.formValues, props.history))}>
         <Field
           name="name"
           component={InputField}
@@ -102,9 +103,21 @@ const validate = (values) => {
   return errors;
 }
 
+const mapStateToProps = ({ form }) => {
+  if (form.signup) {
+    return { formValues: form.signup.values };
+  }
+
+  return {};
+}
+
 export default reduxForm({
   validate,
   form: 'signup'
-})(connect(null, {
-  signUpWithEmailAndPassword
-})(SignUpForm));
+})(
+  withRouter(
+    connect(mapStateToProps, {
+      signUpWithEmailAndPassword
+    })(SignUpForm)
+  )
+);
