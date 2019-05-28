@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { signInWithEmailAndPassword } from '../../actions';
 import InputField from './InputField';
 import { SIGN_UP_FORM } from '../../constants';

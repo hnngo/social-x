@@ -5,7 +5,9 @@ $theme-colors: (
   "shadowMain": rgb(88, 160, 174),
   "darkLight": rgba(0, 0, 0, 0.863),
   "dangerText": rgb(216, 75, 75),
-  "dangerTextShadow": rgb(168, 64, 64)
+  "dangerTextShadow": rgb(168, 64, 64),
+  "headerBarMain": #0085A1,
+  "dashHeaderBar": #b6b6b685,
 );
 
 $breakpoints: (
@@ -434,4 +436,56 @@ body {
       transform: translate(-50%, -50%);
     }
   }
+}
+
+.hb-container {
+  position: fixed;
+  width: 100vw;
+  background-color: map-get($map: $theme-colors, $key: headerBarMain);
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+
+  .hb-rootname {
+    @include pStyle(lucida, 30px, white, 2px);
+    margin: 5px 40px;
+  }
+
+  .hb-auth-features {
+    ul {
+      margin: 8px 5px;
+      list-style: none;
+
+      li {
+        @include pStyle(treb, 18px, white, 2px);
+        display: inline;
+        margin: 0px 10px;
+        position: relative;
+        cursor: pointer;
+
+        &:nth-child(1)::after {
+          content: "";
+          position: absolute;
+          top: -3px;
+          right: -10px;
+          width: 2px;
+          height: 30px;
+          background-color: map-get($map: $theme-colors, $key: dashHeaderBar);
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 1px solid map-get($map: $theme-colors, $key: main);
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.p-container {
+  position: relative;
+  top: 60px;
 }

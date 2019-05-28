@@ -19,7 +19,7 @@ const Navbar = (props) => {
   const renderForm = () => {
     if (showForm === SIGN_IN_FORM) {
       return (
-        <div className="nav-sin-form animated fadeIn slow">
+        <div className="nav-sin-form animated fadeIn">
           <SignInForm
             handleExitForm={() => setShowForm(false)}
             handleSwitchForm={(type) => setShowForm(type)}
@@ -29,7 +29,7 @@ const Navbar = (props) => {
       );
     } else if (showForm === SIGN_UP_FORM) {
       return (
-        <div className="nav-sin-form animated fadeIn slow">
+        <div className="nav-sin-form animated fadeIn">
           <SignUpForm
             handleExitForm={() => setShowForm(false)}
             handleSwitchForm={(type) => setShowForm(type)}

@@ -10,7 +10,7 @@ import {
 
 const INITIAL_STATE = {
   isLoading: false,
-  user: {},
+  user: null,
   errorMsg: ""
 }
 

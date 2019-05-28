@@ -1,9 +1,11 @@
 import React from 'react';
 import imgURL from '../imgURL.json';
+import Navbar from './Navbar.js';
 
 const Homepage = (props) => {
   return (
     <div className="hp-container">
+      <Navbar />
       <div className="hp-img-container">
         <img src={imgURL.homepageImgUrl} alt="hompage-img-1" />
       </div>
