@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import SignInForm from './forms/SignInForm';
-import SignUpForm from './forms/SingUpForm';
+import SignUpForm from './forms/SignUpForm';
 import {
   SIGN_IN_FORM,
   SIGN_UP_FORM

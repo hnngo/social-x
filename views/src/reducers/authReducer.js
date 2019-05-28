@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
         return { ...INITIAL_STATE, user: action.payload };
       }
       
-      return { ...state };
+      return { ...INITIAL_STATE };
     default:
       return state;
   }

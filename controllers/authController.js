@@ -51,7 +51,8 @@ const getCurrentUser = (req, res) => {
 const getLogOut = (req, res) => {
   acLog(`User ${req.user.email} has logged out`);
   req.logOut();
-  res.redirect('/');
+  res.send();
+  // res.redirect('/');
 };
 
 // @Method    GET

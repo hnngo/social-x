@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { } from 'react-router-dom';
 import { fetchUser } from '../../actions';
 import HeaderBar from '../HeaderBar';
+import Navbar from '../Navbar';
 
 const ProfilePage = (props) => {
   // Fetch user to retrive the right

@@ -86,4 +86,19 @@ export const signUpWithEmailAndPassword = ({ name, email, password }, history) =
   }
 };
 
+export const logOut = () => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get('/auth/logout');
+
+      dispatch({
+        type: ACT_FETCH_USER,
+        payload: res.data
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
 //TODO: Redirect to /profile/id
