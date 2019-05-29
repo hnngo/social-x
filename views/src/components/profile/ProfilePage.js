@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { } from 'react-router-dom';
 import { fetchUser } from '../../actions';
@@ -19,6 +19,16 @@ const ProfilePage = (props) => {
       return (
         <div>
           {props.auth.user.name}
+          <form action="/image/upload" method="POST" encType="multipart/form-data">
+            <div className="form-group">
+              <label>Select a file to upload</label>
+              <input type="file"
+                name="file" className="form-control-file" />
+            </div>
+            <button className="btn btn-primary" type="submit">
+              Submit
+            </button>
+          </form>
         </div>
       );
     }
