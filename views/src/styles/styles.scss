@@ -445,6 +445,7 @@ body {
   height: 60px;
   display: flex;
   justify-content: space-between;
+  z-index: 3;
 
   .hb-rootname {
     @include pStyle(lucida, 30px, white, 2px);
@@ -488,4 +489,180 @@ body {
 .p-container {
   position: relative;
   top: 60px;
+
+  .p-ava {
+    padding-top: 20px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      border: 3px solid map-get($map: $theme-colors, $key: main);
+      border-radius: 50%;
+
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .p-basic-info {
+    margin-top: 20px;
+    border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+    border-radius: 10px;
+
+    .info-row {
+      display: flex;
+      padding: 5px 5px;
+
+      i {
+        color: map-get($map: $theme-colors, $key: main);
+        font-size: 20px;
+      }
+
+      p {
+        margin: 0;
+        padding-left: 10px;
+      }
+    }
+
+    .p-basic-edit {
+      @include pStyle(lucida, 14px, dashHeaderBar, 0px);
+      margin-top: 5px;
+      text-align: center;
+    }
+  }
+
+  .p-friend-list {
+    position: relative;
+    margin-top: 20px;
+    border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+    border-radius: 10px;
+
+    .fl-title {
+      @include pStyle(treb, 18px, main, 0px);
+      margin: 5px 15px;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        @include pStyle(treb, 16px, black, 0px);
+      }
+    }
+
+    .fl-edit {
+      @include pStyle(lucida, 14px, dashHeaderBar, 0px);
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+  }
+
+  .p-post-area {
+    margin-top: 30px;
+    border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+    border-radius: 10px;
+  
+    .post-wrapper {
+      margin: 20px 20px;
+  
+      img {
+        width: 40px;
+        height: 40px;
+        vertical-align: top;
+        margin-right: 15px;
+      }
+  
+      textarea {
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        width: calc(100% - 40px - 15px);
+        
+        &::placeholder {
+          font-size: 20px;
+        }
+      }
+    }
+  
+    .post-btn {
+      text-align: center;
+      margin: 10px 0;
+  
+      button {
+        width: 80%;
+        outline: none;
+        border: none;
+        border-radius: 20px;
+        background-color: map-get($map: $theme-colors, $key: main);
+        padding: 5px;
+        color: white;
+        box-shadow: 0px 0px 5px 0px map-get($map: $theme-colors, $key: shadowMain);
+  
+        &:active {
+          box-shadow: inset 0px 0px 5px 0px map-get($map: $theme-colors, $key: shadowMain);
+        }
+      }
+    }
+  }
+
+  .post-heading {
+    margin: 20px 0;
+    @include pStyle(lucida, 22px, main, 0px);
+  }
+}
+
+.post-containter {
+  border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+
+    .post-owner {
+      @include pStyle(lucida, 22px, main, 0px);
+      margin: 0;
+    }
+
+    .post-date {
+      @include pStyle(treb, 16px, rgb(128, 128, 128), 0px);
+      margin: 0;
+    }
+
+    .post-auth-edit i {
+      margin: 0px 4px;
+      font-size: 20px;
+
+      &:nth-child(1) {
+        color: map-get($map: $theme-colors, $key: main);
+      }
+
+      &:nth-child(2) {
+        color: map-get($map: $theme-colors, $key: dangerText);
+      }
+    }
+  }
+
+  .post-body {
+    padding: 5px;
+    margin: 10px 0;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+
+    .footer-likes,
+    .footer-cmts {
+      @include pStyle(treb, 16px, main, 0px);
+      cursor: pointer;
+      border: 1px solid map-get($map: $theme-colors, $key: main);
+      border-radius: 30px;
+      padding: 10px 20px;
+    }
+  }
 }
