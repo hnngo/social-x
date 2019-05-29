@@ -18,6 +18,28 @@ const postSchema = new Schema({
   content: {
     type: String,
     required: true
+  },
+  likes: {
+    total: {
+      type: Number
+    },
+    who: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
+  },
+  comments: {
+    total: {
+      type: Number
+    },
+    who: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
   }
 });
 

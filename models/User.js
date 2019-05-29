@@ -20,7 +20,14 @@ const userSchema = new Schema({
   registerDate: {
     type: Date,
     required: true
-  }
+  },
+  post: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+      required: true
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', userSchema);
