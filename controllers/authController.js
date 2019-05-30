@@ -10,7 +10,8 @@ const sendUserInfo = (userTag) => {
       id: userTag._id,
       name: userTag.name,
       email: userTag.email,
-      registerDate: userTag.registerDate
+      registerDate: userTag.registerDate,
+      post: userTag.post
     };
   }
 }
@@ -55,7 +56,8 @@ const getLogOut = (req, res) => {
   // res.redirect('/');
 };
 
-// @Method    GET
+
+// @Method    POST
 // @Path      /auth/singup
 // @Desc      User log out
 const postSignUpWithEmailAndPassword = async (req, res) => {
@@ -112,6 +114,10 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
   }
 };
 
+
+// @Method    POST
+// @Path      /auth/signin
+// @Desc      User log out
 const postSignInWithEmailAndPassword = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     // Check if err then send back to client

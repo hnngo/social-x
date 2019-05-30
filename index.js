@@ -51,3 +51,5 @@ if (process.env.NODE_ENV === "production") {
 // Server listen
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
+
+//TODO: Show message when cannot connect to DB server, tell user to reload or do something
