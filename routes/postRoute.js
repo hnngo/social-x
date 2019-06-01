@@ -6,7 +6,7 @@ const { isLogin } = require('../utils/requireMiddleware');
 // @Method    Get
 // @Path      /post/id/:postId
 // @Desc      Get all posts in time order
-router.get('/all');
+router.get('/all', postController.getAllPost);
 
 // @Method    Get
 // @Path      /post/id/:postId

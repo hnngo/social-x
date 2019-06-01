@@ -4,6 +4,28 @@ const acLog = require('../utils/activityLog');
 
 // @Method    Get
 // @Path      /post/id/:postId
+// @Desc      Get all posts in time order
+// @Querry    ?limit : get limit number of posts, default is all
+const getAllPost = async (req, res) => {
+  try {
+    let posts;
+    if (!isNaN(req.query.limit)) {
+      posts = await Post.find().sort({ postDate: -1 }).limit(+req.query.limit);
+    } else {
+      posts = await Post.find().sort({ postDate: -1 });
+    }
+
+    if (posts) {
+      return res.send(posts);
+    }
+  } catch (err) {
+    acLog(err);
+    return res.status(400).send({ message: "No post was found" })
+  }
+};
+
+// @Method    Get
+// @Path      /post/id/:postId
 // @Desc      Get posts by Id
 const getPostById = async (req, res) => {
   try {
@@ -120,9 +142,8 @@ const deletePostById = async (req, res) => {
   }
 }
 
-
-
 module.exports = {
+  getAllPost,
   getPostById,
   getPostByUserId,
   postUploadPost,
