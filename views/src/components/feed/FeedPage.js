@@ -63,3 +63,5 @@ const mapStateToProps = ({ post }) => {
 export default connect(mapStateToProps, {
   fetchAllPosts
 })(FeedPage);
+
+//TODO: Fetch limit posts when starting

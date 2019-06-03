@@ -24,10 +24,24 @@ const userSchema = new Schema({
   post: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Post',
-      required: true
+      ref: 'Post'
     }
-  ]
+  ],
+  friend: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  job: {
+    type: String
+  },
+  home: {
+    type: String
+  },
+  birthday: {
+    type: Date
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SignUpForm';
 import { logOut, fetchUser } from '../actions';
@@ -79,7 +80,9 @@ const HeaderBar = (props) => {
     <div>
       <div className="hb-container">
         <div className="hb-rootname">
-          <p>{props.hbName}</p>
+          <p
+            onClick={() => props.history.push("/feed")}
+          >Feeds</p>
         </div>
         <div className="hb-auth-features">
           {renderContent()}
@@ -97,7 +100,9 @@ const mapStateToProps = ({ auth }) => {
   };
 }
 
-export default connect(mapStateToProps, {
-  logOut,
-  fetchUser
-})(HeaderBar);
+export default withRouter(
+  connect(mapStateToProps, {
+    logOut,
+    fetchUser
+  })(HeaderBar)
+);

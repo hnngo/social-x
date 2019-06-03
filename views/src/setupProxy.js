@@ -4,6 +4,7 @@ module.exports = function(app) {
   app.use(proxy([
     '/auth',
     '/image',
-    '/post'
+    '/post',
+    '/user'
   ], { target: 'http://localhost:5000/' }));
 };

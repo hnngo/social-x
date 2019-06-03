@@ -540,6 +540,10 @@ body {
   margin: 5px 40px;
 }
 
+.hb-container .hb-rootname p {
+  cursor: pointer;
+}
+
 .hb-container .hb-auth-features ul {
   margin: 8px 5px;
   list-style: none;

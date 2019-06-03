@@ -452,6 +452,10 @@ body {
   .hb-rootname {
     @include pStyle(lucida, 30px, white, 2px);
     margin: 5px 40px;
+
+    p {
+      cursor: pointer;
+    }
   }
 
   .hb-auth-features {

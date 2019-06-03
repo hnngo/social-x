@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 const path = require('path');
 const imageRoute = require('./routes/imageRoute');
 const postRoute = require('./routes/postRoute');
+const userRoute = require('./routes/userRoute');
 
 // Create express app
 const app = express();
@@ -36,6 +37,7 @@ app.use(passport.session());
 app.use('/auth', authRoute);
 app.use('/image', imageRoute);
 app.use('/post', postRoute);
+app.use('/user', userRoute);
 
 // Setup express static build folder
 if (process.env.NODE_ENV === "production") {
