@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   ACT_FETCH_USER,
   ACT_AUTH_SIGNING_IN,
@@ -26,11 +27,11 @@ export default (state = INITIAL_STATE, action) => {
     case ACT_AUTH_SIGN_IN_SUCCESS:
     case ACT_AUTH_SIGN_UP_SUCCESS:
     case ACT_FETCH_USER:
-      if (action.payload) {
+      if (action.payload && !_.isEqual(state.user, action.payload)) {
         return { ...INITIAL_STATE, user: action.payload };
       }
       
-      return { ...INITIAL_STATE };
+      return state;
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SignUpForm';
-import { logOut } from '../actions';
+import { logOut, fetchUser } from '../actions';
 import {
   SIGN_IN_FORM,
   SIGN_UP_FORM
@@ -12,12 +12,15 @@ const avaImgUrl = "https://lh3.googleusercontent.com/3rhgWbCOvAx946IGRbx71p02Oi6
 
 const HeaderBar = (props) => {
   const [showForm, setShowForm] = useState(false);
+  const { user, fetchUser } = props;
 
   useEffect(() => {
-    if (props.user) {
+    fetchUser();
+
+    if (user) {
       setShowForm(false);
     }
-  }, [props.user]);
+  }, [user, fetchUser]);
 
   const renderForm = () => {
     if (showForm === SIGN_IN_FORM) {
@@ -76,7 +79,7 @@ const HeaderBar = (props) => {
     <div>
       <div className="hb-container">
         <div className="hb-rootname">
-          <p>Feeds</p>
+          <p>{props.hbName}</p>
         </div>
         <div className="hb-auth-features">
           {renderContent()}
@@ -95,5 +98,6 @@ const mapStateToProps = ({ auth }) => {
 }
 
 export default connect(mapStateToProps, {
-  logOut
+  logOut,
+  fetchUser
 })(HeaderBar);

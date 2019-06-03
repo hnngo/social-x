@@ -263,7 +263,7 @@ body {
   border-radius: 20px;
   background-color: map-get($map: $theme-colors, $key: darkLight);
   box-shadow: 0px 0px 33px 1px map-get($map: $theme-colors, $key: shadowMain);
-  z-index: 3;
+  z-index: 4;
 
   @include mq(phone, max) {
     top: 50%;
@@ -441,6 +441,7 @@ body {
 
 .hb-container {
   position: fixed;
+  top: 0px;
   width: 100vw;
   background-color: map-get($map: $theme-colors, $key: headerBarMain);
   height: 60px;
@@ -667,4 +668,9 @@ body {
       padding: 10px 20px;
     }
   }
+}
+
+.feed-post-container {
+  position: relative;
+  top: 60px;
 }
