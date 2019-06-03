@@ -3,16 +3,35 @@ import React from 'react';
 const Post = (props) => {
   const { imgUrl, owner, postDate, content, numberOfLikes, numberOfCmts } = props;
 
+  const timeNow = new Date();
+  const timePosted = new Date(postDate);
+  let difTime = timeNow - timePosted;
+  let timeAgo;
+
+  if (difTime < 60 * 1000) {
+    timeAgo = "Less than a minute ago";
+  } else if (difTime < 60 * 60 * 1000) {
+    timeAgo = `${Math.round(difTime / (60 * 1000))} minute(s) ago`;
+  } else if (difTime < 24 * 60 * 60 * 1000) {
+    timeAgo = `${Math.round(difTime / (60 * 60 * 1000))} hour(s) ago`;
+  } else if (difTime < 30 * 24 * 60 * 60 * 1000) {
+    timeAgo = `${Math.round(difTime / (24 * 60 * 60 * 1000))} day(s) ago`;
+  } else if (difTime < 365 * 24 * 60 * 60 * 1000) {
+    timeAgo = `${Math.round(difTime / (30 * 24 * 60 * 60 * 1000))} month(s) ago`;
+  } else {
+    timeAgo = `${Math.round(difTime / (365 * 24 * 60 * 60 * 1000))} year(s) ago`;
+  }
+
   return (
     <div className="post-containter">
       <div className="post-header">
         <div className="row">
           <div className="col-2">
-            <img src={imgUrl} alt="ava"/>
+            <img src={imgUrl} alt="ava" />
           </div>
           <div className="col-10">
-            <p className="post-owner">{owner || "Nhan"}</p>
-            <p className="post-date">{postDate || "4 hours ago"}</p>
+            <p className="post-owner">{owner}</p>
+            <p className="post-date">{timeAgo}</p>
           </div>
         </div>
         <div className="post-auth-edit">
@@ -21,14 +40,22 @@ const Post = (props) => {
         </div>
       </div>
       <div className="post-body">
-        {content || "leoafeoafoafkeafasdmfldsafmasdfkmsalfmsaklmflm dskmfl aksmfklasmd lfmsadm flsadmf lasml fmsalmf klasm fas"}
+        {content}
       </div>
       <div className="post-footer">
         <div className="footer-likes">
-          {numberOfLikes || 234} Likes
+          {
+            numberOfLikes > 1 ?
+              `${numberOfLikes} Likes`
+              : `${numberOfLikes} Like`
+          }
         </div>
         <div className="footer-cmts">
-          {numberOfCmts || 10} Comment
+          {
+            numberOfCmts > 1 ?
+              `${numberOfCmts} Comments`
+              : `${numberOfCmts} Comment`
+          }
         </div>
       </div>
     </div>

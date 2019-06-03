@@ -8,6 +8,9 @@ export const ACT_AUTH_SIGNING_UP = "act_auth_signing_up";
 export const ACT_AUTH_SIGN_UP_SUCCESS = "act_auth_sign_up_success";
 export const ACT_AUTH_SIGN_UP_FAIL = "act_auth_sign_up_fail";
 
+// POSTS
+export const ACT_POST_FETCH_ALL = "act_post_fetch_all";
+
 // FORMS
 export const SIGN_IN_FORM = "sign_in_form";
 export const SIGN_UP_FORM = "sign_up_form";

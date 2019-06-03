@@ -10,9 +10,20 @@ const getAllPost = async (req, res) => {
   try {
     let posts;
     if (!isNaN(req.query.limit)) {
-      posts = await Post.find().sort({ postDate: -1 }).limit(+req.query.limit);
+      posts = await Post.find()
+        .sort({ postDate: -1 })
+        .limit(+req.query.limit)
+        .populate({
+          path: 'user',
+          select: 'name _id'
+        });
     } else {
-      posts = await Post.find().sort({ postDate: -1 });
+      posts = await Post.find()
+        .sort({ postDate: -1 })
+        .populate({
+          path: 'user',
+          select: 'name _id'
+        });
     }
 
     if (posts) {
