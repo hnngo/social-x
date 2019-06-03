@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SignUpForm';
-import { fetchUser } from '../actions';
+import { fetchUser, logOut } from '../actions';
 import {
   SIGN_IN_FORM,
   SIGN_UP_FORM
@@ -60,6 +60,9 @@ const Navbar = (props) => {
                 <li
                   onClick={() => props.history.push(`/profile/${props.user.id}`)}
                 >Hi {props.user.name}</li>
+                <li
+                  onClick={() => props.logOut()}
+                >Hi {props.user.name}</li>
               </ul>
               :
               <ul>
@@ -77,8 +80,13 @@ const Navbar = (props) => {
           <div className="nav-small-btn">
             {
               props.user ?
-                <div onClick={() => props.history.push(`/profile/${props.user.id}`)}>
-                  <p>Hi {props.user.name}</p>
+                <div>
+                  <div onClick={() => props.history.push(`/profile/${props.user.id}`)}>
+                    <p>Hi {props.user.name}</p>
+                  </div>
+                  <div onClick={() => props.logOut()}>
+                    <p>Sign Out</p>
+                  </div>
                 </div>
                 :
                 <div>
@@ -106,5 +114,6 @@ const mapStateToProps = ({ auth }) => {
 }
 
 export default withRouter(connect(mapStateToProps, {
-  fetchUser
+  fetchUser,
+  logOut
 })(Navbar));

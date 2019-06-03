@@ -6,7 +6,8 @@ import {
   ACT_AUTH_SIGN_IN_SUCCESS,
   ACT_AUTH_SIGNING_UP,
   ACT_AUTH_SIGN_UP_FAIL,
-  ACT_AUTH_SIGN_UP_SUCCESS
+  ACT_AUTH_SIGN_UP_SUCCESS,
+  ACT_LOG_OUT
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -32,6 +33,8 @@ export default (state = INITIAL_STATE, action) => {
       }
       
       return state;
+    case ACT_LOG_OUT:
+      return { ...INITIAL_STATE };
     default:
       return state;
   }

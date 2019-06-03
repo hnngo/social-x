@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   ACT_FETCH_USER,
+  ACT_LOG_OUT,
   ACT_AUTH_SIGNING_IN,
   ACT_AUTH_SIGN_IN_SUCCESS,
   ACT_AUTH_SIGN_IN_FAIL,
@@ -92,8 +93,7 @@ export const logOut = () => {
       const res = await axios.get('/auth/logout');
 
       dispatch({
-        type: ACT_FETCH_USER,
-        payload: res.data
+        type: ACT_LOG_OUT
       });
     } catch (err) {
       console.log(err);
