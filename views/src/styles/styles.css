@@ -815,6 +815,57 @@ body {
   margin: 10px 0;
 }
 
+.post-containter .post-body .post-edit-area textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #b6b6b685;
+  padding: 10px;
+  outline: none;
+}
+
+.post-containter .post-body .post-edit-area .post-edit-button {
+  text-align: right;
+}
+
+.post-containter .post-body .post-edit-area .post-edit-button button.btn-confirm,
+.post-containter .post-body .post-edit-area .post-edit-button button.btn-discard {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px 20px;
+}
+
+.post-containter .post-body .post-edit-area .post-edit-button button.btn-confirm {
+  background-color: #00CBF5;
+  -webkit-box-shadow: 0px 0px 4px 0px #58a0ae;
+          box-shadow: 0px 0px 4px 0px #58a0ae;
+}
+
+@media only screen and (min-width: 768px) {
+  .post-containter .post-body .post-edit-area .post-edit-button button.btn-confirm:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
+            box-shadow: inset 0px 0px 4px 0px #58a0ae;
+  }
+}
+
+.post-containter .post-body .post-edit-area .post-edit-button button.btn-discard {
+  background-color: #d84b4b;
+  -webkit-box-shadow: 0px 0px 4px 0px #a84040;
+          box-shadow: 0px 0px 4px 0px #a84040;
+}
+
+@media only screen and (min-width: 768px) {
+  .post-containter .post-body .post-edit-area .post-edit-button button.btn-discard:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #a84040;
+            box-shadow: inset 0px 0px 4px 0px #a84040;
+  }
+}
+
 .post-containter .post-footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -833,7 +884,7 @@ body {
   cursor: pointer;
   border: 1px solid #00CBF5;
   border-radius: 30px;
-  padding: 10px 20px;
+  padding: 6px 20px;
 }
 
 .post-loading {

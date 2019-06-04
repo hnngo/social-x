@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  deletePost
+  deletePost,
+  updatePost
 } from '../../actions';
 
 const Post = (props) => {
+  const [editPost, setEditPost] = useState(false);
+  const [postContent, setPostContent] = useState(props.content);
+
   const {
     imgUrl,
     owner,
@@ -14,7 +18,8 @@ const Post = (props) => {
     numberOfLikes,
     numberOfCmts,
     userId,
-    auth
+    auth,
+    postId
   } = props;
 
   const timeNow = new Date();
@@ -43,10 +48,16 @@ const Post = (props) => {
 
     return (
       <div className="post-auth-edit">
-        <i className="fas fa-pen" />
+        <i
+          className="fas fa-pen"
+          onClick={() => {
+            setEditPost(true);
+            setPostContent(content);
+          }}
+        />
         <i
           className="fas fa-trash"
-          onClick={() => props.deletePost(props.postId)}
+          onClick={() => props.deletePost(postId)}
         />
       </div>
     );
@@ -70,7 +81,35 @@ const Post = (props) => {
         {renderEditPost()}
       </div>
       <div className="post-body">
-        {content}
+        {
+          editPost ?
+            <div className="post-edit-area">
+              <textarea
+                rows={3}
+                value={postContent}
+                onChange={(e) => setPostContent(e.target.value)}
+              />
+              <div className="post-edit-button">
+                <button
+                  className="btn-confirm"
+                  onClick={() => {
+                    props.updatePost(postId, postContent);
+                    setEditPost(false);
+                  }}
+                >
+                  Confirm
+                </button>
+                <button
+                  className="btn-discard"
+                  onClick={() => setEditPost(false)}
+                >
+                  Discard
+                </button>
+              </div>
+            </div>
+            :
+            content
+        }
       </div>
       <div className="post-footer">
         <div className="footer-likes">
@@ -98,6 +137,7 @@ const mapStateToProps = ({ auth }) => {
 
 export default withRouter(
   connect(mapStateToProps, {
-    deletePost
+    deletePost,
+    updatePost
   })(Post)
 );

@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   ACT_POST_FETCH_ALL,
   ACT_POST_UPLOAD,
-  ACT_POST_DELETE
+  ACT_POST_DELETE,
+  ACT_POST_UPDATE
 } from '../constants';
 
 export const fetchAllPosts = () => {
@@ -43,6 +44,21 @@ export const deletePost = (postId) => {
       dispatch({
         type: ACT_POST_DELETE,
         payload: postId
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export const updatePost = (postId, content) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.patch(`/post/${postId}`, { content });
+
+      dispatch({
+        type: ACT_POST_UPDATE,
+        payload: res.data
       });
     } catch (err) {
       console.log(err);
