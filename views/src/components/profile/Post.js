@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Post = (props) => {
   const {
@@ -9,7 +10,8 @@ const Post = (props) => {
     content,
     numberOfLikes,
     numberOfCmts,
-    userId
+    userId,
+    auth
   } = props;
 
   const timeNow = new Date();
@@ -31,6 +33,19 @@ const Post = (props) => {
     timeAgo = `${Math.round(difTime / (365 * 24 * 60 * 60 * 1000))} year(s) ago`;
   }
 
+  const renderEditPost = () => {
+    if (!auth.user || auth.user.id !== userId) {
+      return <div />;
+    }
+
+    return (
+      <div className="post-auth-edit">
+        <i className="fas fa-pen" />
+        <i className="fas fa-trash" />
+      </div>
+    );
+  }
+
   return (
     <div className="post-containter">
       <div className="post-header">
@@ -46,10 +61,7 @@ const Post = (props) => {
             <p className="post-date">{timeAgo}</p>
           </div>
         </div>
-        <div className="post-auth-edit">
-          <i className="fas fa-pen" />
-          <i className="fas fa-trash" />
-        </div>
+        {renderEditPost()}
       </div>
       <div className="post-body">
         {content}
@@ -74,4 +86,10 @@ const Post = (props) => {
   );
 }
 
-export default withRouter(Post);
+const mapStateToProps = ({ auth }) => {
+  return { auth };
+}
+
+export default withRouter(
+  connect(mapStateToProps)(Post)
+);

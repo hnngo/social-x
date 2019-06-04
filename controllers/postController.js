@@ -101,12 +101,11 @@ const postUploadPost = async (req, res) => {
     await newPost.save();
 
     // Update post on User model
-    currentUser.post.push(newPost._id);
+    currentUser.post.unshift(newPost._id);
     await currentUser.save();
 
     acLog(`${req.user.email} successfully uploaded a post id: ${newPost._id}`);
     res.send(newPost);
-
   } catch (err) {
     acLog(err);
   }

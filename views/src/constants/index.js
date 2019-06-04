@@ -10,6 +10,7 @@ export const ACT_AUTH_SIGN_UP_FAIL = "act_auth_sign_up_fail";
 
 // POSTS
 export const ACT_POST_FETCH_ALL = "act_post_fetch_all";
+export const ACT_POST_UPLOAD = "act_post_upload";
 
 // PROFILE
 export const ACT_PROFILE_FETCH_BY_USERID = "act_profile_fetch_by_userid";

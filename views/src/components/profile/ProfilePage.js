@@ -1,18 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import HeaderBar from '../HeaderBar';
 import Post from './Post';
-import { fetchProfileById } from '../../actions';
 import Loading from '../Loading';
+import {
+  fetchProfileById,
+  uploadPost
+} from '../../actions';
 
 const avaImgUrl = "https://lh3.googleusercontent.com/3rhgWbCOvAx946IGRbx71p02Oi6hmE7Bli7ymXCqvt9oyrhnEoYR5_stB3BZbaIAwLey2aXag06zjqqVN5OYQAyvFjMl7IhYIMZqupGV09INS3F1Tx3V02jSzpvzrUeGxuasP9aExRusY2a4hImokhQ_QYTXvtJt35Sk5ezFAZl40zTjOtCZ7iiUwnJjnQ8tE9gyKRDxz6lQcOmseEMvrXvtAkdDILUFlWDE_LXuB6CIcvnxNkjrIwm5_w7l5opNZIGlkwlY9cPMNHsmGQfjBbP3kLwf2qf1oBnGs5VMRVWXrtYUtEtNADXl2oMbMQ2-L4yoNHydPTJTcr6ra8LN8WZLcpQMwxrCl9BbxzdqRKeFO_J6EJYU5Q-DAI84us5nQOgqPjR_U7FiHTOyvRumxC0naBHKrJtLt-UKB48BkqBNpt9TwhgLOdlw4dSrpTIWxelQQpOt_iinc4mfbdt1q498g8vSxX63QdN-BNRxKL6AH5FuVX5JbhXpPRO4GbsLS99sH0mujYIZmfZm7ze3Gt7pXlq8TL7Ao4dFBypvrIVoSHROSeZrFyPMyguVjYlEWuH2n6rpNfanZbB9b14jRhtZNWULELP1UnByVHzamHRSv6knIJD_euPPnhTea5Q6csG1N-xhjLB2YWdCPChL-JUhgrn9ilA=s225-no";
 
 const ProfilePage = (props) => {
-  const { fetchProfileById, match, profile } = props;
+  const [postContent, setPostContent] = useState("");
+  const [previousPosts, setPreviousPosts] = useState([]);
+  const [posting, setPosting] = useState(false);
+
+  const {
+    fetchProfileById,
+    match,
+    profile,
+    uploadPost
+  } = props;
 
   useEffect(() => {
     fetchProfileById(match.params.userId)
   }, [fetchProfileById, match.params.userId]);
+
+  if (Object.keys(profile).length > 0 && !_.isEqual(previousPosts, profile.post)) {
+    setPreviousPosts(profile.post);
+    setPostContent("");
+    setPosting(false);
+  }
+
+  const handleClickShare = () => {
+    if (postContent.length > 0 && !posting) {
+      setPosting(true);
+      uploadPost(postContent);
+    }
+  }
 
   const renderContent = () => {
     const {
@@ -112,20 +138,45 @@ const ProfilePage = (props) => {
         </div>
 
         <div className="col-sm-8">
-          <div className="p-post-area">
-            <div className="post-wrapper">
-              <img src={avaImgUrl} alt="avatar" />
-              <textarea
-                placeholder="What is your thought?"
-                rows={3}
-              />
-            </div>
-            <div className="post-btn">
-              <button>Share</button>
-            </div>
-          </div>
+          {renderPostArea()}
           <p className="post-heading">POSTS</p>
           {renderPost()}
+        </div>
+      </div>
+    );
+  }
+
+  const renderPostArea = () => {
+    if (!props.auth.user) {
+      return <div />;
+    }
+
+    return (
+      <div className="p-post-area">
+        <div className="post-wrapper">
+          <img src={avaImgUrl} alt="avatar" />
+          <textarea
+            placeholder="What is your thought?"
+            rows={3}
+            value={postContent}
+            onChange={(e) => setPostContent(e.target.value)}
+          />
+        </div>
+        <div className="post-btn">
+          <button
+            onClick={() => handleClickShare()}
+          >
+            {
+              posting ?
+                <div>
+                  <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                  <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                  <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                </div>
+                :
+                "Share"
+            }
+          </button>
         </div>
       </div>
     );
@@ -189,7 +240,8 @@ const mapStateToProps = ({ auth, profile }) => {
 }
 
 export default connect(mapStateToProps, {
-  fetchProfileById
+  fetchProfileById,
+  uploadPost
 })(ProfilePage);
 
 //TODO: If login then let user can editted

@@ -53,7 +53,7 @@ const HeaderBar = (props) => {
     if (props.user) {
       return (
         <ul>
-          <li>
+          <li onClick={() => props.history.push(`/profile/${props.user.id}`)}>
             <img src={avaImgUrl} alt="avatar" />
             {props.user.name}
           </li>
