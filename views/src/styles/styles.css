@@ -147,6 +147,7 @@ body {
   height: calc(100vh - 60px);
   top: 60px;
   left: 0px;
+  z-index: 3;
 }
 
 .hp-container .hp-img-container img {
@@ -244,7 +245,7 @@ body {
   background-color: rgba(0, 0, 0, 0.863);
   -webkit-box-shadow: 0px 0px 33px 1px #58a0ae;
           box-shadow: 0px 0px 33px 1px #58a0ae;
-  z-index: 4;
+  z-index: 4 !important;
 }
 
 @media only screen and (max-width: 575px) {
@@ -517,22 +518,27 @@ body {
           transform: translate(-50%, -50%);
 }
 
-.hb-container {
-  position: fixed;
+.hb-background {
   top: 0px;
   width: 100vw;
+  top: 0px;
   background-color: #0085A1;
   height: 60px;
+  z-index: 3;
+  position: fixed;
+}
+
+.hb-background .hb-container {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  z-index: 3;
 }
 
-.hb-container .hb-rootname {
+.hb-background .hb-container .hb-rootname {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 30px;
   letter-spacing: 2px;
@@ -540,16 +546,16 @@ body {
   margin: 5px 40px;
 }
 
-.hb-container .hb-rootname p {
+.hb-background .hb-container .hb-rootname p {
   cursor: pointer;
 }
 
-.hb-container .hb-auth-features ul {
+.hb-background .hb-container .hb-auth-features ul {
   margin: 8px 5px;
   list-style: none;
 }
 
-.hb-container .hb-auth-features ul li {
+.hb-background .hb-container .hb-auth-features ul li {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
@@ -560,7 +566,7 @@ body {
   cursor: pointer;
 }
 
-.hb-container .hb-auth-features ul li:nth-child(1)::after {
+.hb-background .hb-container .hb-auth-features ul li:nth-child(1)::after {
   content: "";
   position: absolute;
   top: -3px;
@@ -570,7 +576,7 @@ body {
   background-color: #b6b6b685;
 }
 
-.hb-container .hb-auth-features ul li img {
+.hb-background .hb-container .hb-auth-features ul li img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -581,7 +587,6 @@ body {
 .p-container {
   position: relative;
   top: 60px;
-  z-index: -1;
 }
 
 .p-container .p-ava {
@@ -597,6 +602,15 @@ body {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+}
+
+.p-container .p-ava p {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  letter-spacing: 0px;
+  color: #067288;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .p-container .p-basic-info {
@@ -644,6 +658,10 @@ body {
   letter-spacing: 0px;
   color: #00CBF5;
   margin: 5px 15px;
+}
+
+.p-container .p-friend-list .fl-nofriend {
+  margin-left: 20px;
 }
 
 .p-container .p-friend-list ul {
@@ -758,7 +776,14 @@ body {
   font-size: 22px;
   letter-spacing: 0px;
   color: #00CBF5;
+  cursor: pointer;
   margin: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .post-containter .post-header .post-owner:hover {
+    color: #067288;
+  }
 }
 
 .post-containter .post-header .post-date {

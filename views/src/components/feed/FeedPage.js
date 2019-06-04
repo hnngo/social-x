@@ -18,6 +18,7 @@ const FeedPage = (props) => {
         return (
           <Post
             key={p._id}
+            userId={p.user._id}
             owner={p.user.name}
             postDate={p.postDate}
             content={p.content}
@@ -33,14 +34,12 @@ const FeedPage = (props) => {
 
   return (
     <div>
-      <HeaderBar
-        hbName="Feeds"
-      />
       <div className="container">
         <div className="feed-post-container">
           {renderPost()}
         </div>
       </div>
+      <HeaderBar />
     </div>
   );
 }

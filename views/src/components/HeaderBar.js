@@ -26,7 +26,7 @@ const HeaderBar = (props) => {
   const renderForm = () => {
     if (showForm === SIGN_IN_FORM) {
       return (
-        <div className="nav-sin-form animated fadeIn">
+        <div className="animated fadeIn">
           <SignInForm
             handleExitForm={() => setShowForm(false)}
             handleSwitchForm={(type) => setShowForm(type)}
@@ -36,7 +36,7 @@ const HeaderBar = (props) => {
       );
     } else if (showForm === SIGN_UP_FORM) {
       return (
-        <div className="nav-sin-form animated fadeIn">
+        <div className="animated fadeIn">
           <SignUpForm
             handleExitForm={() => setShowForm(false)}
             handleSwitchForm={(type) => setShowForm(type)}
@@ -78,14 +78,18 @@ const HeaderBar = (props) => {
 
   return (
     <div>
-      <div className="hb-container">
-        <div className="hb-rootname">
-          <p
-            onClick={() => props.history.push("/feed")}
-          >Feeds</p>
-        </div>
-        <div className="hb-auth-features">
-          {renderContent()}
+      <div className="hb-background">
+        <div className="container">
+          <div className="hb-container">
+            <div className="hb-rootname">
+              <p
+                onClick={() => props.history.push("/feed")}
+              >Feeds</p>
+            </div>
+            <div className="hb-auth-features">
+              {renderContent()}
+            </div>
+          </div>
         </div>
       </div>
       {renderForm()}

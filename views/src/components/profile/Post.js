@@ -1,7 +1,16 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const Post = (props) => {
-  const { imgUrl, owner, postDate, content, numberOfLikes, numberOfCmts } = props;
+  const {
+    imgUrl,
+    owner,
+    postDate,
+    content,
+    numberOfLikes,
+    numberOfCmts,
+    userId
+  } = props;
 
   const timeNow = new Date();
   const timePosted = new Date(postDate);
@@ -30,7 +39,10 @@ const Post = (props) => {
             <img src={imgUrl} alt="ava" />
           </div>
           <div className="col-10">
-            <p className="post-owner">{owner}</p>
+            <p
+              className="post-owner"
+              onClick={() => props.history.push(`/profile/${userId}`)}
+            >{owner}</p>
             <p className="post-date">{timeAgo}</p>
           </div>
         </div>
@@ -62,4 +74,4 @@ const Post = (props) => {
   );
 }
 
-export default Post;
+export default withRouter(Post);

@@ -8,6 +8,7 @@ $theme-colors: (
   "dangerTextShadow": rgb(168, 64, 64),
   "headerBarMain": #0085A1,
   "dashHeaderBar": #b6b6b685,
+  "mainName": rgb(6, 114, 136)
 );
 
 $breakpoints: (
@@ -183,6 +184,7 @@ body {
     height: calc(100vh - 60px);
     top: 60px;
     left: 0px;
+    z-index: 3;
   }
 }
 
@@ -263,7 +265,7 @@ body {
   border-radius: 20px;
   background-color: map-get($map: $theme-colors, $key: darkLight);
   box-shadow: 0px 0px 33px 1px map-get($map: $theme-colors, $key: shadowMain);
-  z-index: 4;
+  z-index: 4!important;
 
   @include mq(phone, max) {
     top: 50%;
@@ -439,53 +441,58 @@ body {
   }
 }
 
-.hb-container {
-  position: fixed;
+.hb-background {
   top: 0px;
   width: 100vw;
+  top: 0px;
   background-color: map-get($map: $theme-colors, $key: headerBarMain);
   height: 60px;
-  display: flex;
-  justify-content: space-between;
   z-index: 3;
+  position: fixed;
 
-  .hb-rootname {
-    @include pStyle(lucida, 30px, white, 2px);
-    margin: 5px 40px;
+  .hb-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 
-    p {
-      cursor: pointer;
-    }
-  }
+    .hb-rootname {
+      @include pStyle(lucida, 30px, white, 2px);
+      margin: 5px 40px;
 
-  .hb-auth-features {
-    ul {
-      margin: 8px 5px;
-      list-style: none;
-
-      li {
-        @include pStyle(treb, 18px, white, 2px);
-        display: inline;
-        margin: 0px 10px;
-        position: relative;
+      p {
         cursor: pointer;
+      }
+    }
 
-        &:nth-child(1)::after {
-          content: "";
-          position: absolute;
-          top: -3px;
-          right: -10px;
-          width: 2px;
-          height: 30px;
-          background-color: map-get($map: $theme-colors, $key: dashHeaderBar);
-        }
+    .hb-auth-features {
+      ul {
+        margin: 8px 5px;
+        list-style: none;
 
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: 1px solid map-get($map: $theme-colors, $key: main);
-          margin-right: 5px;
+        li {
+          @include pStyle(treb, 18px, white, 2px);
+          display: inline;
+          margin: 0px 10px;
+          position: relative;
+          cursor: pointer;
+
+          &:nth-child(1)::after {
+            content: "";
+            position: absolute;
+            top: -3px;
+            right: -10px;
+            width: 2px;
+            height: 30px;
+            background-color: map-get($map: $theme-colors, $key: dashHeaderBar);
+          }
+
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid map-get($map: $theme-colors, $key: main);
+            margin-right: 5px;
+          }
         }
       }
     }
@@ -495,7 +502,6 @@ body {
 .p-container {
   position: relative;
   top: 60px;
-  z-index: -1;
 
   .p-ava {
     padding-top: 20px;
@@ -509,6 +515,12 @@ body {
       position: relative;
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    p {
+      @include pStyle(lucida, 25px, mainName, 0px);
+      margin-top: 10px;
+      text-align: center;
     }
   }
 
@@ -548,6 +560,10 @@ body {
     .fl-title {
       @include pStyle(treb, 18px, main, 0px);
       margin: 5px 15px;
+    }
+
+    .fl-nofriend {
+      margin-left: 20px;
     }
 
     ul {
@@ -632,7 +648,14 @@ body {
 
     .post-owner {
       @include pStyle(lucida, 22px, main, 0px);
+      cursor: pointer;
       margin: 0;
+
+      @include mq("tablet", min) {
+        &:hover {
+          color: map-get($map: $theme-colors, $key: mainName);
+        }
+      }
     }
 
     .post-date {
