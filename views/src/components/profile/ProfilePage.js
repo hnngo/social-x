@@ -147,7 +147,8 @@ const ProfilePage = (props) => {
   }
 
   const renderPostArea = () => {
-    if (!props.auth.user) {
+    // Check if user has permission to upload new post
+    if (!props.auth.user || props.auth.user.id !== props.match.params.userId) {
       return <div />;
     }
 
@@ -195,6 +196,7 @@ const ProfilePage = (props) => {
       return (
         <Post
           key={p._id}
+          postId={p._id}
           userId={profile._id}
           owner={profile.name}
           postDate={p.postDate}
@@ -225,7 +227,7 @@ const ProfilePage = (props) => {
       <div className="p-container">
         <div className="container">
           {
-            Object.keys(profile).length > 0 ?
+            (Object.keys(profile).length > 0 && profile._id === props.match.params.userId)?
               renderContent() : <Loading />
           }
         </div>

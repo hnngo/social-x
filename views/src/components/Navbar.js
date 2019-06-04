@@ -62,7 +62,7 @@ const Navbar = (props) => {
                 >Hi {props.user.name}</li>
                 <li
                   onClick={() => props.logOut()}
-                >Hi {props.user.name}</li>
+                >Sign Out</li>
               </ul>
               :
               <ul>

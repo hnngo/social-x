@@ -1,6 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {
+  deletePost
+} from '../../actions';
 
 const Post = (props) => {
   const {
@@ -41,7 +44,7 @@ const Post = (props) => {
     return (
       <div className="post-auth-edit">
         <i className="fas fa-pen" />
-        <i className="fas fa-trash" />
+        <i className="fas fa-trash" onClick={() => props.deletePost(props.postId)}/>
       </div>
     );
   }
@@ -91,5 +94,7 @@ const mapStateToProps = ({ auth }) => {
 }
 
 export default withRouter(
-  connect(mapStateToProps)(Post)
+  connect(mapStateToProps, {
+    deletePost
+  })(Post)
 );

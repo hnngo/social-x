@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
   ACT_POST_FETCH_ALL,
-  ACT_POST_UPLOAD
+  ACT_POST_UPLOAD,
+  ACT_POST_DELETE
 } from '../constants';
 
 export const fetchAllPosts = () => {
@@ -30,6 +31,21 @@ export const uploadPost = (content) => {
       });
     } catch (err) {
       console.log(err)
+    }
+  }
+}
+
+export const deletePost = (postId) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/post/id/${postId}`);
+
+      dispatch({
+        type: ACT_POST_DELETE,
+        payload: postId
+      });
+    } catch (err) {
+      console.log(err);
     }
   }
 }

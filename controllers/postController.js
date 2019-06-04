@@ -127,7 +127,7 @@ const deletePostById = async (req, res) => {
 
     if (!currentUser || !postsOfUser.includes(postId)) {
       acLog(err);
-      return res.send({ message: "You are not allowed to delete the post" });
+      return res.send({ message: "You are not allowed to delete this post" });
     }
 
     Post.findByIdAndDelete(postId)
