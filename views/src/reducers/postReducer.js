@@ -1,5 +1,6 @@
 import {
-  ACT_POST_FETCH_ALL
+  ACT_POST_FETCH_ALL,
+  ACT_POST_DELETE
 } from '../constants';
 
 export default (state = [], action) => {
@@ -10,6 +11,10 @@ export default (state = [], action) => {
       }
 
       return state;
+    case ACT_POST_DELETE:
+      const newPostArr = state.filter(p => p._id !== action.payload);
+
+      return [...newPostArr];
     default:
       return state;
   }

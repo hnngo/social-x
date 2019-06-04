@@ -49,7 +49,7 @@ const getPostById = async (req, res) => {
     }
   } catch (err) {
     acLog(err);
-    res.send({ message: "Error when retrieving posts" });
+    res.status(400).send(err);
   }
 };
 
@@ -65,7 +65,7 @@ const getPostByUserId = async (req, res) => {
     }
   } catch (err) {
     acLog(err);
-    res.send({ message: "Error when retrieving posts" });
+    res.status(400).send(err);
   }
 };
 
@@ -108,6 +108,7 @@ const postUploadPost = async (req, res) => {
     res.send(newPost);
   } catch (err) {
     acLog(err);
+    res.status(400).send(err);
   }
 };
 
@@ -115,11 +116,6 @@ const postUploadPost = async (req, res) => {
 // @Path      /post/id/:postId
 // @Desc      Delete a post by its id
 const deletePostById = async (req, res) => {
-  if (!req.user) {
-    acLog("Anonymous try to delete a post");
-    return res.status(400).send({ message: "You need to login to perform this function" });
-  }
-
   try {
     const { postId } = req.params;
     let currentUser = await User.findById(req.user._id);
@@ -148,7 +144,43 @@ const deletePostById = async (req, res) => {
 
   } catch (err) {
     acLog(err);
-    res.status(400).send({ message: err });
+    res.status(400).send(err);
+  }
+}
+
+// @Method    PATCH
+// @Path      /post/:postId
+// @Desc      Edit content of the post
+const patchPostById = async (req, res) => {
+  try {
+    const { content } = req.body;
+    const { postId } = req.params;
+
+    if (!content || content.length === 0) {
+      acLog(`${req.user.email} invalidly edit post id ${postId}`);
+      return res.status(400).send({ message: "The edited post content is invalid" });
+    }
+
+    // Check if existing a post
+    const existingPost = await Post.findById(postId).populate({
+      path: 'user',
+      select: 'name _id'
+    });
+
+    if (!existingPost || existingPost.user._id.toString() !== req.user._id.toString()) {
+      acLog(`${req.user.email} is not allowed to edit post id ${postId}`);
+      return res.status(400).send({ message: "You are not allowed to edit this post" });
+    }
+
+    // Replace the existing content with new one
+    existingPost.content = content;
+    await existingPost.save();
+
+    acLog(`${req.user.email} edited successfully post id ${postId}`);
+    return res.send(existingPost);
+  } catch (err) {
+    acLog(err);
+    res.status(400).send(err)
   }
 }
 
@@ -157,5 +189,6 @@ module.exports = {
   getPostById,
   getPostByUserId,
   postUploadPost,
-  deletePostById
+  deletePostById,
+  patchPostById
 };

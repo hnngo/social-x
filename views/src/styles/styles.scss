@@ -641,6 +641,7 @@ body {
   border-radius: 10px;
   margin: 20px 0;
   padding: 20px;
+  transition: 0.5s;
 
   .post-header {
     display: flex;
@@ -666,6 +667,7 @@ body {
     .post-auth-edit i {
       margin: 0px 4px;
       font-size: 20px;
+      cursor: pointer;
 
       &:nth-child(1) {
         color: map-get($map: $theme-colors, $key: main);

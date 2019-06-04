@@ -26,11 +26,11 @@ router.post('/upload', isLogin, postController.postUploadPost);
 // @Method    DELETE
 // @Path      /post/id/:postId
 // @Desc      Delete a post by its id
-router.delete('/id/:postId', postController.deletePostById);
+router.delete('/id/:postId', isLogin, postController.deletePostById);
 
 // @Method    PATCH
 // @Path      /post/:postId
-// @Desc      Google OAuth with passport
-// router.post('/:postId', isLogin);
+// @Desc      Edit content of the post
+router.patch('/:postId', isLogin, postController.patchPostById);
 
 module.exports = router;

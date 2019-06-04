@@ -760,6 +760,8 @@ body {
   border-radius: 10px;
   margin: 20px 0;
   padding: 20px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .post-containter .post-header {
@@ -797,6 +799,7 @@ body {
 .post-containter .post-header .post-auth-edit i {
   margin: 0px 4px;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .post-containter .post-header .post-auth-edit i:nth-child(1) {

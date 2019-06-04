@@ -44,7 +44,10 @@ const Post = (props) => {
     return (
       <div className="post-auth-edit">
         <i className="fas fa-pen" />
-        <i className="fas fa-trash" onClick={() => props.deletePost(props.postId)}/>
+        <i
+          className="fas fa-trash"
+          onClick={() => props.deletePost(props.postId)}
+        />
       </div>
     );
   }
