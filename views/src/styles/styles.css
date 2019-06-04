@@ -808,12 +808,7 @@ body {
   padding: 10px 20px;
 }
 
-.feed-post-container {
-  position: relative;
-  top: 60px;
-}
-
-.feed-post-container .post-loading {
+.post-loading {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -824,5 +819,10 @@ body {
       -ms-flex-align: center;
           align-items: center;
   height: 100vh;
+}
+
+.feed-post-container {
+  position: relative;
+  top: 60px;
 }
 /*# sourceMappingURL=styles.css.map */

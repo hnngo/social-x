@@ -90,7 +90,7 @@ export const signUpWithEmailAndPassword = ({ name, email, password }, history) =
 export const logOut = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get('/auth/logout');
+      await axios.get('/auth/logout');
 
       dispatch({
         type: ACT_LOG_OUT

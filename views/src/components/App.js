@@ -11,7 +11,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/feed" component={FeedPage} />
-          <Route path="/profile" component={ProfilePage} />
+          <Route path="/profile/:userId" component={ProfilePage} />
         </Switch>
       </div>
     </BrowserRouter>

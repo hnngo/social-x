@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import HeaderBar from '../HeaderBar';
 import { fetchAllPosts } from '../../actions';
 import Post from '../profile/Post';
+import Loading from '../Loading';
 
 const FeedPage = (props) => {
   const { fetchAllPosts, post } = props;
@@ -27,19 +28,7 @@ const FeedPage = (props) => {
       })
     }
 
-    return (
-      <div className="post-loading">
-        <div className="spinner-border text-info" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-        <div className="spinner-border text-info" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-        <div className="spinner-border text-info" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

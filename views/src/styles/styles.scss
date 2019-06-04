@@ -674,14 +674,16 @@ body {
   }
 }
 
+.post-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .feed-post-container {
   position: relative;
   top: 60px;
-
-  .post-loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
 }
+
+
