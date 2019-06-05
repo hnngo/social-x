@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   deletePost,
-  updatePost
+  updatePost,
+  likePost
 } from '../../actions';
 
 const Post = (props) => {
@@ -22,7 +23,7 @@ const Post = (props) => {
   const {
     postDate,
     content,
-    postId,
+    _id: postId,
     likes,
     comments
   } = postInfo
@@ -33,6 +34,8 @@ const Post = (props) => {
   // Set the isLiked state
   if (auth.user && likes.who.includes(auth.user.id) && !isLiked) {
     setIsLiked(true);
+  } else if ((!auth.user || !likes.who.includes(auth.user.id)) && isLiked) {
+    setIsLiked(false);
   }
 
   // Re-format the time
@@ -53,6 +56,14 @@ const Post = (props) => {
     timeAgo = `${Math.round(difTime / (30 * 24 * 60 * 60 * 1000))} month(s) ago`;
   } else {
     timeAgo = `${Math.round(difTime / (365 * 24 * 60 * 60 * 1000))} year(s) ago`;
+  }
+
+  const handleClickLike = () => {
+    if (!auth.user) {
+      return;
+    }
+
+    props.likePost(postId);
   }
 
   const renderEditPost = () => {
@@ -126,9 +137,12 @@ const Post = (props) => {
         }
       </div>
       <div className="post-footer">
-        <div className={
-          isLiked ? "footer-likes post-liked" : "footer-likes" 
-        }>
+        <div
+          className={
+            isLiked ? "footer-likes post-liked" : "footer-likes"
+          }
+          onClick={() => handleClickLike()}
+        >
           {
             numberOfLikes > 1 ?
               `${numberOfLikes} Likes`
@@ -154,6 +168,9 @@ const mapStateToProps = ({ auth }) => {
 export default withRouter(
   connect(mapStateToProps, {
     deletePost,
-    updatePost
+    updatePost,
+    likePost
   })(Post)
 );
+
+//TODO: Ask to delete

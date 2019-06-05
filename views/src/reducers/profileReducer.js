@@ -3,7 +3,8 @@ import {
   ACT_PROFILE_FETCH_BY_USERID,
   ACT_POST_UPLOAD,
   ACT_POST_DELETE,
-  ACT_POST_UPDATE
+  ACT_POST_UPDATE,
+  ACT_POST_LIKE
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -23,6 +24,7 @@ export default (state = {}, action) => {
         return { ...state, post: newPostArr };
       }
     case ACT_POST_UPDATE:
+    case ACT_POST_LIKE:
       {
         const oldPostIndex = _.findIndex(state.post, ['_id', action.payload._id]);
         const newPostArr = [...state.post];

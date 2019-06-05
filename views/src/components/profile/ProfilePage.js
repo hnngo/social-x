@@ -242,9 +242,6 @@ export default connect(mapStateToProps, {
   uploadPost
 })(ProfilePage);
 
-//TODO: If login then let user can editted
-//TODO: Get the right profile page
-
 /*
 <form action="/image/upload" method="POST" encType="multipart/form-data">
             <div className="form-group">

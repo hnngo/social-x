@@ -3,7 +3,8 @@ import {
   ACT_POST_FETCH_ALL,
   ACT_POST_UPLOAD,
   ACT_POST_DELETE,
-  ACT_POST_UPDATE
+  ACT_POST_UPDATE,
+  ACT_POST_LIKE
 } from '../constants';
 
 export const fetchAllPosts = () => {
@@ -58,6 +59,21 @@ export const updatePost = (postId, content) => {
 
       dispatch({
         type: ACT_POST_UPDATE,
+        payload: res.data
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export const likePost = (postId) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(`/post/like/${postId}`);
+
+      dispatch({
+        type: ACT_POST_LIKE,
         payload: res.data
       });
     } catch (err) {
