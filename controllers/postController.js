@@ -176,7 +176,7 @@ const patchPostById = async (req, res) => {
     // Replace the existing content with new one
     existingPost.content = content;
     await existingPost.save();
-
+    
     acLog(`${req.user.email} edited successfully post id ${postId}`);
     return res.send(existingPost);
   } catch (err) {
