@@ -9,19 +9,33 @@ import {
 const Post = (props) => {
   const [editPost, setEditPost] = useState(false);
   const [postContent, setPostContent] = useState(props.content);
+  const [isLiked, setIsLiked] = useState(false);
 
   const {
-    imgUrl,
     owner,
-    postDate,
-    content,
-    numberOfLikes,
-    numberOfCmts,
     userId,
+    imgUrl,
     auth,
-    postId
+    postInfo
   } = props;
 
+  const {
+    postDate,
+    content,
+    postId,
+    likes,
+    comments
+  } = postInfo
+
+  const numberOfLikes = likes.total
+  const numberOfCmts = comments.total
+
+  // Set the isLiked state
+  if (auth.user && likes.who.includes(auth.user.id) && !isLiked) {
+    setIsLiked(true);
+  }
+
+  // Re-format the time
   const timeNow = new Date();
   const timePosted = new Date(postDate);
   let difTime = timeNow - timePosted;
@@ -112,7 +126,9 @@ const Post = (props) => {
         }
       </div>
       <div className="post-footer">
-        <div className="footer-likes">
+        <div className={
+          isLiked ? "footer-likes post-liked" : "footer-likes" 
+        }>
           {
             numberOfLikes > 1 ?
               `${numberOfLikes} Likes`

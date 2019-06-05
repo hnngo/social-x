@@ -18,13 +18,9 @@ const FeedPage = (props) => {
         return (
           <Post
             key={p._id}
-            postId={p._id}
+            postInfo={p}
             userId={p.user._id}
             owner={p.user.name}
-            postDate={p.postDate}
-            content={p.content}
-            numberOfLikes={p.likes.total}
-            numberOfCmts={p.comments.total}
           />
         );
       })

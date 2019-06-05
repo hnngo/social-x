@@ -887,6 +887,11 @@ body {
   padding: 6px 20px;
 }
 
+.post-containter .post-footer .post-liked {
+  background-color: #00CBF5;
+  color: white !important;
+}
+
 .post-loading {
   display: -webkit-box;
   display: -ms-flexbox;

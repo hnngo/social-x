@@ -196,13 +196,9 @@ const ProfilePage = (props) => {
       return (
         <Post
           key={p._id}
-          postId={p._id}
+          postInfo={p}
           userId={profile._id}
           owner={profile.name}
-          postDate={p.postDate}
-          content={p.content}
-          numberOfLikes={p.likes.total}
-          numberOfCmts={p.comments.total}
         />
       );
     })
