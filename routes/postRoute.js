@@ -33,4 +33,9 @@ router.delete('/id/:postId', isLogin, postController.deletePostById);
 // @Desc      Edit content of the post
 router.patch('/:postId', isLogin, postController.patchPostById);
 
+// @Method    GET
+// @Path      /post/like/:postId
+// @Desc      Like/unlike the post
+router.get('/like/:postId', isLogin, postController.getLikeUnlikePostById);
+
 module.exports = router;

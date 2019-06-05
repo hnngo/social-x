@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const acLog = require('../utils/activityLog');
@@ -184,10 +185,53 @@ const patchPostById = async (req, res) => {
   }
 }
 
+// @Method    GET
+// @Path      /post/like/:postId
+// @Desc      Like/unlike the post
+const getLikeUnlikePostById = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.user._id;
+    const existingPost = await Post.findById(postId).populate({
+      path: 'user',
+      select: 'name _id'
+    });
+
+    if (!postId || !existingPost) {
+      acLog(`${req.user.email} likes an invalid post`);
+      return res.status(400).send({ message: "Cannot like this post" });
+    }
+
+    // Check if user already like or not
+    const isLikedByUserIndex = _.findIndex(existingPost.likes.who, (w) => w.toString() === userId.toString());
+
+    // Update likes array
+    if (isLikedByUserIndex >= 0) {
+      // Unlike action
+      existingPost.likes.who.splice(isLikedByUserIndex, 1);
+      existingPost.likes.total -= 1;
+      await existingPost.save();
+      acLog(`${req.user.email} unliked post id ${postId}`);
+    } else {
+      // Like action
+      existingPost.likes.who.push(userId);
+      existingPost.likes.total += 1;
+      await existingPost.save();
+      acLog(`${req.user.email} liked post id ${postId}`);
+    }
+
+    return res.send(existingPost);
+  } catch (err) {
+    acLog(err);
+    return res.status(400).send(err);
+  }
+}
+
 module.exports = {
   getAllPost,
   getPostById,
   getPostByUserId,
+  getLikeUnlikePostById,
   postUploadPost,
   deletePostById,
   patchPostById
