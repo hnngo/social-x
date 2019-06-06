@@ -44,4 +44,10 @@ router.get('/like/:postId', isLogin, postController.getLikeUnlikePostById);
 // @Desc      Comment a post
 router.post('/comment/:postId', isLogin, postController.postCommentById);
 
+
+// @Method    DELETE
+// @Path      /post/comment/:commentId
+// @Desc      Delete a comment
+router.delete('/comment/:commentId/:postId', isLogin, postController.deleteComment);
+
 module.exports = router;

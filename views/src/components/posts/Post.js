@@ -5,7 +5,8 @@ import { formatTime } from './formatTime';
 import {
   deletePost,
   updatePost,
-  likePost
+  likePost,
+  deleteComment
 } from '../../actions';
 
 const Post = (props) => {
@@ -101,13 +102,13 @@ const Post = (props) => {
     }
 
     const formattedCmt = comments.content.map((cmt, i) => {
-      if (i > limitViewCmt) {
+      if (i >= limitViewCmt) {
         return <div key={cmt._id} />;
       }
 
       // Re-format the time
       let cmtTime = formatTime(new Date() - new Date(cmt.commentDate));
-      
+
       return (
         <div key={cmt._id}>
           <div className="cmt-row" >
@@ -119,20 +120,27 @@ const Post = (props) => {
               <p className="cmt-content">{cmt.comment}</p>
             </div>
           </div>
-          {
-            (auth.user &&
-              (auth.user.id.toString() ===
-                postInfo.user.toString() ||
-                auth.user.id.toString() ===
-                cmt.user._id.toString())) ?
+          <div className="cmt-util">
+            <p className="cmt-time">{cmtTime}</p>
+            {
+              (auth.user &&
+                (auth.user.id.toString() ===
+                  postInfo.user.toString() ||
+                  auth.user.id.toString() ===
+                  cmt.user._id.toString())) ?
 
-              <div className="cmt-util">
-                <p className="cmt-time">{cmtTime}</p>
-                <p className="cmt-delete-btn">Delete</p>
-              </div>
-              :
-              <div />
-          }
+                <p
+                  className="cmt-delete-btn"
+                  onClick={() => props.deleteComment(
+                    cmt._id,
+                    postId,
+                    rootPath
+                  )}
+                >Delete</p>
+                :
+                <div />
+            }
+          </div>
         </div>
       );
     });
@@ -275,8 +283,7 @@ export default withRouter(
   connect(mapStateToProps, {
     deletePost,
     updatePost,
-    likePost
+    likePost,
+    deleteComment
   })(Post)
 );
-
-//TODO: Ask to delete

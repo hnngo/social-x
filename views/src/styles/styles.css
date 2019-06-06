@@ -884,8 +884,7 @@ body {
           justify-content: space-between;
 }
 
-.post-containter .post-footer .footer-likes,
-.post-containter .post-footer .footer-cmts {
+.post-containter .post-footer .footer-likes {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 0px;
@@ -896,10 +895,17 @@ body {
   padding: 6px 20px;
 }
 
-.post-containter .post-footer .footer-likes:active,
-.post-containter .post-footer .footer-cmts:active {
+.post-containter .post-footer .footer-likes:active {
   -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
           box-shadow: inset 0px 0px 4px 0px #58a0ae;
+}
+
+.post-containter .post-footer .footer-cmts {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: #00CBF5;
+  padding-top: 15px;
 }
 
 .post-containter .post-footer .post-liked {
@@ -1095,6 +1101,7 @@ body {
   letter-spacing: 0px;
   color: #d84b4b;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .post-loading {

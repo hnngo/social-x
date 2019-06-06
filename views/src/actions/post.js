@@ -7,7 +7,9 @@ import {
   ACT_POST_UPDATE_F,
   ACT_POST_UPDATE_P,
   ACT_POST_LIKE_F,
-  ACT_POST_LIKE_P
+  ACT_POST_LIKE_P,
+  ACT_CMT_DELTE_F,
+  ACT_CMT_DELTE_P
 } from '../constants';
 
 export const fetchAllPosts = () => {
@@ -78,6 +80,20 @@ export const likePost = (postId, userId, rootPath) => {
     payload: {
       userId,
       postId
+    }
+  };
+}
+
+export const deleteComment = (commentId, postId, rootPath) => {
+  axios.delete(`/post/comment/${commentId}/${postId}`);
+
+  let type = rootPath === "feed" ? ACT_CMT_DELTE_F : ACT_CMT_DELTE_P;
+
+  return {
+    type,
+    payload: {
+      postId,
+      commentId
     }
   };
 }

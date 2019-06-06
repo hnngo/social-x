@@ -22,7 +22,7 @@ const getAllPost = async (req, res) => {
           path: "comments.content.user",
           model: "User",
           select: "_id name"
-        });;
+        });
     } else {
       posts = await Post.find()
         .sort({ postDate: -1 })
@@ -277,13 +277,78 @@ const postCommentById = async (req, res) => {
   }
 }
 
+// @Method    DELETE
+// @Path      /post/comment/:commentId/:postId
+// @Desc      Delete a comment
+const deleteComment = async (req, res) => {
+  try {
+    const { commentId, postId } = req.params;
+    const userId = req.user._id;
+
+    if (!commentId || !postId) {
+      acLog(`${req.user.email} performed an invalid action`);
+      return res.status(400).send({ message: "Invalid action" });
+    }
+
+    const existingPost = await Post.findById(postId)
+      .populate({
+        path: "user",
+        select: "_id name",
+        model: "User"
+      })
+      .populate({
+        path: "comments.content.user",
+        model: "User",
+        select: "_id name"
+      });
+
+    if (!existingPost) {
+      acLog(`${req.user.email} comment an invalid post`);
+      return res.status(400).send({ message: "The post does not exist" });
+    }
+
+    // Check if user have permission to delete
+    let isAllowedToDelete = false;
+
+    // Check if that comment is belongs to that user
+    let cmtIndex = _.findIndex(existingPost.comments.content, (c) => c._id.toString() === commentId.toString());
+    let cmtUserId = existingPost.comments.content[cmtIndex].user._id;
+    if (cmtUserId.toString() === userId.toString()) {
+      isAllowedToDelete = isAllowedToDelete || true;
+    }
+    
+    // Check if that post is belongs to that user
+    if (existingPost.user._id.toString() === userId.toString()) {
+      isAllowedToDelete = isAllowedToDelete || true;
+    }
+
+    // Make decision
+    if (isAllowedToDelete) {
+      let newContent = existingPost.comments.content.filter(c => c._id.toString() !== commentId.toString());
+      existingPost.comments.content = newContent;
+      existingPost.comments.total -= 1;
+      await existingPost.save();
+  
+      acLog(`${req.user.email} deleted successfully comment id ${commentId} in post id ${postId}`);
+      return res.send(existingPost);
+    }
+
+    acLog(`${req.user.email} make invalid action`);
+    return res.send({ message: "Invalid action" });
+  } catch (err) {
+    acLog(err);
+    return res.status(400).send(err);
+  }
+}
+
 module.exports = {
   getAllPost,
   getPostById,
   getPostByUserId,
   getLikeUnlikePostById,
   postUploadPost,
+  postCommentById,
   deletePostById,
-  patchPostById,
-  postCommentById
+  deleteComment,
+  patchPostById
 };

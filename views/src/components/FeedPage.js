@@ -7,7 +7,7 @@ import Loading from './Loading';
 
 const FeedPage = (props) => {
   const { fetchAllPosts, feed } = props;
-  
+
   useEffect(() => {
     fetchAllPosts();
   }, [fetchAllPosts]);
@@ -22,6 +22,7 @@ const FeedPage = (props) => {
             userId={p.user._id}
             owner={p.user.name}
             triggerLikes={p.likes.total}
+            triggerComments={p.comments.total}
           />
         );
       })

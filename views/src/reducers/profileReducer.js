@@ -4,7 +4,8 @@ import {
   ACT_POST_UPLOAD,
   ACT_POST_DELETE_P,
   ACT_POST_UPDATE_P,
-  ACT_POST_LIKE_P
+  ACT_POST_LIKE_P,
+  ACT_CMT_DELTE_P
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -45,7 +46,18 @@ export default (state = {}, action) => {
           newPostArr[oldPostIndex].likes.who.push(action.payload.userId)
           newPostArr[oldPostIndex].likes.total += 1;
         }
-        
+
+        return { ...state, post: newPostArr };
+      }
+    case ACT_CMT_DELTE_P:
+      {
+        const oldPostIndex = _.findIndex(state.post, ['_id', action.payload.postId]);
+        const newPostArr = [...state.post];
+
+        const newCmtArr = newPostArr[oldPostIndex].comments.content.filter(c => c._id.toString() !== action.payload.commentId);
+        newPostArr[oldPostIndex].comments.content = newCmtArr;
+        newPostArr[oldPostIndex].comments.total -= 1;
+
         return { ...state, post: newPostArr };
       }
     default:

@@ -741,8 +741,7 @@ body {
     display: flex;
     justify-content: space-between;
 
-    .footer-likes,
-    .footer-cmts {
+    .footer-likes {
       @include pStyle(treb, 16px, main, 0px);
       cursor: pointer;
       border: 2px solid map-get($map: $theme-colors, $key: main);
@@ -752,6 +751,11 @@ body {
       &:active {
         box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
       }
+    }
+
+    .footer-cmts {
+      @include pStyle(treb, 16px, main, 0px);
+      padding-top: 15px;
     }
 
     .post-liked {
@@ -892,6 +896,7 @@ body {
       .cmt-delete-btn {
         @include pStyle(lucida, 12px, dangerText, 0px);
         margin-bottom: 5px;
+        cursor: pointer;
       }
     }
   }

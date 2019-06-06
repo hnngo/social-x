@@ -200,6 +200,7 @@ const ProfilePage = (props) => {
           userId={profile._id}
           owner={profile.name}
           triggerLikes={p.likes.total}
+          triggerCmts={p.comments.total}
         />
       );
     })
