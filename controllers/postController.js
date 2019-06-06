@@ -17,13 +17,23 @@ const getAllPost = async (req, res) => {
         .populate({
           path: 'user',
           select: 'name _id'
-        });
+        })
+        .populate({
+          path: "comments.content.user",
+          model: "User",
+          select: "_id name"
+        });;
     } else {
       posts = await Post.find()
         .sort({ postDate: -1 })
         .populate({
           path: 'user',
-          select: 'name _id'
+          select: 'name _id',
+        })
+        .populate({
+          path: "comments.content.user",
+          model: "User",
+          select: "_id name"
         });
     }
 

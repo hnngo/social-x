@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import HeaderBar from '../HeaderBar';
-import { fetchAllPosts } from '../../actions';
-import Post from '../profile/Post';
-import Loading from '../Loading';
+import HeaderBar from './HeaderBar';
+import { fetchAllPosts } from '../actions';
+import Post from './posts/Post';
+import Loading from './Loading';
 
 const FeedPage = (props) => {
   const { fetchAllPosts, feed } = props;
-
+  
   useEffect(() => {
     fetchAllPosts();
   }, [fetchAllPosts]);

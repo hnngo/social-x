@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { formatTime } from './formatTime';
 import {
   deletePost,
   updatePost,
@@ -12,6 +13,7 @@ const Post = (props) => {
   const [postContent, setPostContent] = useState(props.content);
   const [isLiked, setIsLiked] = useState(false);
   const [isDeleteAsking, setIsDeleteAsking] = useState(false);
+  const [limitViewCmt, setLimitViewCmt] = useState(3);
 
   const {
     owner,
@@ -31,7 +33,7 @@ const Post = (props) => {
 
   const numberOfLikes = likes.total
   const numberOfCmts = comments.total
-  
+
   // Get the path root
   const rootPath = props.match.path.split('/')[1];
 
@@ -46,21 +48,7 @@ const Post = (props) => {
   const timeNow = new Date();
   const timePosted = new Date(postDate);
   let difTime = timeNow - timePosted;
-  let timeAgo;
-
-  if (difTime < 60 * 1000) {
-    timeAgo = "Less than a minute ago";
-  } else if (difTime < 60 * 60 * 1000) {
-    timeAgo = `${Math.round(difTime / (60 * 1000))} minute(s) ago`;
-  } else if (difTime < 24 * 60 * 60 * 1000) {
-    timeAgo = `${Math.round(difTime / (60 * 60 * 1000))} hour(s) ago`;
-  } else if (difTime < 30 * 24 * 60 * 60 * 1000) {
-    timeAgo = `${Math.round(difTime / (24 * 60 * 60 * 1000))} day(s) ago`;
-  } else if (difTime < 365 * 24 * 60 * 60 * 1000) {
-    timeAgo = `${Math.round(difTime / (30 * 24 * 60 * 60 * 1000))} month(s) ago`;
-  } else {
-    timeAgo = `${Math.round(difTime / (365 * 24 * 60 * 60 * 1000))} year(s) ago`;
-  }
+  let timeAgo = formatTime(difTime);
 
   const handleClickLike = () => {
     if (!auth.user) {
@@ -86,7 +74,6 @@ const Post = (props) => {
         />
         <i
           className="fas fa-trash"
-          // onClick={() => props.deletePost(postId, rootPath)}
           onClick={() => setIsDeleteAsking(true)}
         />
       </div>
@@ -113,26 +100,62 @@ const Post = (props) => {
       return <div />;
     }
 
-    const formattedCmt = comments.content.map(cmt => {
+    const formattedCmt = comments.content.map((cmt, i) => {
+      if (i > limitViewCmt) {
+        return <div key={cmt._id} />;
+      }
+
+      // Re-format the time
+      let cmtTime = formatTime(new Date() - new Date(cmt.commentDate));
+      
       return (
-        <div
-          key={cmt._id}
-          className="cmt-row"
-        >
-          <div className="cmt-avatar">
-            <img src={"dfdd"} alt="ava"/>
+        <div key={cmt._id}>
+          <div className="cmt-row" >
+            <div className="cmt-avatar">
+              <img src={"dfdd"} alt="ava" />
+            </div>
+            <div className="cmt-area">
+              <p className="cmt-name">{cmt.user.name}</p>
+              <p className="cmt-content">{cmt.comment}</p>
+            </div>
           </div>
-          <div className="cmt-area">
-            <p className="cmt-name">{cmt.user.name}</p>
-            <p className="cmt-content">{cmt.comment}</p>
-          </div>
+          {
+            (auth.user &&
+              (auth.user.id.toString() ===
+                postInfo.user.toString() ||
+                auth.user.id.toString() ===
+                cmt.user._id.toString())) ?
+
+              <div className="cmt-util">
+                <p className="cmt-time">{cmtTime}</p>
+                <p className="cmt-delete-btn">Delete</p>
+              </div>
+              :
+              <div />
+          }
         </div>
       );
     });
 
+    const renderSeeMore = () => {
+      if (comments.content.length > limitViewCmt) {
+        return (
+          <div
+            className="cmt-see-more"
+            onClick={() => setLimitViewCmt(limitViewCmt + 6)}
+          >
+            <p>See More</p>
+          </div>
+        );
+      }
+
+      return <div />;
+    }
+
     return (
       <div className="comment-view">
         {formattedCmt}
+        {renderSeeMore()}
       </div>
     )
   }
@@ -153,11 +176,11 @@ const Post = (props) => {
                   setIsDeleteAsking(false);
                 }}
               >Confirm</button>
-              <button 
-              className="btn-cancel"
-              onClick={() => {
-                setIsDeleteAsking(false);
-              }}
+              <button
+                className="btn-cancel"
+                onClick={() => {
+                  setIsDeleteAsking(false);
+                }}
               >Cancel</button>
             </div>
           </div>

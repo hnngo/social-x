@@ -843,6 +843,7 @@ body {
 
       .cmt-avatar {
         margin-right: 10px;
+        width: 50px;
       }
 
       .cmt-area {
@@ -850,18 +851,47 @@ body {
         width: 100%;
         background-color: map-get($map: $theme-colors, $key: placeholderBg);
         border-radius: 15px;
-        padding: 5px 10px;
+        padding: 10px;
 
         .cmt-name {
           @include pStyle(treb, 17px, main, 0px);
           cursor: pointer;
           margin-right: 10px;
           font-weight: bold;
+          margin-bottom: 0;
         }
 
         .cmt-content {
           @include pStyle(treb, 16px, black, 0px);
+          margin-bottom: 0;
         }
+      }
+    }
+
+    .cmt-see-more {
+      text-align: center;
+      
+      p {
+        @include pStyle(lucida, 16px, main, 0px);
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0;
+      }
+    }
+
+    .cmt-util {
+      display: flex;
+      padding-left: 60px;
+
+      .cmt-time {
+        @include pStyle(lucida, 12px, rgb(141, 141, 141), 0px);
+        margin-right: 10px;
+        margin-bottom: 5px;
+      }
+
+      .cmt-delete-btn {
+        @include pStyle(lucida, 12px, dangerText, 0px);
+        margin-bottom: 5px;
       }
     }
   }
