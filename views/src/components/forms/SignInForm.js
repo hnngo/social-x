@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signInWithEmailAndPassword } from '../../actions';
+import { signInWithEmailAndPassword, clearErrMsg } from '../../actions';
 import InputField from './InputField';
 import { SIGN_UP_FORM } from '../../constants';
+import ErrorMsg from './ErrorMsg';
 
 // Validate process
 const isEmail = value =>
@@ -13,6 +14,11 @@ const isEmail = value =>
 const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 characters or more`;
 
 const SignInForm = (props) => {
+  const { clearErrMsg } = props;
+  useEffect(() => {
+    clearErrMsg();
+  }, [clearErrMsg]);
+
   const renderLoading = () => {
     if (props.isLoading) {
       return (
@@ -34,7 +40,7 @@ const SignInForm = (props) => {
       return <div />;
     }
   }
-
+  
   return (
     <div className="sin-sup-form-container">
       <p>Sign In</p>
@@ -55,6 +61,7 @@ const SignInForm = (props) => {
           validate={minLength}
           icon={"fas fa-key"}
         />
+        <ErrorMsg />
         <button
           type="submit"
         >
@@ -86,7 +93,9 @@ const SignInForm = (props) => {
 
 const mapStateToProps = ({ form }) => {
   if (form.signin) {
-    return { formValues: form.signin.values };
+    return {
+      formValues: form.signin.values
+    };
   }
 
   return {};
@@ -97,7 +106,8 @@ export default reduxForm({
 })(
   withRouter(
     connect(mapStateToProps, {
-      signInWithEmailAndPassword
+      signInWithEmailAndPassword,
+      clearErrMsg
     })(SignInForm)
   )
 );

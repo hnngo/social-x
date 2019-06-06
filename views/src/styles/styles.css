@@ -235,7 +235,7 @@ body {
 
 .sin-sup-form-container {
   position: absolute;
-  top: 40%;
+  top: 48%;
   left: 50%;
   width: 400px;
   -webkit-transform: translate(-50%, -50%);
@@ -399,6 +399,14 @@ body {
     letter-spacing: 1px;
     color: #d84b4b;
   }
+}
+
+.sin-sup-form-container form .form-errmsg {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #ff5656;
+  padding-bottom: 0;
 }
 
 .sin-sup-form-container form button,

@@ -70,7 +70,7 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
   // Check if POST method receive enough field
   if (!name || !email || !password) {
     acLog("Unsuccesful post sign up with invalid field(s)");
-    return res.status(400).send({ msg: "Invalid input field(s)" });
+    return res.send({ message: "Invalid input field(s)" });
   }
 
   try {
@@ -81,7 +81,7 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
       // Existing user, return error
       acLog(`Anonymous tried to created existing user ${existingUser.email}`);
 
-      return res.status(400).send({ msg: "User is already existed" });
+      return res.send({ message: "User is already existed" });
     }
 
     // Hash password with bcrypt
@@ -110,7 +110,7 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
     });
   } catch (err) {
     acLog(err);
-    return res.status(400).send({ msg: err });
+    return res.status(400).send(err);
   }
 };
 

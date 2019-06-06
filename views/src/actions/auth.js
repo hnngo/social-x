@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   ACT_FETCH_USER,
   ACT_LOG_OUT,
+  ACT_CLEAR_ERROR_MSG,
   ACT_AUTH_SIGNING_IN,
   ACT_AUTH_SIGN_IN_SUCCESS,
   ACT_AUTH_SIGN_IN_FAIL,
@@ -23,6 +24,12 @@ export const fetchUser = () => {
       console.log(err);
     }
   }
+}
+
+export const clearErrMsg = () => {
+  return ({
+    type: ACT_CLEAR_ERROR_MSG
+  })
 }
 
 export const signInWithEmailAndPassword = ({ email, password }, history) => {

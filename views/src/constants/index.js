@@ -1,6 +1,7 @@
 // ACTIONS
 export const ACT_FETCH_USER = "act_fetch_user";
 export const ACT_LOG_OUT = "act_log_out";
+export const ACT_CLEAR_ERROR_MSG = "act_clear_error_msg";
 export const ACT_AUTH_SIGNING_IN = "act_auth_signing_in";
 export const ACT_AUTH_SIGN_IN_SUCCESS = "act_auth_sign_in_success";
 export const ACT_AUTH_SIGN_IN_FAIL = "act_auth_sign_in_fail";

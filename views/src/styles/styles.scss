@@ -257,7 +257,7 @@ body {
 
 .sin-sup-form-container {
   position: absolute;
-  top: 40%;
+  top: 48%;
   left: 50%;
   width: 400px;
   transform: translate(-50%, -50%);
@@ -342,6 +342,11 @@ body {
           @include pStyle(treb, 14px, dangerText, 1px);
         }
       }
+    }
+
+    .form-errmsg {
+      @include pStyle(treb, 18px, rgb(255, 86, 86), 1px);
+      padding-bottom: 0;
     }
 
     button,

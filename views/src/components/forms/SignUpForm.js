@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signUpWithEmailAndPassword } from '../../actions';
+import { signUpWithEmailAndPassword, clearErrMsg } from '../../actions';
 import InputField from './InputField';
 import { SIGN_IN_FORM } from '../../constants';
+import ErrorMsg from './ErrorMsg';
 
 // Validate process
 const isNotNull = value => value ? undefined : "Please enter the field"
@@ -14,6 +15,11 @@ const isEmail = value =>
 const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 characters or more`;
 
 const SignUpForm = (props) => {
+  const { clearErrMsg } = props;
+  useEffect(() => {
+    clearErrMsg();
+  }, [clearErrMsg]);
+
   const renderLoading = () => {
     if (props.isLoading) {
       return (
@@ -72,6 +78,7 @@ const SignUpForm = (props) => {
           validate={minLength}
           icon={"fas fa-key"}
         />
+        <ErrorMsg />
         <button type="submit">
           Confirm
         </button>
@@ -117,7 +124,8 @@ export default reduxForm({
 })(
   withRouter(
     connect(mapStateToProps, {
-      signUpWithEmailAndPassword
+      signUpWithEmailAndPassword,
+      clearErrMsg
     })(SignUpForm)
   )
 );
