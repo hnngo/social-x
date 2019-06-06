@@ -252,7 +252,17 @@ const postCommentById = async (req, res) => {
       return res.status(400).send({ message: "Invalid action" });
     }
 
-    const existingPost = await Post.findById(postId);
+    const existingPost = await Post.findById(postId)
+      .populate({
+        path: "user",
+        select: "_id name",
+        model: "User"
+      })
+      .populate({
+        path: "comments.content.user",
+        model: "User",
+        select: "_id name"
+      });
 
     if (!existingPost) {
       acLog(`${req.user.email} comment an invalid post`);
@@ -261,7 +271,10 @@ const postCommentById = async (req, res) => {
 
     const commentContent = {
       comment,
-      user: userId,
+      user: {
+        _id: req.user._id,
+        name: req.user.name
+      },
       commentDate: new Date()
     }
 
@@ -316,7 +329,7 @@ const deleteComment = async (req, res) => {
     if (cmtUserId.toString() === userId.toString()) {
       isAllowedToDelete = isAllowedToDelete || true;
     }
-    
+
     // Check if that post is belongs to that user
     if (existingPost.user._id.toString() === userId.toString()) {
       isAllowedToDelete = isAllowedToDelete || true;
@@ -328,7 +341,7 @@ const deleteComment = async (req, res) => {
       existingPost.comments.content = newContent;
       existingPost.comments.total -= 1;
       await existingPost.save();
-  
+
       acLog(`${req.user.email} deleted successfully comment id ${commentId} in post id ${postId}`);
       return res.send(existingPost);
     }

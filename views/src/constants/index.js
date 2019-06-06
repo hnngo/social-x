@@ -19,7 +19,8 @@ export const ACT_POST_UPDATE_F = "act_post_update_f";
 export const ACT_POST_LIKE_P = "act_post_like_p";
 export const ACT_POST_LIKE_F = "act_post_like_f";
 
-export const ACT_CMT_UPLOAD = "act_cmt_upload";
+export const ACT_CMT_UPLOAD_P = "act_cmt_upload_p";
+export const ACT_CMT_UPLOAD_F = "act_cmt_upload_f";
 export const ACT_CMT_DELTE_P = "act_cmt_delete_p";
 export const ACT_CMT_DELTE_F = "act_cmt_delete_f";
 

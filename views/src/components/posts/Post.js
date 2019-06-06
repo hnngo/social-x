@@ -6,7 +6,8 @@ import {
   deletePost,
   updatePost,
   likePost,
-  deleteComment
+  deleteComment,
+  uploadComment
 } from '../../actions';
 
 const Post = (props) => {
@@ -15,6 +16,7 @@ const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isDeleteAsking, setIsDeleteAsking] = useState(false);
   const [limitViewCmt, setLimitViewCmt] = useState(3);
+  const [commentContent, setCommentContent] = useState("");
 
   const {
     owner,
@@ -91,6 +93,14 @@ const Post = (props) => {
         <textarea
           placeholder="Comment here"
           rows={1}
+          value={commentContent}
+          onChange={(e) => setCommentContent(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter" && commentContent.length > 0) {
+              props.uploadComment(postId, commentContent, rootPath);
+              setCommentContent("");
+            }
+          }}
         />
       </div>
     );
@@ -284,6 +294,7 @@ export default withRouter(
     deletePost,
     updatePost,
     likePost,
-    deleteComment
+    deleteComment,
+    uploadComment
   })(Post)
 );

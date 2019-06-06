@@ -9,7 +9,9 @@ import {
   ACT_POST_LIKE_F,
   ACT_POST_LIKE_P,
   ACT_CMT_DELTE_F,
-  ACT_CMT_DELTE_P
+  ACT_CMT_DELTE_P,
+  ACT_CMT_UPLOAD_F,
+  ACT_CMT_UPLOAD_P
 } from '../constants';
 
 export const fetchAllPosts = () => {
@@ -96,4 +98,17 @@ export const deleteComment = (commentId, postId, rootPath) => {
       commentId
     }
   };
+}
+
+export const uploadComment = (postId, comment, rootPath) => {
+  return async (dispatch) => {
+    const res = await axios.post(`/post/comment/${postId}`, { comment });
+
+    let type = rootPath === "feed" ? ACT_CMT_UPLOAD_F : ACT_CMT_UPLOAD_P;
+
+    dispatch({
+      type,
+      payload: res.data
+    });
+  }
 }

@@ -5,7 +5,8 @@ import {
   ACT_POST_DELETE_P,
   ACT_POST_UPDATE_P,
   ACT_POST_LIKE_P,
-  ACT_CMT_DELTE_P
+  ACT_CMT_DELTE_P,
+  ACT_CMT_UPLOAD_P
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -58,6 +59,15 @@ export default (state = {}, action) => {
         newPostArr[oldPostIndex].comments.content = newCmtArr;
         newPostArr[oldPostIndex].comments.total -= 1;
 
+        return { ...state, post: newPostArr };
+      }
+    case ACT_CMT_UPLOAD_P:
+      {
+        const oldPostIndex = _.findIndex(state.post, ['_id', action.payload._id]);
+        const newPostArr = [...state.post];
+
+        newPostArr[oldPostIndex] = action.payload;
+        
         return { ...state, post: newPostArr };
       }
     default:
