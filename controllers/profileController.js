@@ -9,7 +9,15 @@ const getUserProfile = async (req, res) => {
       .select({
         password: false
       })
-      .populate("post");
+      .populate({
+        path: "post",
+        populate: {
+          path: "comments.content.user",
+          model: "User",
+          select: "_id name"
+        }
+      });
+
 
     if (!existingUser) {
       return res.status(400).send({ message: "There is no such user" });

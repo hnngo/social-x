@@ -34,10 +34,18 @@ const postSchema = new Schema({
     total: {
       type: Number
     },
-    who: [
+    content: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+        comment: {
+          type: String
+        },
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: 'User'
+        },
+        commentDate: {
+          type: Date
+        }
       }
     ]
   }

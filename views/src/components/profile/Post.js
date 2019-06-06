@@ -93,6 +93,50 @@ const Post = (props) => {
     );
   }
 
+  const renderCommentArea = () => {
+    if (!auth.user) {
+      return <div />;
+    }
+
+    return (
+      <div className="comment-section">
+        <textarea
+          placeholder="Comment here"
+          rows={1}
+        />
+      </div>
+    );
+  }
+
+  const renderCommentView = () => {
+    if (comments.total === 0) {
+      return <div />;
+    }
+
+    const formattedCmt = comments.content.map(cmt => {
+      return (
+        <div
+          key={cmt._id}
+          className="cmt-row"
+        >
+          <div className="cmt-avatar">
+            <img src={"dfdd"} alt="ava"/>
+          </div>
+          <div className="cmt-area">
+            <p className="cmt-name">{cmt.user.name}</p>
+            <p className="cmt-content">{cmt.comment}</p>
+          </div>
+        </div>
+      );
+    });
+
+    return (
+      <div className="comment-view">
+        {formattedCmt}
+      </div>
+    )
+  }
+
   const renderDeleteAsking = () => {
     if (isDeleteAsking) {
       return (
@@ -193,6 +237,8 @@ const Post = (props) => {
           }
         </div>
       </div>
+      {renderCommentArea()}
+      {renderCommentView()}
       {renderDeleteAsking()}
     </div>
   );

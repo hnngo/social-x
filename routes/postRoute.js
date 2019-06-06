@@ -38,4 +38,10 @@ router.patch('/:postId', isLogin, postController.patchPostById);
 // @Desc      Like/unlike the post
 router.get('/like/:postId', isLogin, postController.getLikeUnlikePostById);
 
+
+// @Method    POST
+// @Path      /post/comment/:postId
+// @Desc      Comment a post
+router.post('/comment/:postId', isLogin, postController.postCommentById);
+
 module.exports = router;

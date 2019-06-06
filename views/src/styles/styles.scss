@@ -8,7 +8,8 @@ $theme-colors: (
   "dangerTextShadow": rgb(168, 64, 64),
   "headerBarMain": #0085A1,
   "dashHeaderBar": #b6b6b685,
-  "mainName": rgb(6, 114, 136)
+  "mainName": rgb(6, 114, 136),
+  "placeholderBg": rgba(235, 235, 235, 0.678)
 );
 
 $breakpoints: (
@@ -808,6 +809,58 @@ body {
               box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: dangerTextShadow);
             }
           }
+        }
+      }
+    }
+  }
+
+  .comment-section {
+    margin-top: 10px;
+    border-top: 1px solid map-get($map: $theme-colors, $key: lightMain);
+
+    textarea {
+      margin-top: 10px;
+      width: 100%;
+      outline: none;
+      border-radius: 20px;
+      border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+      padding: 5px 10px;
+      background-color: map-get($map: $theme-colors, $key: placeholderBg);
+
+      &::placeholder {
+        @include pStyle(treb, 16px, dashHeaderBar, 0px);
+      }
+    }
+  }
+  
+  .comment-view {
+    margin-top: 10px;
+    border-top: 1px solid map-get($map: $theme-colors, $key: lightMain);
+
+    .cmt-row {
+      margin: 10px 5px;
+      display: flex;
+
+      .cmt-avatar {
+        margin-right: 10px;
+      }
+
+      .cmt-area {
+        display: flex;
+        width: 100%;
+        background-color: map-get($map: $theme-colors, $key: placeholderBg);
+        border-radius: 15px;
+        padding: 5px 10px;
+
+        .cmt-name {
+          @include pStyle(treb, 17px, main, 0px);
+          cursor: pointer;
+          margin-right: 10px;
+          font-weight: bold;
+        }
+
+        .cmt-content {
+          @include pStyle(treb, 16px, black, 0px);
         }
       }
     }

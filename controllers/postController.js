@@ -175,8 +175,9 @@ const patchPostById = async (req, res) => {
 
     // Replace the existing content with new one
     existingPost.content = content;
+    existingPost.lastUpdatedDate = new Date();
     await existingPost.save();
-    
+
     acLog(`${req.user.email} edited successfully post id ${postId}`);
     return res.send(existingPost);
   } catch (err) {
@@ -227,6 +228,45 @@ const getLikeUnlikePostById = async (req, res) => {
   }
 }
 
+// @Method    POST
+// @Path      /post/comment/:postId
+// @Desc      Comment a post
+const postCommentById = async (req, res) => {
+  try {
+    const { comment } = req.body;
+    const { postId } = req.params;
+    const userId = req.user._id;
+
+    if (!comment || !postId) {
+      acLog(`${req.user.email} performed an invalid action`);
+      return res.status(400).send({ message: "Invalid action" });
+    }
+
+    const existingPost = await Post.findById(postId);
+
+    if (!existingPost) {
+      acLog(`${req.user.email} comment an invalid post`);
+      return res.status(400).send({ message: "The post does not exist" });
+    }
+
+    const commentContent = {
+      comment,
+      user: userId,
+      commentDate: new Date()
+    }
+
+    existingPost.comments.content.unshift(commentContent);
+    existingPost.comments.total += 1;
+    await existingPost.save();
+
+    acLog(`${req.user.email} commented post id ${postId}`);
+    return res.send(existingPost);
+  } catch (err) {
+    acLog(err);
+    return res.status(400).send(err);
+  }
+}
+
 module.exports = {
   getAllPost,
   getPostById,
@@ -234,5 +274,6 @@ module.exports = {
   getLikeUnlikePostById,
   postUploadPost,
   deletePostById,
-  patchPostById
+  patchPostById,
+  postCommentById
 };
