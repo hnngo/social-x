@@ -6,15 +6,15 @@ import Post from '../profile/Post';
 import Loading from '../Loading';
 
 const FeedPage = (props) => {
-  const { fetchAllPosts, post } = props;
+  const { fetchAllPosts, feed } = props;
 
   useEffect(() => {
     fetchAllPosts();
   }, [fetchAllPosts]);
 
   const renderPost = () => {
-    if (post.length > 0) {
-      return post.map((p) => {
+    if (feed.length > 0) {
+      return feed.map((p) => {
         return (
           <Post
             key={p._id}
@@ -41,8 +41,8 @@ const FeedPage = (props) => {
   );
 }
 
-const mapStateToProps = ({ post }) => {
-  return { post }
+const mapStateToProps = ({ feed }) => {
+  return { feed }
 }
 
 export default connect(mapStateToProps, {

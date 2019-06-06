@@ -11,9 +11,12 @@ export const ACT_AUTH_SIGN_UP_FAIL = "act_auth_sign_up_fail";
 // POSTS
 export const ACT_POST_FETCH_ALL = "act_post_fetch_all";
 export const ACT_POST_UPLOAD = "act_post_upload";
-export const ACT_POST_DELETE = "act_post_delete";
-export const ACT_POST_UPDATE = "act_post_update";
-export const ACT_POST_LIKE = "act_post_like";
+export const ACT_POST_DELETE_P = "act_post_delete_p";
+export const ACT_POST_DELETE_F = "act_post_delete_f";
+export const ACT_POST_UPDATE_P = "act_post_update_p";
+export const ACT_POST_UPDATE_F = "act_post_update_f";
+export const ACT_POST_LIKE_P = "act_post_like_p";
+export const ACT_POST_LIKE_F = "act_post_like_f";
 
 // PROFILE
 export const ACT_PROFILE_FETCH_BY_USERID = "act_profile_fetch_by_userid";

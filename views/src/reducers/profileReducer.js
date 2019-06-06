@@ -2,9 +2,9 @@ import _ from 'lodash';
 import {
   ACT_PROFILE_FETCH_BY_USERID,
   ACT_POST_UPLOAD,
-  ACT_POST_DELETE,
-  ACT_POST_UPDATE,
-  ACT_POST_LIKE
+  ACT_POST_DELETE_P,
+  ACT_POST_UPDATE_P,
+  ACT_POST_LIKE_P
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -17,14 +17,14 @@ export default (state = {}, action) => {
       return action.payload;
     case ACT_POST_UPLOAD:
       return { ...state, post: [action.payload, ...state.post] };
-    case ACT_POST_DELETE:
+    case ACT_POST_DELETE_P:
       {
         const newPostArr = state.post.filter(p => p._id !== action.payload);
 
         return { ...state, post: newPostArr };
       }
-    case ACT_POST_UPDATE:
-    case ACT_POST_LIKE:
+    case ACT_POST_UPDATE_P:
+    case ACT_POST_LIKE_P:
       {
         const oldPostIndex = _.findIndex(state.post, ['_id', action.payload._id]);
         const newPostArr = [...state.post];

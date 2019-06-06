@@ -11,7 +11,7 @@ const Post = (props) => {
   const [editPost, setEditPost] = useState(false);
   const [postContent, setPostContent] = useState(props.content);
   const [isLiked, setIsLiked] = useState(false);
-
+  
   const {
     owner,
     userId,
@@ -30,6 +30,9 @@ const Post = (props) => {
 
   const numberOfLikes = likes.total
   const numberOfCmts = comments.total
+
+  // Get the path root
+  const rootPath = props.match.path.split('/')[1];
 
   // Set the isLiked state
   if (auth.user && likes.who.includes(auth.user.id) && !isLiked) {
@@ -63,7 +66,7 @@ const Post = (props) => {
       return;
     }
 
-    props.likePost(postId);
+    props.likePost(postId, rootPath);
   }
 
   const renderEditPost = () => {
@@ -82,7 +85,7 @@ const Post = (props) => {
         />
         <i
           className="fas fa-trash"
-          onClick={() => props.deletePost(postId)}
+          onClick={() => props.deletePost(postId, rootPath)}
         />
       </div>
     );
@@ -118,7 +121,7 @@ const Post = (props) => {
                 <button
                   className="btn-confirm"
                   onClick={() => {
-                    props.updatePost(postId, postContent);
+                    props.updatePost(postId, postContent, rootPath);
                     setEditPost(false);
                   }}
                 >
