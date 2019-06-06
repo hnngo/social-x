@@ -764,6 +764,7 @@ body {
 }
 
 .post-containter {
+  position: relative;
   border: 1px solid #b6b6b685;
   border-radius: 10px;
   margin: 20px 0;
@@ -890,14 +891,83 @@ body {
   letter-spacing: 0px;
   color: #00CBF5;
   cursor: pointer;
-  border: 1px solid #00CBF5;
+  border: 2px solid #00CBF5;
   border-radius: 30px;
   padding: 6px 20px;
+}
+
+.post-containter .post-footer .footer-likes:active,
+.post-containter .post-footer .footer-cmts:active {
+  -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
+          box-shadow: inset 0px 0px 4px 0px #58a0ae;
 }
 
 .post-containter .post-footer .post-liked {
   background-color: #00CBF5;
   color: white !important;
+}
+
+.post-containter .post-delete-ask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(51, 51, 51, 0.719);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.post-containter .post-delete-ask .post-delete-content {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.post-containter .post-delete-ask .post-delete-content .delete-question {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.post-containter .post-delete-ask .post-delete-content .delete-btn-group button {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px 20px;
+}
+
+.post-containter .post-delete-ask .post-delete-content .delete-btn-group button.btn-confirm {
+  background-color: #00CBF5;
+  -webkit-box-shadow: 0px 0px 4px 0px #58a0ae;
+          box-shadow: 0px 0px 4px 0px #58a0ae;
+}
+
+@media only screen and (min-width: 768px) {
+  .post-containter .post-delete-ask .post-delete-content .delete-btn-group button.btn-confirm:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
+            box-shadow: inset 0px 0px 4px 0px #58a0ae;
+  }
+}
+
+.post-containter .post-delete-ask .post-delete-content .delete-btn-group button.btn-cancel {
+  background-color: #d84b4b;
+  -webkit-box-shadow: 0px 0px 4px 0px #a84040;
+          box-shadow: 0px 0px 4px 0px #a84040;
+}
+
+@media only screen and (min-width: 768px) {
+  .post-containter .post-delete-ask .post-delete-content .delete-btn-group button.btn-cancel:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #a84040;
+            box-shadow: inset 0px 0px 4px 0px #a84040;
+  }
 }
 
 .post-loading {

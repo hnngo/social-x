@@ -41,20 +41,14 @@ export const uploadPost = (content) => {
 }
 
 export const deletePost = (postId, rootPath) => {
-  return async (dispatch) => {
-    try {
-      await axios.delete(`/post/id/${postId}`);
+  axios.delete(`/post/id/${postId}`);
 
-      let type = rootPath === "feed" ? ACT_POST_DELETE_F : ACT_POST_DELETE_P;
+  let type = rootPath === "feed" ? ACT_POST_DELETE_F : ACT_POST_DELETE_P;
 
-      dispatch({
-        type,
-        payload: postId
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  return {
+    type,
+    payload: postId
+  };
 }
 
 export const updatePost = (postId, content, rootPath) => {
@@ -74,19 +68,16 @@ export const updatePost = (postId, content, rootPath) => {
   }
 }
 
-export const likePost = (postId, rootPath) => {
-  return async (dispatch) => {
-    try {
-      const res = await axios.get(`/post/like/${postId}`);
+export const likePost = (postId, userId, rootPath) => {
+  axios.get(`/post/like/${postId}`);
 
-      let type = rootPath === "feed" ? ACT_POST_LIKE_F : ACT_POST_LIKE_P;
+  let type = rootPath === "feed" ? ACT_POST_LIKE_F : ACT_POST_LIKE_P;
 
-      dispatch({
-        type,
-        payload: res.data
-      });
-    } catch (err) {
-      console.log(err);
+  return {
+    type,
+    payload: {
+      userId,
+      postId
     }
-  }
+  };
 }

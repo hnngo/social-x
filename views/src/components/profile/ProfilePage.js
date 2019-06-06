@@ -199,6 +199,7 @@ const ProfilePage = (props) => {
           postInfo={p}
           userId={profile._id}
           owner={profile.name}
+          triggerLikes={p.likes.total}
         />
       );
     })

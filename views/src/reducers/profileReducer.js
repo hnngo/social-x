@@ -24,13 +24,28 @@ export default (state = {}, action) => {
         return { ...state, post: newPostArr };
       }
     case ACT_POST_UPDATE_P:
-    case ACT_POST_LIKE_P:
       {
         const oldPostIndex = _.findIndex(state.post, ['_id', action.payload._id]);
         const newPostArr = [...state.post];
         newPostArr[oldPostIndex] = action.payload;
         newPostArr[oldPostIndex].user = newPostArr[oldPostIndex].user._id;
 
+        return { ...state, post: newPostArr };
+      }
+    case ACT_POST_LIKE_P:
+      {
+        const oldPostIndex = _.findIndex(state.post, ['_id', action.payload.postId]);
+        const newPostArr = [...state.post];
+
+        // Check if like or unlike
+        if (newPostArr[oldPostIndex].likes.who.includes(action.payload.userId)) {
+          _.remove(newPostArr[oldPostIndex].likes.who, (n) => n === action.payload.userId);
+          newPostArr[oldPostIndex].likes.total -= 1;
+        } else {
+          newPostArr[oldPostIndex].likes.who.push(action.payload.userId)
+          newPostArr[oldPostIndex].likes.total += 1;
+        }
+        
         return { ...state, post: newPostArr };
       }
     default:

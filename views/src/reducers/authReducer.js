@@ -18,7 +18,6 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
     case "@@redux-form/CHANGE":
     case ACT_CLEAR_ERROR_MSG:

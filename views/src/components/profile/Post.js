@@ -11,7 +11,8 @@ const Post = (props) => {
   const [editPost, setEditPost] = useState(false);
   const [postContent, setPostContent] = useState(props.content);
   const [isLiked, setIsLiked] = useState(false);
-  
+  const [isDeleteAsking, setIsDeleteAsking] = useState(false);
+
   const {
     owner,
     userId,
@@ -30,7 +31,7 @@ const Post = (props) => {
 
   const numberOfLikes = likes.total
   const numberOfCmts = comments.total
-
+  
   // Get the path root
   const rootPath = props.match.path.split('/')[1];
 
@@ -66,7 +67,7 @@ const Post = (props) => {
       return;
     }
 
-    props.likePost(postId, rootPath);
+    props.likePost(postId, auth.user.id, rootPath);
   }
 
   const renderEditPost = () => {
@@ -85,10 +86,42 @@ const Post = (props) => {
         />
         <i
           className="fas fa-trash"
-          onClick={() => props.deletePost(postId, rootPath)}
+          // onClick={() => props.deletePost(postId, rootPath)}
+          onClick={() => setIsDeleteAsking(true)}
         />
       </div>
     );
+  }
+
+  const renderDeleteAsking = () => {
+    if (isDeleteAsking) {
+      return (
+        <div className="post-delete-ask">
+          <div className="post-delete-content">
+            <div className="delete-question">
+              <p>Do you want to delete this post?</p>
+            </div>
+            <div className="delete-btn-group">
+              <button
+                className="btn-confirm"
+                onClick={() => {
+                  props.deletePost(postId, rootPath)
+                  setIsDeleteAsking(false);
+                }}
+              >Confirm</button>
+              <button 
+              className="btn-cancel"
+              onClick={() => {
+                setIsDeleteAsking(false);
+              }}
+              >Cancel</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return <div />
   }
 
   return (
@@ -160,6 +193,7 @@ const Post = (props) => {
           }
         </div>
       </div>
+      {renderDeleteAsking()}
     </div>
   );
 }
