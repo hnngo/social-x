@@ -5,75 +5,95 @@ import InputField from './InputField';
 import valid from './validate';
 
 const EditInfoForm = (props) => {
-  const { initialize } = props;
-  
+  const {
+    initialize,
+    formValues,
+    profile
+  } = props;
+
   useEffect(() => {
+    // Format birthday
+    let bday = "";
+
+    if (profile.birthday) {
+      bday = new Date(profile.birthday);
+
+      let bdayMonth = +bday.getMonth() >= 10 ? bday.getMonth() : "0" + bday.getMonth();
+      let bdayDay = +bday.getDay() >= 10 ? bday.getDay() : "0" + bday.getMonth();
+      bday = `${bday.getFullYear()}-${bdayMonth}-${bdayDay}`;
+    }
+
+    // Initialize value for form
     if (initialize) {
       initialize({
-        name: "Alex",
-        birthday: "2018-02-02",
-        job: "software engineer",
-        home: "Singapore"
+        name: profile.name,
+        birthday: bday || "",
+        job: profile.job || "",
+        home: profile.home || ""
       });
     }
-  }, [initialize])
-  
+  }, [
+      initialize,
+      profile.name,
+      profile.birthday,
+      profile.home,
+      profile.job
+    ]
+  );
+
 
   return (
     <div className="edit-form-container">
-      <form onSubmit={props.handleSubmit(() => console.log(props.formValues))}>
-        <div className="edit-name row">
+      <form onSubmit={props.handleSubmit(() => console.log(formValues))}>
+        <div className="edit-row row">
           <div className="col-2">
-            <p>Name</p>
+            <p>Name:</p>
           </div>
           <div className="col-10">
             <Field
               name="name"
               component={InputField}
               type="text"
-              value={"Nick"}
               validate={valid.isNotNull}
+              placeholder="Enter a Name"
             />
           </div>
         </div>
-        <div className="edit-bday row">
+        <div className="edit-row row">
           <div className="col-2">
-            <p>Birthday</p>
+            <p>Birthday:</p>
           </div>
           <div className="col-10">
             <Field
               name="birthday"
               component={InputField}
               type="date"
-              value={"2/2/2018"}
             />
           </div>
         </div>
-        <div className="edit-job row">
+        <div className="edit-row row">
           <div className="col-2">
-            <p>Job</p>
+            <p>Job:</p>
           </div>
           <div className="col-10">
             <Field
               name="job"
               component={InputField}
               type="text"
-              value={"Software developer"}
-              validate={valid.isNotNull}
+              placeholder="Enter a Job"
             />
           </div>
         </div>
-        <div className="edit-home row">
+        <div className="edit-row row">
           <div className="col-2">
-            <p>Home</p>
+            <p>Home:</p>
           </div>
           <div className="col-10">
             <Field
               name="home"
               component={InputField}
               type="text"
-              value={"Singapore"}
-              validate={valid.isNotNull}
+              placeholder="Enter a Place"
             />
           </div>
         </div>
@@ -88,14 +108,15 @@ const EditInfoForm = (props) => {
   );
 };
 
-const mapStateToProps = ({ form }) => {
+const mapStateToProps = ({ form, profile }) => {
   if (form.editInfoForm) {
     return {
-      formValues: form.editInfoForm.values
+      formValues: form.editInfoForm.values,
+      profile
     };
   }
 
-  return {};
+  return { profile };
 }
 
 export default reduxForm({

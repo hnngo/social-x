@@ -6,8 +6,11 @@ const minLength6 = value => value && value.length >= 6 ? undefined : `Must be 6 
 
 const isNotNull = value => value ? undefined : "Please enter the field"
 
+const isSelectedDate = value => value ? undefined : "Please select a day"
+
 export default {
   isEmail,
   minLength6,
-  isNotNull
+  isNotNull,
+  isSelectedDate
 };

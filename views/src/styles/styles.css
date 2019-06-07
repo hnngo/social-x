@@ -1155,6 +1155,81 @@ body {
   font-weight: bold;
 }
 
+.edit-container .edit-form-container form .edit-row {
+  margin: 5px 0px;
+}
+
+.edit-container .edit-form-container form .edit-row p {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: black;
+  padding: 6px 0px;
+}
+
+.edit-container .edit-form-container form .edit-row input {
+  width: 100%;
+  padding: 5px 5px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #b6b6b685;
+  background-color: rgba(235, 235, 235, 0.678);
+}
+
+.edit-container .edit-form-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.edit-container .edit-form-btn .btn-update {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px;
+  margin: 5px;
+  background-color: #00CBF5;
+  -webkit-box-shadow: 0px 0px 4px 0px #58a0ae;
+          box-shadow: 0px 0px 4px 0px #58a0ae;
+}
+
+@media only screen and (min-width: 768px) {
+  .edit-container .edit-form-btn .btn-update:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
+            box-shadow: inset 0px 0px 4px 0px #58a0ae;
+  }
+}
+
+.edit-container .edit-form-btn .btn-discard {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px;
+  margin: 5px;
+  background-color: #d84b4b;
+  -webkit-box-shadow: 0px 0px 4px 0px #a84040;
+          box-shadow: 0px 0px 4px 0px #a84040;
+}
+
+@media only screen and (min-width: 768px) {
+  .edit-container .edit-form-btn .btn-discard:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #a84040;
+            box-shadow: inset 0px 0px 4px 0px #a84040;
+  }
+}
+
 .feed-post-container {
   position: relative;
   top: 60px;
