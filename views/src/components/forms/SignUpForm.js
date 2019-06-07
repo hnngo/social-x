@@ -2,17 +2,14 @@ import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signUpWithEmailAndPassword, clearErrMsg } from '../../actions';
 import InputField from './InputField';
 import { SIGN_IN_FORM } from '../../constants';
 import ErrorMsg from './ErrorMsg';
-
-// Validate process
-const isNotNull = value => value ? undefined : "Please enter the field"
-const isEmail = value =>
-  value && /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
-    ? undefined : "Invalid email address";
-const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 characters or more`;
+import valid from './validate';
+import {
+  signUpWithEmailAndPassword,
+  clearErrMsg
+} from '../../actions';
 
 const SignUpForm = (props) => {
   const { clearErrMsg } = props;
@@ -51,7 +48,7 @@ const SignUpForm = (props) => {
           component={InputField}
           type="text"
           placeholder="your name"
-          validate={isNotNull}
+          validate={valid.isNotNull}
           icon={"fas fa-user"}
         />
         <Field
@@ -59,7 +56,7 @@ const SignUpForm = (props) => {
           component={InputField}
           type="email"
           placeholder="email@test.com"
-          validate={isEmail}
+          validate={valid.isEmail}
           icon={"fas fa-envelope"}
         />
         <Field
@@ -67,7 +64,7 @@ const SignUpForm = (props) => {
           component={InputField}
           type="password"
           placeholder="password"
-          validate={minLength}
+          validate={valid.minLength6}
           icon={"fas fa-key"}
         />
         <Field
@@ -75,7 +72,7 @@ const SignUpForm = (props) => {
           component={InputField}
           type="password"
           placeholder="confirm password"
-          validate={minLength}
+          validate={valid.minLength6}
           icon={"fas fa-key"}
         />
         <ErrorMsg />

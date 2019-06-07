@@ -4,7 +4,8 @@ import {
   ACT_POST_DELETE_F,
   ACT_POST_UPDATE_F,
   ACT_POST_LIKE_F,
-  ACT_CMT_DELTE_F
+  ACT_CMT_DELTE_F,
+  ACT_CMT_UPLOAD_F
 } from '../constants';
 
 export default (state = [], action) => {
@@ -53,6 +54,15 @@ export default (state = [], action) => {
         const newCmtArr = newPostArr[oldPostIndex].comments.content.filter(c => c._id.toString() !== action.payload.commentId);
         newPostArr[oldPostIndex].comments.content = newCmtArr;
         newPostArr[oldPostIndex].comments.total -= 1;
+
+        return newPostArr;
+      }
+    case ACT_CMT_UPLOAD_F:
+      {
+        const oldPostIndex = _.findIndex(state, ['_id', action.payload._id]);
+        const newPostArr = [...state];
+
+        newPostArr[oldPostIndex] = action.payload;
 
         return newPostArr;
       }

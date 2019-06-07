@@ -5,8 +5,7 @@ const InputField = ({
   placeholder,
   type,
   icon,
-  meta: { touched, error },
-  disable
+  meta: { touched, error }
 }) => {
   return (
     <div className="input-field">

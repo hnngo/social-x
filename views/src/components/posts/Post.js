@@ -91,14 +91,20 @@ const Post = (props) => {
     return (
       <div className="comment-section">
         <textarea
+          id={"cmt-area-" + postId}
           placeholder="Comment here"
           rows={1}
           value={commentContent}
-          onChange={(e) => setCommentContent(e.target.value)}
+          onChange={(e) => {
+            setCommentContent(e.target.value);
+          }}
           onKeyPress={(e) => {
             if (e.key === "Enter" && commentContent.length > 0) {
               props.uploadComment(postId, commentContent, rootPath);
               setCommentContent("");
+
+              // Deselect the text area
+              document.querySelector("#cmt-area-" + postId).blur()
             }
           }}
         />
@@ -126,7 +132,10 @@ const Post = (props) => {
               <img src={"dfdd"} alt="ava" />
             </div>
             <div className="cmt-area">
-              <p className="cmt-name">{cmt.user.name}</p>
+              <p
+                className="cmt-name"
+                onClick={() => props.history.push(`/profile/${cmt.user._id}`)}
+              >{cmt.user.name}</p>
               <p className="cmt-content">{cmt.comment}</p>
             </div>
           </div>

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import HeaderBar from './HeaderBar';
-import Post from './posts/Post';
-import Loading from './Loading';
+import HeaderBar from '../HeaderBar';
+import Post from '../posts/Post';
+import Loading from '../Loading';
+import EditInfo from './EditInfo';
 import {
   fetchProfileById,
   uploadPost
-} from '../actions';
+} from '../../actions';
 
 const avaImgUrl = "https://lh3.googleusercontent.com/3rhgWbCOvAx946IGRbx71p02Oi6hmE7Bli7ymXCqvt9oyrhnEoYR5_stB3BZbaIAwLey2aXag06zjqqVN5OYQAyvFjMl7IhYIMZqupGV09INS3F1Tx3V02jSzpvzrUeGxuasP9aExRusY2a4hImokhQ_QYTXvtJt35Sk5ezFAZl40zTjOtCZ7iiUwnJjnQ8tE9gyKRDxz6lQcOmseEMvrXvtAkdDILUFlWDE_LXuB6CIcvnxNkjrIwm5_w7l5opNZIGlkwlY9cPMNHsmGQfjBbP3kLwf2qf1oBnGs5VMRVWXrtYUtEtNADXl2oMbMQ2-L4yoNHydPTJTcr6ra8LN8WZLcpQMwxrCl9BbxzdqRKeFO_J6EJYU5Q-DAI84us5nQOgqPjR_U7FiHTOyvRumxC0naBHKrJtLt-UKB48BkqBNpt9TwhgLOdlw4dSrpTIWxelQQpOt_iinc4mfbdt1q498g8vSxX63QdN-BNRxKL6AH5FuVX5JbhXpPRO4GbsLS99sH0mujYIZmfZm7ze3Gt7pXlq8TL7Ao4dFBypvrIVoSHROSeZrFyPMyguVjYlEWuH2n6rpNfanZbB9b14jRhtZNWULELP1UnByVHzamHRSv6knIJD_euPPnhTea5Q6csG1N-xhjLB2YWdCPChL-JUhgrn9ilA=s225-no";
 
@@ -15,12 +16,14 @@ const ProfilePage = (props) => {
   const [postContent, setPostContent] = useState("");
   const [previousPosts, setPreviousPosts] = useState([]);
   const [posting, setPosting] = useState(false);
+  const [isEditingInfo, setIsEditingInfo] = useState(false);
 
   const {
     fetchProfileById,
     match,
     profile,
-    uploadPost
+    uploadPost,
+    auth
   } = props;
 
   useEffect(() => {
@@ -123,24 +126,39 @@ const ProfilePage = (props) => {
                 :
                 <div />
             }
-            <div className="p-basic-edit">
-              Edit info
-            </div>
+            {
+              (auth.user && match.params.userId === auth.user.id) ?
+                <div
+                  className="p-basic-edit"
+                  onClick={() => setIsEditingInfo(true)}
+                >
+                  Edit info
+                </div>
+                :
+                <div />
+            }
           </div>
 
           <div className="p-friend-list">
             <p className="fl-title">Friends</p>
             {renderFriend()}
             <div className="fl-edit">
-              Edit
-              </div>
+              View all
+            </div>
           </div>
         </div>
 
         <div className="col-sm-8">
           {renderPostArea()}
-          <p className="post-heading">POSTS</p>
-          {renderPost()}
+          {
+            isEditingInfo ?
+              <EditInfo />
+              :
+              <div>
+                <p className="post-heading">POSTS</p>
+                {renderPost()}
+              </div>
+          }
         </div>
       </div>
     );
@@ -148,7 +166,7 @@ const ProfilePage = (props) => {
 
   const renderPostArea = () => {
     // Check if user has permission to upload new post
-    if (!props.auth.user || props.auth.user.id !== props.match.params.userId) {
+    if (!auth.user || auth.user.id !== match.params.userId) {
       return <div />;
     }
 
@@ -225,7 +243,7 @@ const ProfilePage = (props) => {
       <div className="p-container">
         <div className="container">
           {
-            (Object.keys(profile).length > 0 && profile._id === props.match.params.userId)?
+            (Object.keys(profile).length > 0 && profile._id === match.params.userId) ?
               renderContent() : <Loading />
           }
         </div>

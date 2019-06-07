@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Homepage from './Homepage';
-import ProfilePage from './ProfilePage';
+import ProfilePage from './profile/ProfilePage';
 import FeedPage from './FeedPage';
 
 const App = () => {

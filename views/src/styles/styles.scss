@@ -257,7 +257,7 @@ body {
 }
 
 .sin-sup-form-container {
-  position: absolute;
+  position: fixed;
   top: 48%;
   left: 50%;
   width: 400px;
@@ -534,6 +534,7 @@ body {
     margin-top: 20px;
     border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
     border-radius: 10px;
+    padding: 5px 0;
 
     .info-row {
       display: flex;
@@ -554,6 +555,14 @@ body {
       @include pStyle(lucida, 14px, dashHeaderBar, 0px);
       margin-top: 5px;
       text-align: center;
+      cursor: pointer;
+
+      @include mq(tablet, min) {
+        &:hover {
+          @include pStyle(lucida, 14px, main, 0px);
+          font-weight: bold;
+        }
+      }
     }
   }
 
@@ -583,8 +592,16 @@ body {
     .fl-edit {
       @include pStyle(lucida, 14px, dashHeaderBar, 0px);
       position: absolute;
-      right: 5px;
+      cursor: pointer;
+      right: 10px;
       top: 5px;
+
+      @include mq(tablet, min) {
+        &:hover {
+          @include pStyle(lucida, 14px, main, 0px);
+          font-weight: bold;
+        }
+      }
     }
   }
 
@@ -770,7 +787,7 @@ body {
     height: 100%;
     top: 0px;
     left: 0px;
-    background-color: rgba(51, 51, 51, 0.719);
+    background-color: rgba(51, 51, 51, 0.904);
     border-radius: 10px;
     text-align: center;
     
@@ -907,6 +924,18 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.edit-container {
+  margin-top: 20px;
+  border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+  border-radius: 10px;
+  padding: 15px;
+
+  .edit-title {
+    @include pStyle(lucida, 18px, main, 0px);
+    font-weight: bold;
+  }
 }
 
 .feed-post-container {

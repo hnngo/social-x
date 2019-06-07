@@ -2,16 +2,14 @@ import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signInWithEmailAndPassword, clearErrMsg } from '../../actions';
 import InputField from './InputField';
 import { SIGN_UP_FORM } from '../../constants';
 import ErrorMsg from './ErrorMsg';
-
-// Validate process
-const isEmail = value =>
-  value && /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
-    ? undefined : 'Invalid email address';
-const minLength = value => value && value.length >= 6 ? undefined : `Must be 6 characters or more`;
+import valid from './validate';
+import {
+  signInWithEmailAndPassword,
+  clearErrMsg
+} from '../../actions';
 
 const SignInForm = (props) => {
   const { clearErrMsg } = props;
@@ -40,7 +38,7 @@ const SignInForm = (props) => {
       return <div />;
     }
   }
-  
+
   return (
     <div className="sin-sup-form-container">
       <p>Sign In</p>
@@ -50,7 +48,7 @@ const SignInForm = (props) => {
           component={InputField}
           type="email"
           placeholder="email@test.com"
-          validate={isEmail}
+          validate={valid.isEmail}
           icon={"fas fa-envelope"}
         />
         <Field
@@ -58,7 +56,7 @@ const SignInForm = (props) => {
           component={InputField}
           type="password"
           placeholder="password"
-          validate={minLength}
+          validate={valid.minLength6}
           icon={"fas fa-key"}
         />
         <ErrorMsg />
