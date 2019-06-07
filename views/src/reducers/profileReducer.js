@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import {
   ACT_PROFILE_FETCH_BY_USERID,
+  ACT_PROFILE_UPDATE,
+  ACT_PROFILE_UPDATING,
   ACT_POST_UPLOAD,
   ACT_POST_DELETE_P,
   ACT_POST_UPDATE_P,
@@ -67,9 +69,13 @@ export default (state = {}, action) => {
         const newPostArr = [...state.post];
 
         newPostArr[oldPostIndex] = action.payload;
-        
+
         return { ...state, post: newPostArr };
       }
+    case ACT_PROFILE_UPDATE:
+      return { ...action.payload, updatingProfile: false };
+    case ACT_PROFILE_UPDATING:
+      return { ...state, updatingProfile: true }
     default:
       return state;
   }

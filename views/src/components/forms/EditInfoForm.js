@@ -3,12 +3,14 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import InputField from './InputField';
 import valid from './validate';
+import { updateProfileById } from '../../actions';
 
 const EditInfoForm = (props) => {
   const {
     initialize,
     formValues,
-    profile
+    profile,
+    auth
   } = props;
 
   useEffect(() => {
@@ -17,12 +19,15 @@ const EditInfoForm = (props) => {
 
     if (profile.birthday) {
       bday = new Date(profile.birthday);
+      
+      // let bdayMonth = +bday.getMonth() >= 10 ? bday.getMonth() : "0" + bday.getMonth();
+      // let bdayDay = +bday.getDay() >= 10 ? bday.getDay() : "0" + bday.getMonth();
+      let bdayMonth = bday.toLocaleDateString().slice(3, 5);
+      let bdayDay = bday.toLocaleDateString().slice(0, 2);
 
-      let bdayMonth = +bday.getMonth() >= 10 ? bday.getMonth() : "0" + bday.getMonth();
-      let bdayDay = +bday.getDay() >= 10 ? bday.getDay() : "0" + bday.getMonth();
       bday = `${bday.getFullYear()}-${bdayMonth}-${bdayDay}`;
     }
-
+    console.log(bday)
     // Initialize value for form
     if (initialize) {
       initialize({
@@ -44,7 +49,12 @@ const EditInfoForm = (props) => {
 
   return (
     <div className="edit-form-container">
-      <form onSubmit={props.handleSubmit(() => console.log(formValues))}>
+      <form onSubmit={
+        props.handleSubmit(() => {
+          props.updateProfileById(auth.user.id, formValues);
+          props.OnUpdating();
+        })
+      }>
         <div className="edit-row row">
           <div className="col-2">
             <p>Name:</p>
@@ -68,6 +78,7 @@ const EditInfoForm = (props) => {
               name="birthday"
               component={InputField}
               type="date"
+              validate={valid.isSelectedDate}
             />
           </div>
         </div>
@@ -101,6 +112,7 @@ const EditInfoForm = (props) => {
           <button type="submit" className="btn-update">Update</button>
           <div
             className="btn-discard"
+            onClick={() => props.discardEdit()}
           >Discard</div>
         </div>
       </form>
@@ -108,19 +120,22 @@ const EditInfoForm = (props) => {
   );
 };
 
-const mapStateToProps = ({ form, profile }) => {
+const mapStateToProps = ({ form, profile, auth }) => {
   if (form.editInfoForm) {
     return {
       formValues: form.editInfoForm.values,
-      profile
+      profile,
+      auth
     };
   }
 
-  return { profile };
+  return { profile, auth };
 }
 
 export default reduxForm({
   form: "editInfoForm"
 })(
-  connect(mapStateToProps)(EditInfoForm)
+  connect(mapStateToProps, {
+    updateProfileById
+  })(EditInfoForm)
 );

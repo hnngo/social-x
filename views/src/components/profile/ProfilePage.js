@@ -152,7 +152,9 @@ const ProfilePage = (props) => {
           {renderPostArea()}
           {
             isEditingInfo ?
-              <EditInfo />
+              <EditInfo
+                discardEdit={() => setIsEditingInfo(false)}
+              />
               :
               <div>
                 <p className="post-heading">POSTS</p>

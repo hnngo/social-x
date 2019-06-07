@@ -927,6 +927,7 @@ body {
 }
 
 .edit-container {
+  position: relative;
   margin-top: 20px;
   border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
   border-radius: 10px;
@@ -945,14 +946,21 @@ body {
         @include pStyle(lucida, 16px, black, 0px);
         padding: 6px 0px;
       }
+      
+      .input-field {
+        input {
+          width: 100%;
+          padding: 5px 5px;
+          border-radius: 10px;
+          outline: none;
+          border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+          background-color: map-get($map: $theme-colors, $key: placeholderBg);
+        }
 
-      input {
-        width: 100%;
-        padding: 5px 5px;
-        border-radius: 10px;
-        outline: none;
-        border: 1px solid map-get($map: $theme-colors, $key: dashHeaderBar);
-        background-color: map-get($map: $theme-colors, $key: placeholderBg);
+        .error-text {
+          @include pStyle(lucida, 13px, dangerText, 0px);
+          margin: 5px;
+        }
       }
     }
   }
@@ -996,6 +1004,19 @@ body {
       }
     }
   }
+}
+
+.updating-loading {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  background-color: map-get($map: $theme-colors, $key: darkLight);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .feed-post-container {
