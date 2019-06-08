@@ -38,3 +38,10 @@ export const ACT_PROFILE_FETCH_BY_USERID = "act_profile_fetch_by_userid";
 // FORMS
 export const SIGN_IN_FORM = "sign_in_form";
 export const SIGN_UP_FORM = "sign_up_form";
+
+// VIEWs
+export const VIEW_POST = "view_post";
+export const VIEW_FRIEND = "view_friend";
+export const VIEW_ALL_FRIENDS = "view_all_friends";
+export const VIEW_FRIEND_REQUESTS = "view_friend_requests";
+export const VIEW_REQUEST_SENT = "view_request_sent";

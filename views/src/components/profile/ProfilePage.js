@@ -5,6 +5,11 @@ import HeaderBar from '../HeaderBar';
 import Post from '../posts/Post';
 import Loading from '../Loading';
 import EditInfo from './EditInfo';
+import FriendTab from './FriendTab';
+import {
+  VIEW_POST,
+  VIEW_FRIEND
+} from '../../constants';
 import {
   fetchProfileById,
   uploadPost,
@@ -16,6 +21,7 @@ const ProfilePage = (props) => {
   const [previousPosts, setPreviousPosts] = useState([]);
   const [posting, setPosting] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
+  const [viewTab, setViewTab] = useState(VIEW_POST);
 
   const {
     fetchProfileById,
@@ -197,13 +203,30 @@ const ProfilePage = (props) => {
               />
               :
               <div>
-                <p className="post-heading">POSTS</p>
-                {renderPost()}
+                <div className="view-tab">
+                  <p
+                    className={viewTab === VIEW_POST ?"view-heading" : "view-heading dim"}
+                    onClick={() => setViewTab(VIEW_POST)}
+                  >POSTS</p>
+                  <p
+                    className={viewTab === VIEW_FRIEND ?"view-heading" : "view-heading dim"}
+                    onClick={() => setViewTab(VIEW_FRIEND)}
+                  >FRIENDS</p>
+                </div>
+                {renderTab()}
               </div>
           }
         </div>
       </div>
     );
+  }
+
+  const renderTab = () => {
+    if (viewTab === VIEW_POST) {
+      return renderPost();
+    } else if (viewTab === VIEW_FRIEND) {
+      return <FriendTab />;
+    }
   }
 
   const renderPostArea = () => {

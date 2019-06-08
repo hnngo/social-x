@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const acLog = require('../utils/activityLog');
 
+const selectUserPopulate = "_id name avatar";
 
 // @Method    GET
 // @Path      /user/profile/:userId
@@ -18,17 +19,20 @@ const getUserProfile = async (req, res) => {
         populate: {
           path: "comments.content.user",
           model: "User",
-          select: "_id name avatar"
+          select: selectUserPopulate
         }
       })
       .populate({
-        path: "friend.list"
+        path: "friend.list",
+        select: selectUserPopulate
       })
       .populate({
-        path: "friend.requestFromList"
+        path: "friend.requestFromList",
+        select: selectUserPopulate
       })
       .populate({
-        path: "friend.requestToList"
+        path: "friend.requestToList",
+        select: selectUserPopulate
       });
 
 
@@ -70,8 +74,20 @@ const postEditProfile = async (req, res) => {
         populate: {
           path: "comments.content.user",
           model: "User",
-          select: "_id name avatar"
+          select: selectUserPopulate
         }
+      })
+      .populate({
+        path: "friend.list",
+        select: selectUserPopulate
+      })
+      .populate({
+        path: "friend.requestFromList",
+        select: selectUserPopulate
+      })
+      .populate({
+        path: "friend.requestToList",
+        select: selectUserPopulate
       });
 
     if (!existingUser) {
