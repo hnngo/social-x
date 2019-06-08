@@ -15,6 +15,7 @@ export const fetchProfileById = (userId) => {
         payload: res.data
       });
     } catch (err) {
+      // TODO: Render no user profile found here
       console.log(err);
     }
   }

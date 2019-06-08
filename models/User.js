@@ -27,12 +27,26 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
-  friend: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
+  friend: {
+    list: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
+    requestFromList: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
+    requestToList: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
+  },
   avatar: {
     type: String
   },

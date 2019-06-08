@@ -8,6 +8,7 @@ const path = require('path');
 const imageRoute = require('./routes/imageRoute');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
+const friendRoute = require('./routes/friendRoute');
 
 // Create express app
 const app = express();
@@ -38,6 +39,7 @@ app.use('/auth', authRoute);
 app.use('/image', imageRoute);
 app.use('/post', postRoute);
 app.use('/user', userRoute);
+app.use('/friend', friendRoute);
 
 // Setup express static build folder
 if (process.env.NODE_ENV === "production") {

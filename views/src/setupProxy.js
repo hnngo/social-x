@@ -5,6 +5,7 @@ module.exports = function(app) {
     '/auth',
     '/image',
     '/post',
-    '/user'
+    '/user',
+    '/friend'
   ], { target: 'http://localhost:5000/' }));
 };

@@ -227,11 +227,11 @@ const ProfilePage = (props) => {
   }
 
   const renderFriend = () => {
-    if (profile.friend.length === 0) {
+    if (profile.friend.list.length === 0) {
       return <p className="fl-nofriend">No Friends</p>;
     }
 
-    return profile.friend.map((f, i) => {
+    return profile.friend.list.map((f, i) => {
       return (
         <li key={i}>
           {f.name}
