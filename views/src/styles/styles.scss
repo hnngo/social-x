@@ -670,6 +670,15 @@ body {
   .post-header {
     display: flex;
     justify-content: space-between;
+    
+    img {
+      width: 40px;
+      height: 40px;
+      vertical-align: top;
+      border-radius: 50%;
+      border: 2px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+      margin-right: 80px;
+    }
 
     .post-owner {
       @include pStyle(lucida, 22px, main, 0px);
@@ -864,7 +873,14 @@ body {
 
       .cmt-avatar {
         margin-right: 10px;
-        width: 50px;
+        
+        img {
+          width: 40px;
+          height: 40px;
+          vertical-align: top;
+          border-radius: 50%;
+          border: 2px solid map-get($map: $theme-colors, $key: dashHeaderBar);
+        }
       }
 
       .cmt-area {

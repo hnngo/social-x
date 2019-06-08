@@ -21,6 +21,7 @@ const FeedPage = (props) => {
             postInfo={p}
             userId={p.user._id}
             owner={p.user.name}
+            imgUrl={p.user.avatar}
             triggerLikes={p.likes.total}
             triggerComments={p.comments.total}
           />

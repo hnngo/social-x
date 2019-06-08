@@ -7,6 +7,9 @@ const Grid = require('gridfs-stream');
 const path = require('path');
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User');
+const acLog = require('../utils/activityLog');
+const { isLogin } = require('../utils/requireMiddleware');
 
 const conn = mongoose.createConnection(keys.mongoDbUrl);
 
@@ -45,10 +48,30 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('file'), (req, res) => {
+router.post('/upload', isLogin, upload.single('file'), async (req, res) => {
   //TODO: Send back the image name or do something to let client know
-  
-  return res.send({ fileName: req.file.filename });
+  try {
+    const existingUser = await User.findById(req.user._id)
+      .select({
+        password: false
+      })
+      .populate({
+        path: "post",
+        populate: {
+          path: "comments.content.user",
+          model: "User",
+          select: "_id name"
+        }
+      });
+
+    existingUser.avatar = req.file.filename;
+    existingUser.save();
+    
+    return res.send(existingUser);
+  } catch (err) {
+    acLog(err);
+    return res.send(err);
+  }
 });
 
 router.get('/all', (req, res) => {

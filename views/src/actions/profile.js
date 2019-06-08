@@ -32,17 +32,20 @@ export const updateProfileById = (userId, content) => {
 
       dispatch({ type: ACT_PROFILE_UPDATING })
 
-      const res = await axios.post(`/user/profile/edit/${userId}`, {
+      let res = await axios.post(`/user/profile/edit/${userId}`, {
         name,
         job,
         home,
         birthday
       });
 
-      // Create multipart file
-      let formData = new FormData();
-      formData.append("file", content.file)
-      await axios.post(`/image/upload`, formData);
+      // Create multipart file if contain
+      if (content.file) {
+        let formData = new FormData();
+        formData.append("file", content.file);
+        
+        res = await axios.post(`/image/upload`, formData);
+      }
 
       dispatch({
         type: ACT_PROFILE_UPDATE,

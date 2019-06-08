@@ -30,7 +30,8 @@ passport.use(
         googleId: profile.id,
         name: profile.displayName,
         email: profile._json.email,
-        registerDate: new Date()
+        registerDate: new Date(),
+        avatar: "67936a5c0997cf0dfb7eb9d168cb6f38.jpeg"
       }).save()
         .then(newUser => {
           acLog(`Google OAuth new User created: ${newUser.email}`);

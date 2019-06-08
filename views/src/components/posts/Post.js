@@ -129,7 +129,7 @@ const Post = (props) => {
         <div key={cmt._id}>
           <div className="cmt-row" >
             <div className="cmt-avatar">
-              <img src={"dfdd"} alt="ava" />
+              <img src={`/image/${cmt.user.avatar}`} alt="ava" />
             </div>
             <div className="cmt-area">
               <p
@@ -223,7 +223,7 @@ const Post = (props) => {
       <div className="post-header">
         <div className="row">
           <div className="col-2">
-            <img src={imgUrl} alt="ava" />
+            <img src={`/image/${imgUrl}`} alt="ava" />
           </div>
           <div className="col-10">
             <p

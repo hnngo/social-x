@@ -16,24 +16,24 @@ const getAllPost = async (req, res) => {
         .limit(+req.query.limit)
         .populate({
           path: 'user',
-          select: 'name _id'
+          select: 'name _id avatar'
         })
         .populate({
           path: "comments.content.user",
           model: "User",
-          select: "_id name"
+          select: "_id name avatar"
         });
     } else {
       posts = await Post.find()
         .sort({ postDate: -1 })
         .populate({
           path: 'user',
-          select: 'name _id',
+          select: 'name _id avatar',
         })
         .populate({
           path: "comments.content.user",
           model: "User",
-          select: "_id name"
+          select: "_id name avatar"
         });
     }
 
@@ -175,7 +175,7 @@ const patchPostById = async (req, res) => {
     // Check if existing a post
     const existingPost = await Post.findById(postId).populate({
       path: 'user',
-      select: 'name _id'
+      select: 'name _id avatar'
     });
 
     if (!existingPost || existingPost.user._id.toString() !== req.user._id.toString()) {
@@ -205,7 +205,7 @@ const getLikeUnlikePostById = async (req, res) => {
     const userId = req.user._id;
     const existingPost = await Post.findById(postId).populate({
       path: 'user',
-      select: 'name _id'
+      select: 'name _id avatar'
     });
 
     if (!postId || !existingPost) {
@@ -245,7 +245,6 @@ const postCommentById = async (req, res) => {
   try {
     const { comment } = req.body;
     const { postId } = req.params;
-    const userId = req.user._id;
 
     if (!comment || !postId) {
       acLog(`${req.user.email} performed an invalid action`);
@@ -255,13 +254,13 @@ const postCommentById = async (req, res) => {
     const existingPost = await Post.findById(postId)
       .populate({
         path: "user",
-        select: "_id name",
+        select: "_id name avatar",
         model: "User"
       })
       .populate({
         path: "comments.content.user",
         model: "User",
-        select: "_id name"
+        select: "_id name avatar"
       });
 
     if (!existingPost) {
@@ -273,7 +272,8 @@ const postCommentById = async (req, res) => {
       comment,
       user: {
         _id: req.user._id,
-        name: req.user.name
+        name: req.user.name,
+        avatar: req.user.avatar
       },
       commentDate: new Date()
     }
@@ -306,13 +306,13 @@ const deleteComment = async (req, res) => {
     const existingPost = await Post.findById(postId)
       .populate({
         path: "user",
-        select: "_id name",
+        select: "_id name avatar",
         model: "User"
       })
       .populate({
         path: "comments.content.user",
         model: "User",
-        select: "_id name"
+        select: "_id name avatar"
       });
 
     if (!existingPost) {

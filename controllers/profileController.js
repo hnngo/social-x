@@ -18,7 +18,7 @@ const getUserProfile = async (req, res) => {
         populate: {
           path: "comments.content.user",
           model: "User",
-          select: "_id name"
+          select: "_id name avatar"
         }
       });
 
@@ -61,7 +61,7 @@ const postEditProfile = async (req, res) => {
         populate: {
           path: "comments.content.user",
           model: "User",
-          select: "_id name"
+          select: "_id name avatar"
         }
       });
 
