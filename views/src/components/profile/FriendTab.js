@@ -6,18 +6,26 @@ import {
   VIEW_FRIEND_REQUESTS,
   VIEW_REQUEST_SENT
 } from '../../constants';
+import {
+  cancelFriendRequest
+} from '../../actions';
 
 const FriendTab = (props) => {
   const [viewTab, setViewTab] = useState(VIEW_ALL_FRIENDS);
-  const { profile } = props;
+  const { profile, auth } = props;
 
   const renderFriendList = () => {
     if (profile.friend.list.length > 0) {
       return profile.friend.list.map((f) => {
         return (
-          <div key={f._id}>
-            <p>{f.name}</p>
-          </div>
+          <FriendRow
+            key={f._id}
+            friendInfo={f}
+            numberOfBtn={1}
+            btnName1={"Unfriend"}
+            optionalClassBtn1={"f-btn-danger"}
+            onClickBtn1={() => console.log("AA")}
+          />
         );
       })
     }
@@ -57,7 +65,7 @@ const FriendTab = (props) => {
             numberOfBtn={1}
             btnName1={"Cancel Request"}
             optionalClassBtn1={"f-btn-danger"}
-            onClickBtn1={() => console.log("AA")}
+            onClickBtn1={() => props.cancelFriendRequest(f._id)}
           />
         );
       })
@@ -90,30 +98,43 @@ const FriendTab = (props) => {
         >
           All friends
         </p>
-        <p
-          className={
-            viewTab === VIEW_FRIEND_REQUESTS ? "" : "dim"
-          }
-          onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
-        >
-          Friend Requests
-        </p>
-        <p
-          className={
-            viewTab === VIEW_REQUEST_SENT ? "" : "dim"
-          }
-          onClick={() => setViewTab(VIEW_REQUEST_SENT)}
-        >
-          Requests Sent
-        </p>
+        {
+          (!auth.user || auth.user.id !== profile._id) ?
+            <div />
+            :
+            <p
+              className={
+                viewTab === VIEW_FRIEND_REQUESTS ? "" : "dim"
+              }
+              onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
+            >
+              Friend Requests
+            </p>
+        }
+        {
+          (!auth.user || auth.user.id !== profile._id) ?
+            <div />
+            :
+            <p
+              className={
+                viewTab === VIEW_REQUEST_SENT ? "" : "dim"
+              }
+              onClick={() => setViewTab(VIEW_REQUEST_SENT)}
+            >
+              Requests Sent
+            </p>
+        }
+
       </div>
       {renderTab()}
     </div>
   );
 };
 
-const mapStateToProps = ({ profile }) => {
-  return { profile };
+const mapStateToProps = ({ auth, profile }) => {
+  return { auth, profile };
 }
 
-export default connect(mapStateToProps)(FriendTab);
+export default connect(mapStateToProps, {
+  cancelFriendRequest
+})(FriendTab);

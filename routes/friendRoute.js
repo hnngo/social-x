@@ -23,4 +23,9 @@ router.get('/decline/:userId', isLogin, friendController.getDeclineFriendRequest
 // @Desc      Unfriend a user
 router.get('/unfriend/:userId', isLogin, friendController.getUnfriend);
 
+// @Method    GET
+// @Path      /friend/cancel/:userId
+// @Desc      Cancel a friend request
+router.get('/cancel/:userId', isLogin, friendController.getCancelRequest);
+
 module.exports = router;

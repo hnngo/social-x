@@ -8,7 +8,8 @@ import {
   ACT_POST_UPDATE_P,
   ACT_POST_LIKE_P,
   ACT_CMT_DELTE_P,
-  ACT_CMT_UPLOAD_P
+  ACT_CMT_UPLOAD_P,
+  ACT_FRIEND_CANCEL_REQUEST
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -76,6 +77,16 @@ export default (state = {}, action) => {
       return { ...action.payload, updatingProfile: false };
     case ACT_PROFILE_UPDATING:
       return { ...state, updatingProfile: true };
+    case ACT_FRIEND_CANCEL_REQUEST:
+      {
+        const newFriendList = state.friend;
+
+        // Remove friend request
+        _.remove(newFriendList.requestToList, (f) => f._id === action.payload);
+        
+        return { ...state, friend: newFriendList };
+      }
+
     default:
       return state;
   }

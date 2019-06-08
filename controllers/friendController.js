@@ -181,9 +181,54 @@ const getUnfriend = async (req, res) => {
   }
 }
 
+// @Method    GET
+// @Path      /friend/cancel/:userId
+// @Desc      Cancel a friend request
+const getCancelRequest = async (req, res) => {
+  try {
+    const friendId = req.params.userId;
+    const userId = req.user._id;
+
+    const existingFriend = await User.findById(friendId);
+    const existingUser = await User.findById(userId);
+
+    if (!existingUser || !existingFriend) {
+      acLog(`${req.user.email} cancel invalid friend request`);
+      return res.send({ message: "Request to invalid user" });
+    }
+
+    // Checking if both users are in request mode
+    if (existingFriend.friend.requestFromList.includes(userId) && existingUser.friend.requestToList.includes(friendId)) {
+      let newFlistFriend = existingFriend.friend;
+      let newFlistUser = existingUser.friend;
+
+      // Remove request on both sides
+      _.remove(newFlistFriend.requestFromList, (id) => id.toString() === userId.toString());
+      _.remove(newFlistUser.requestToList, (id) => id.toString() === friendId.toString());
+
+      // Assign to existing models
+      existingFriend.friend = newFlistFriend;
+      existingUser.friend = newFlistUser;
+
+      await existingFriend.save();
+      await existingUser.save();
+
+      acLog(`${req.user.email} has cancelled friend request to ${existingFriend.email}`);
+      return res.status(200).send();
+    }
+
+    acLog(`${req.user.email} perform invalid cancel request`);
+    return res.status({ message: "Invalid cancel request" });
+  } catch (err) {
+    acLog(err);
+    return res.send(err);
+  }
+}
+
 module.exports = {
   getFriendRequest,
   getAcceptFriendRequest,
   getDeclineFriendRequest,
+  getCancelRequest,
   getUnfriend
 };

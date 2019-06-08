@@ -27,6 +27,7 @@ export const ACT_CMT_DELTE_F = "act_cmt_delete_f";
 
 // FRIEND
 export const ACT_FRIEND_SEND_REQUEST = "act_friend_send_request";
+export const ACT_FRIEND_CANCEL_REQUEST = "act_friend_cancel_request";
 
 // PROFILE
 export const ACT_PROFILE_UPDATING = "act_profile_updating";

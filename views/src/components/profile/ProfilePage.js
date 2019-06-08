@@ -32,6 +32,7 @@ const ProfilePage = (props) => {
   } = props;
 
   useEffect(() => {
+    setViewTab(VIEW_POST);
     fetchProfileById(match.params.userId)
   }, [fetchProfileById, match.params.userId]);
 

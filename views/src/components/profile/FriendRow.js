@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 const FriendRow = (props) => {
   const {
@@ -49,7 +50,7 @@ const FriendRow = (props) => {
           <img src={`/image/${friendInfo.avatar}`} alt="avatar" />
         </div>
         <div className="friend-name">
-          <p>{friendInfo.name}</p>
+          <p onClick={() => props.history.push(`/profile/${friendInfo._id}`)}>{friendInfo.name}</p>
         </div>
       </div>
       {renderBtn()}
@@ -57,4 +58,4 @@ const FriendRow = (props) => {
   );
 };
 
-export default FriendRow;
+export default withRouter(FriendRow);
