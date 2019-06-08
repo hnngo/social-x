@@ -7,7 +7,8 @@ import Loading from '../Loading';
 import EditInfo from './EditInfo';
 import {
   fetchProfileById,
-  uploadPost
+  uploadPost,
+  sendFriendRequest
 } from '../../actions';
 
 const ProfilePage = (props) => {
@@ -41,6 +42,44 @@ const ProfilePage = (props) => {
     }
   }
 
+  const renderAddFriendBtn = () => {
+    if (auth.user && (profile._id !== auth.user.id)) {
+      if (auth.user.friend.list.includes(profile._id)) {
+        return (
+          <div className="p-friend-add">
+            <div className="p-add-btn">
+              <i class="fas fa-check" />
+              Friend
+            </div>
+          </div>
+        );
+      } else if (auth.user.friend.requestToList.includes(profile._id)) {
+        return (
+          <div className="p-friend-add">
+            <div className="p-add-btn">
+              <i className="fas fa-user-plus" />
+              Friend Request Sent
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="p-friend-add">
+            <div
+              className="p-add-btn"
+              onClick={() => props.sendFriendRequest(profile._id)}
+            >
+              <i className="fas fa-user-plus" />
+              Add Friend
+            </div>
+          </div>
+        );
+      }
+    }
+
+    return <div />;
+  }
+
   const renderContent = () => {
     const {
       name,
@@ -71,6 +110,8 @@ const ProfilePage = (props) => {
             <img src={`/image/${avatar}`} alt="avatar" />
             <p>@{name}</p>
           </div>
+
+          {renderAddFriendBtn()}
 
           <div className="p-basic-info">
             {
@@ -261,18 +302,6 @@ const mapStateToProps = ({ auth, profile }) => {
 
 export default connect(mapStateToProps, {
   fetchProfileById,
-  uploadPost
+  uploadPost,
+  sendFriendRequest
 })(ProfilePage);
-
-/*
-<form action="/image/upload" method="POST" encType="multipart/form-data">
-            <div className="form-group">
-              <label>Select a file to upload</label>
-              <input type="file"
-                name="file" className="form-control-file" />
-            </div>
-            <button className="btn btn-primary" type="submit">
-              Submit
-            </button>
-          </form>
-*/

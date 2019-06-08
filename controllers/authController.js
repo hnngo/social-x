@@ -12,7 +12,8 @@ const sendUserInfo = (userTag) => {
       email: userTag.email,
       registerDate: userTag.registerDate,
       post: userTag.post,
-      avatar: userTag.avatar
+      avatar: userTag.avatar,
+      friend: userTag.friend
     };
   }
 }
@@ -98,8 +99,6 @@ const postSignUpWithEmailAndPassword = async (req, res) => {
         }).save()
           .then(newUser => {
             acLog(`New user created ${newUser.email}`);
-
-            //PENDING: Send back posts or comments later
 
             // Sign in with new user created
             req.logIn(newUser, (err) => {

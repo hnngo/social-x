@@ -20,6 +20,15 @@ const getUserProfile = async (req, res) => {
           model: "User",
           select: "_id name avatar"
         }
+      })
+      .populate({
+        path: "friend.list"
+      })
+      .populate({
+        path: "friend.requestFromList"
+      })
+      .populate({
+        path: "friend.requestToList"
       });
 
 

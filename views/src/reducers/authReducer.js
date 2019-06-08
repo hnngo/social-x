@@ -8,7 +8,8 @@ import {
   ACT_AUTH_SIGNING_UP,
   ACT_AUTH_SIGN_UP_FAIL,
   ACT_AUTH_SIGN_UP_SUCCESS,
-  ACT_LOG_OUT
+  ACT_LOG_OUT,
+  ACT_FRIEND_SEND_REQUEST
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -38,6 +39,13 @@ export default (state = INITIAL_STATE, action) => {
       return state;
     case ACT_LOG_OUT:
       return { ...INITIAL_STATE };
+    case ACT_FRIEND_SEND_REQUEST:
+      const updatedUser = state.user;
+
+      // Add friendId to requestTo
+      updatedUser.friend.requestToList.push(action.payload);
+
+      return { ...state, user: updatedUser };
     default:
       return state;
   }

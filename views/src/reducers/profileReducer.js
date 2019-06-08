@@ -75,7 +75,7 @@ export default (state = {}, action) => {
     case ACT_PROFILE_UPDATE:
       return { ...action.payload, updatingProfile: false };
     case ACT_PROFILE_UPDATING:
-      return { ...state, updatingProfile: true }
+      return { ...state, updatingProfile: true };
     default:
       return state;
   }

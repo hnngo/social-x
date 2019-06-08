@@ -621,6 +621,41 @@ body {
   text-align: center;
 }
 
+.p-container .p-friend-add {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.p-container .p-friend-add .p-add-btn {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #00CBF5;
+  -webkit-box-shadow: 0px 0px 4px 0px #58a0ae;
+          box-shadow: 0px 0px 4px 0px #58a0ae;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .p-container .p-friend-add .p-add-btn:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
+            box-shadow: inset 0px 0px 4px 0px #58a0ae;
+  }
+}
+
+.p-container .p-friend-add .p-add-btn i {
+  margin-right: 10px;
+}
+
 .p-container .p-basic-info {
   margin-top: 20px;
   border: 1px solid #b6b6b685;
