@@ -118,6 +118,7 @@ const EditInfoForm = (props) => {
               component={InputField}
               type="file"
               placeholder="Choose an image"
+              icon="fas fa-images"
             />
           </div>
         </div>

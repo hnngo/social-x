@@ -731,6 +731,7 @@ body {
   height: 40px;
   vertical-align: top;
   margin-right: 15px;
+  border-radius: 50%;
 }
 
 .p-container .p-post-area .post-wrapper textarea {
@@ -1200,6 +1201,38 @@ body {
   letter-spacing: 0px;
   color: #d84b4b;
   margin: 5px;
+}
+
+.edit-container .edit-form-container form .edit-row .input-field label {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: white;
+  background-color: #00CBF5;
+  -webkit-box-shadow: 0px 0px 4px 0px #58a0ae;
+          box-shadow: 0px 0px 4px 0px #58a0ae;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .edit-container .edit-form-container form .edit-row .input-field label:active {
+    -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
+            box-shadow: inset 0px 0px 4px 0px #58a0ae;
+  }
+}
+
+.edit-container .edit-form-container form .edit-row .input-field label i {
+  margin-right: 10px;
+}
+
+.edit-container .edit-form-container form .edit-row .input-field label input[type=file] {
+  display: none;
+}
+
+.edit-container .edit-form-container form .edit-row .input-field .input-file-name {
+  display: inline;
+  margin-left: 15px;
 }
 
 .edit-container .edit-form-btn {

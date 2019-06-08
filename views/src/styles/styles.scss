@@ -618,6 +618,7 @@ body {
         height: 40px;
         vertical-align: top;
         margin-right: 15px;
+        border-radius: 50%;
       }
   
       textarea {
@@ -977,6 +978,35 @@ body {
         .error-text {
           @include pStyle(lucida, 13px, dangerText, 0px);
           margin: 5px;
+        }
+      }
+
+      .input-field {
+        label {
+          @include pStyle(treb, 16px, white, 0px);
+          background-color: map-get($map: $theme-colors, $key: main);
+          box-shadow: 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
+          padding: 5px 10px;
+          border-radius: 10px;
+
+          @include mq(tablet, min) {
+            &:active {
+              box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
+            }
+          }
+
+          i {
+            margin-right: 10px;
+          }
+
+          input[type=file] {
+            display: none;
+          }
+        }
+
+        .input-file-name {
+          display: inline;
+          margin-left: 15px;
         }
       }
     }

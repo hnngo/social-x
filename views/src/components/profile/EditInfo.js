@@ -4,13 +4,19 @@ import EditInfoForm from '../forms/EditInfoForm';
 
 const EditInfo = (props) => {
   const [isUpdating, setIsUpdating] = useState(false)
-  const { profile, discardEdit } = props;
+  const { profile, discardEdit, auth } = props;
 
   useEffect(() => {
-    if (!profile.updatingProfile && isUpdating) {
+    if ((!profile.updatingProfile && isUpdating) || !auth.user) {
       discardEdit();
     }
-  }, [profile.updatingProfile, discardEdit, isUpdating])
+  }, [
+      profile.updatingProfile,
+      discardEdit,
+      isUpdating,
+      auth.user
+    ]
+  );
 
   return (
     <div className="edit-container">
@@ -39,8 +45,8 @@ const EditInfo = (props) => {
   );
 }
 
-const mapStateToProps = ({ profile }) => {
-  return ({ profile });
+const mapStateToProps = ({ auth, profile }) => {
+  return ({ auth, profile });
 }
 
 export default connect(mapStateToProps)(EditInfo);

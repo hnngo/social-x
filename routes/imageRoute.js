@@ -60,14 +60,33 @@ router.post('/upload', isLogin, upload.single('file'), async (req, res) => {
         populate: {
           path: "comments.content.user",
           model: "User",
-          select: "_id name"
+          select: "_id name avatar"
         }
       });
 
+    // Check if user has previous image then delete it from db
+    if (existingUser.avatar !== "67936a5c0997cf0dfb7eb9d168cb6f38.jpeg") {
+      await gfs.remove({ filename: existingUser.avatar, root: 'uploads' });
+    }
+
+    // Save new avatar filename
     existingUser.avatar = req.file.filename;
-    existingUser.save();
-    
-    return res.send(existingUser);
+    await existingUser.save();
+
+    const updatedUser = await User.findById(req.user._id)
+      .select({
+        password: false
+      })
+      .populate({
+        path: "post",
+        populate: {
+          path: "comments.content.user",
+          model: "User",
+          select: "_id name avatar"
+        }
+      });
+
+    return res.send(updatedUser);
   } catch (err) {
     acLog(err);
     return res.send(err);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const InputField = ({
   input,
@@ -7,13 +7,16 @@ const InputField = ({
   icon,
   meta: { touched, error }
 }) => {
+  const [fileName, setFileName] = useState("");
+
   if (type === "file") {
     const handleOnChangeFile = async (e) => {
       const { onChange } = input;
       const targetFile = e.target.files[0];
 
       if (targetFile) {
-        onChange(targetFile)
+        setFileName(targetFile.name);
+        onChange(targetFile);
       } else {
         onChange(null)
       }
@@ -21,14 +24,21 @@ const InputField = ({
 
     return (
       <div className="input-field">
-        <div>
+        <label>
           <i className={icon} />
+          Choose an image
           <input
             onChange={(e) => handleOnChangeFile(e)}
             accept='.jpg, .png, .jpeg'
             type="file"
           />
-        </div>
+        </label>
+        {
+          fileName ?
+            <p className="input-file-name">{fileName}</p>
+            :
+            <div />
+        }
       </div>
     );
   }

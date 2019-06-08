@@ -3,6 +3,8 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const acLog = require('../utils/activityLog');
 
+const userPopulateSelect = "_id name avatar";
+
 // @Method    Get
 // @Path      /post/id/:postId
 // @Desc      Get all posts in time order
@@ -16,24 +18,24 @@ const getAllPost = async (req, res) => {
         .limit(+req.query.limit)
         .populate({
           path: 'user',
-          select: 'name _id avatar'
+          select: userPopulateSelect
         })
         .populate({
           path: "comments.content.user",
           model: "User",
-          select: "_id name avatar"
+          select: userPopulateSelect
         });
     } else {
       posts = await Post.find()
         .sort({ postDate: -1 })
         .populate({
           path: 'user',
-          select: 'name _id avatar',
+          select: userPopulateSelect
         })
         .populate({
           path: "comments.content.user",
           model: "User",
-          select: "_id name avatar"
+          select: userPopulateSelect
         });
     }
 
@@ -175,7 +177,7 @@ const patchPostById = async (req, res) => {
     // Check if existing a post
     const existingPost = await Post.findById(postId).populate({
       path: 'user',
-      select: 'name _id avatar'
+      select: userPopulateSelect
     });
 
     if (!existingPost || existingPost.user._id.toString() !== req.user._id.toString()) {
@@ -205,7 +207,7 @@ const getLikeUnlikePostById = async (req, res) => {
     const userId = req.user._id;
     const existingPost = await Post.findById(postId).populate({
       path: 'user',
-      select: 'name _id avatar'
+      select: userPopulateSelect
     });
 
     if (!postId || !existingPost) {
@@ -254,13 +256,13 @@ const postCommentById = async (req, res) => {
     const existingPost = await Post.findById(postId)
       .populate({
         path: "user",
-        select: "_id name avatar",
+        select: userPopulateSelect,
         model: "User"
       })
       .populate({
         path: "comments.content.user",
         model: "User",
-        select: "_id name avatar"
+        select: userPopulateSelect
       });
 
     if (!existingPost) {
@@ -306,13 +308,13 @@ const deleteComment = async (req, res) => {
     const existingPost = await Post.findById(postId)
       .populate({
         path: "user",
-        select: "_id name avatar",
+        select: userPopulateSelect,
         model: "User"
       })
       .populate({
         path: "comments.content.user",
         model: "User",
-        select: "_id name avatar"
+        select: userPopulateSelect
       });
 
     if (!existingPost) {
