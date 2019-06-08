@@ -22,12 +22,14 @@ conn.once('open', () => {
 const storage = new GridFsStorage({
   url: keys.mongoDbUrl,
   file: (req, file) => {
+    // console.log(req.file)
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
         if (err) {
           return reject(err);
         }
         const filename = buf.toString('hex') + path.extname(file.originalname);
+
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads',
@@ -44,9 +46,9 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 router.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.user)
-  // res.json({ file: req.file })
-  res.redirect('/');
+  //TODO: Send back the image name or do something to let client know
+  
+  return res.send({ fileName: req.file.filename });
 });
 
 router.get('/all', (req, res) => {

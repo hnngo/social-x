@@ -33,6 +33,9 @@ const userSchema = new Schema({
       ref: 'User'
     }
   ],
+  avatar: {
+    type: String
+  },
   job: {
     type: String
   },

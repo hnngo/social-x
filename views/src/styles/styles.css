@@ -1168,7 +1168,8 @@ body {
   padding: 6px 0px;
 }
 
-.edit-container .edit-form-container form .edit-row .input-field input {
+.edit-container .edit-form-container form .edit-row .input-field input[type=text],
+.edit-container .edit-form-container form .edit-row .input-field input[type=date] {
   width: 100%;
   padding: 5px 5px;
   border-radius: 10px;

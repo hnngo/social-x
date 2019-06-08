@@ -19,15 +19,13 @@ const EditInfoForm = (props) => {
 
     if (profile.birthday) {
       bday = new Date(profile.birthday);
-      
-      // let bdayMonth = +bday.getMonth() >= 10 ? bday.getMonth() : "0" + bday.getMonth();
-      // let bdayDay = +bday.getDay() >= 10 ? bday.getDay() : "0" + bday.getMonth();
+
       let bdayMonth = bday.toLocaleDateString().slice(3, 5);
       let bdayDay = bday.toLocaleDateString().slice(0, 2);
 
       bday = `${bday.getFullYear()}-${bdayMonth}-${bdayDay}`;
     }
-    console.log(bday)
+
     // Initialize value for form
     if (initialize) {
       initialize({
@@ -49,12 +47,14 @@ const EditInfoForm = (props) => {
 
   return (
     <div className="edit-form-container">
-      <form onSubmit={
-        props.handleSubmit(() => {
-          props.updateProfileById(auth.user.id, formValues);
-          props.OnUpdating();
-        })
-      }>
+      <form
+        onSubmit={
+          props.handleSubmit(() => {
+            props.updateProfileById(auth.user.id, formValues);
+            props.OnUpdating();
+          })
+        }
+      >
         <div className="edit-row row">
           <div className="col-2">
             <p>Name:</p>
@@ -105,6 +105,19 @@ const EditInfoForm = (props) => {
               component={InputField}
               type="text"
               placeholder="Enter a Place"
+            />
+          </div>
+        </div>
+        <div className="edit-row row">
+          <div className="col-2">
+            <p>Avatar:</p>
+          </div>
+          <div className="col-10">
+            <Field
+              name="file"
+              component={InputField}
+              type="file"
+              placeholder="Choose an image"
             />
           </div>
         </div>
