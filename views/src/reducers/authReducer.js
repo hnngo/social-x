@@ -9,8 +9,7 @@ import {
   ACT_AUTH_SIGN_UP_FAIL,
   ACT_AUTH_SIGN_UP_SUCCESS,
   ACT_LOG_OUT,
-  ACT_FRIEND_SEND_REQUEST,
-  ACT_FRIEND_CANCEL_REQUEST,
+  ACT_FRIEND_SEND_REQUEST
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -49,17 +48,6 @@ export default (state = INITIAL_STATE, action) => {
 
         return { ...state, user: updatedUser };
       }
-    // case ACT_FRIEND_CANCEL_REQUEST:
-    //   {
-    //     const updatedUser = state.user;
-    //     const newFriendList = updatedUser.friend;
-
-    //     // Remove friend request
-    //     _.remove(newFriendList.requestToList, (id) => id === action.payload);
-    //     updatedUser.friend = newFriendList;
-
-    //     return { ...state, user: updatedUser };
-    //   }
     default:
       return state;
   }

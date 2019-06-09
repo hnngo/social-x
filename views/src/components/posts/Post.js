@@ -128,7 +128,10 @@ const Post = (props) => {
       return (
         <div key={cmt._id}>
           <div className="cmt-row" >
-            <div className="cmt-avatar">
+            <div
+              className="cmt-avatar"
+              onClick={() => props.history.push(`/profile/${cmt._id}`)}
+            >
               <img src={`/image/${cmt.user.avatar}`} alt="ava" />
             </div>
             <div className="cmt-area">

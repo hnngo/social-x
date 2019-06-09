@@ -599,12 +599,36 @@ body {
     border-radius: 10px;
 
     .fl-title {
+      cursor: pointer;
       @include pStyle(treb, 18px, main, 0px);
       margin: 5px 15px;
     }
 
     .fl-nofriend {
       margin-left: 20px;
+    }
+
+    .fl-row {
+      cursor: pointer;
+      display: flex;
+      margin: 15px 20px;
+
+      .fl-ava img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .fl-name {
+        @include pStyle(treb, 18px, black, 0px);
+        padding: 5px;
+
+        @include mq(tablet, min) {
+          &:hover {
+            color: map-get($map: $theme-colors, $key: main)!important;
+          }
+        }
+      }
     }
 
     ul {
@@ -682,10 +706,11 @@ body {
 
   .view-tab {
     display: flex;
+    margin-top: 20px;
 
     .view-heading {
       @include pStyle(lucida, 20px, main, 0px);
-      margin: 20px 20px 0px 0;
+      margin: 0px 20px 0px 0px;
       cursor: pointer;
     }
   }
@@ -905,6 +930,7 @@ body {
 
       .cmt-avatar {
         margin-right: 10px;
+        cursor: pointer;
         
         img {
           width: 40px;
@@ -1093,10 +1119,10 @@ body {
   .friend-view-select-tab {
     display: flex;
 
-    p {
+    .friend-head {
       @include pStyle(treb, 18px, main, 0px);
       cursor: pointer;
-      margin: 0px 15px 15px 0px;
+      margin: 0px 20px 0px 0px;
     }
   }
 
@@ -1113,6 +1139,7 @@ body {
       margin-left: 10px;
 
       .friend-ava img {
+        cursor: pointer;
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -1183,6 +1210,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.badge-container {
+  position: absolute;
+  right: 0px;
+  top: -6px;
+  background-color: map-get($map: $theme-colors, $key: dangerText);
+  border-radius: 5px;
+  opacity: 0.9;
+
+  .badge-number {
+    @include pStyle(treb, 14px, white, 0px);
+    padding: 1px 5px;
+    margin: 0;
+  }
 }
 
 .dim {

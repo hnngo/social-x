@@ -708,6 +708,7 @@ body {
 }
 
 .p-container .p-friend-list .fl-title {
+  cursor: pointer;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   letter-spacing: 0px;
@@ -717,6 +718,34 @@ body {
 
 .p-container .p-friend-list .fl-nofriend {
   margin-left: 20px;
+}
+
+.p-container .p-friend-list .fl-row {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 15px 20px;
+}
+
+.p-container .p-friend-list .fl-row .fl-ava img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.p-container .p-friend-list .fl-row .fl-name {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0px;
+  color: black;
+  padding: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  .p-container .p-friend-list .fl-row .fl-name:hover {
+    color: #00CBF5 !important;
+  }
 }
 
 .p-container .p-friend-list ul {
@@ -818,6 +847,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 20px;
 }
 
 .p-container .view-tab .view-heading {
@@ -825,7 +855,7 @@ body {
   font-size: 20px;
   letter-spacing: 0px;
   color: #00CBF5;
-  margin: 20px 20px 0px 0;
+  margin: 0px 20px 0px 0px;
   cursor: pointer;
 }
 
@@ -1108,6 +1138,7 @@ body {
 
 .post-containter .comment-view .cmt-row .cmt-avatar {
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .post-containter .comment-view .cmt-row .cmt-avatar img {
@@ -1344,13 +1375,13 @@ body {
   display: flex;
 }
 
-.friend-container .friend-view-select-tab p {
+.friend-container .friend-view-select-tab .friend-head {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   letter-spacing: 0px;
   color: #00CBF5;
   cursor: pointer;
-  margin: 0px 15px 15px 0px;
+  margin: 0px 20px 0px 0px;
 }
 
 .friend-container .friend-row-container {
@@ -1374,6 +1405,7 @@ body {
 }
 
 .friend-container .friend-row-container .friend-info .friend-ava img {
+  cursor: pointer;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -1462,6 +1494,24 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.badge-container {
+  position: absolute;
+  right: 0px;
+  top: -6px;
+  background-color: #d84b4b;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
+.badge-container .badge-number {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0px;
+  color: white;
+  padding: 1px 5px;
+  margin: 0;
 }
 
 .dim {

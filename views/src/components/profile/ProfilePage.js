@@ -15,6 +15,7 @@ import {
   uploadPost,
   sendFriendRequest
 } from '../../actions';
+import BadgeNoti from './BadgeNoti';
 
 const ProfilePage = (props) => {
   const [postContent, setPostContent] = useState("");
@@ -32,6 +33,8 @@ const ProfilePage = (props) => {
   } = props;
 
   useEffect(() => {
+    // Set the view back to post
+    setViewTab(VIEW_POST);
     fetchProfileById(match.params.userId)
   }, [fetchProfileById, match.params.userId]);
 
@@ -54,7 +57,7 @@ const ProfilePage = (props) => {
         return (
           <div className="p-friend-add">
             <div className="p-add-btn">
-              <i class="fas fa-check" />
+              <i className="fas fa-check" />
               Friend
             </div>
           </div>
@@ -186,9 +189,17 @@ const ProfilePage = (props) => {
           </div>
 
           <div className="p-friend-list">
-            <p className="fl-title">Friends</p>
+            <p
+              className="fl-title"
+              onClick={() => setViewTab(VIEW_FRIEND)}
+            >
+              Friends
+            </p>
             {renderFriend()}
-            <div className="fl-edit">
+            <div
+              className="fl-edit"
+              onClick={() => setViewTab(VIEW_FRIEND)}
+            >
               View all
             </div>
           </div>
@@ -205,13 +216,20 @@ const ProfilePage = (props) => {
               <div>
                 <div className="view-tab">
                   <p
-                    className={viewTab === VIEW_POST ?"view-heading" : "view-heading dim"}
+                    className={viewTab === VIEW_POST ? "view-heading" : "view-heading dim"}
                     onClick={() => setViewTab(VIEW_POST)}
                   >POSTS</p>
-                  <p
-                    className={viewTab === VIEW_FRIEND ?"view-heading" : "view-heading dim"}
-                    onClick={() => setViewTab(VIEW_FRIEND)}
-                  >FRIENDS</p>
+                  <div style={{ position: "relative" }}>
+                    <p
+                      className={viewTab === VIEW_FRIEND ? "view-heading" : "view-heading dim"}
+                      onClick={() => setViewTab(VIEW_FRIEND)}
+                    >
+                      FRIENDS
+                    </p>
+                    <BadgeNoti
+                      notiNum={profile.friend.requestFromList.length}
+                    />
+                  </div>
                 </div>
                 {renderTab()}
               </div>
@@ -297,9 +315,18 @@ const ProfilePage = (props) => {
 
     return profile.friend.list.map((f, i) => {
       return (
-        <li key={i}>
-          {f.name}
-        </li>
+        <div
+          key={i}
+          className="fl-row"
+          onClick={() => props.history.push(`/profile/${f._id}`)}
+        >
+          <div className="fl-ava">
+            <img src={`/image/${f.avatar}`} alt="friend-avatar" />
+          </div>
+          <div className="fl-name">
+            {f.name}
+          </div>
+        </div>
       );
     })
   };

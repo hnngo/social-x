@@ -12,6 +12,7 @@ import {
   declineFriendRequest,
   unfriend
 } from '../../actions';
+import BadgeNoti from './BadgeNoti';
 
 const FriendTab = (props) => {
   const [viewTab, setViewTab] = useState(VIEW_ALL_FRIENDS);
@@ -95,7 +96,7 @@ const FriendTab = (props) => {
       <div className="friend-view-select-tab">
         <p
           className={
-            viewTab === VIEW_ALL_FRIENDS ? "" : "dim"
+            viewTab === VIEW_ALL_FRIENDS ? "friend-head" : "friend-head dim"
           }
           onClick={() => setViewTab(VIEW_ALL_FRIENDS)}
         >
@@ -105,14 +106,16 @@ const FriendTab = (props) => {
           (!auth.user || auth.user.id !== profile._id) ?
             <div />
             :
-            <p
-              className={
-                viewTab === VIEW_FRIEND_REQUESTS ? "" : "dim"
-              }
-              onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
-            >
-              Friend Requests
-            </p>
+            <div style={{ position: "relative" }}>
+              <p
+                className={
+                  viewTab === VIEW_FRIEND_REQUESTS ? "friend-head" : "friend-head dim"
+                }
+                onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
+              >
+                Friend Requests
+              </p>
+            </div>
         }
         {
           (!auth.user || auth.user.id !== profile._id) ?
@@ -120,7 +123,7 @@ const FriendTab = (props) => {
             :
             <p
               className={
-                viewTab === VIEW_REQUEST_SENT ? "" : "dim"
+                viewTab === VIEW_REQUEST_SENT ? "friend-head" : "friend-head dim"
               }
               onClick={() => setViewTab(VIEW_REQUEST_SENT)}
             >
