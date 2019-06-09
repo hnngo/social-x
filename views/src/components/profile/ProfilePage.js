@@ -146,7 +146,7 @@ const ProfilePage = (props) => {
                 if (isAdding) {
                   return;
                 }
-                
+
                 props.sendFriendRequest(profile._id);
                 setIsAdding(true);
               }}
@@ -347,10 +347,17 @@ const ProfilePage = (props) => {
         <div className="post-wrapper">
           <img src={`/image/${props.profile.avatar}`} alt="avatar" />
           <textarea
+            id="profilePostArea"
             placeholder="What is your thought?"
             rows={3}
             value={postContent}
-            onChange={(e) => setPostContent(e.target.value)}
+            onChange={(e) => {
+              setPostContent(e.target.value);
+
+              // Auto increase the height
+              const qTA = document.querySelector("#profilePostArea");
+              qTA.style.height = qTA.scrollHeight + "px";
+            }}
           />
         </div>
         <div className="post-btn">

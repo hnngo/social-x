@@ -797,6 +797,11 @@ body {
     padding: 5px;
     margin: 10px 0;
 
+    .post-body-p {
+      @include pStyle(lucida, 16px, black, 0px);
+      margin: 0;
+    }
+
     .post-edit-area {
       textarea {
         width: 100%;

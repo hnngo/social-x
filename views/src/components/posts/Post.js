@@ -37,6 +37,11 @@ const Post = (props) => {
   const numberOfLikes = likes.total
   const numberOfCmts = comments.total
 
+  // Set view content if it has new line character
+  const viewContent = content.split('\n').map((item, i) => {
+    return <p key={i} className="post-body-p">{item}</p>;
+  });
+
   // Get the path root
   const rootPath = props.match.path.split('/')[1];
 
@@ -97,6 +102,9 @@ const Post = (props) => {
           value={commentContent}
           onChange={(e) => {
             setCommentContent(e.target.value);
+
+            const qTA = document.querySelector(".comment-section textarea");
+            qTA.style.height = qTA.scrollHeight + "px";
           }}
           onKeyPress={(e) => {
             if (e.key === "Enter" && commentContent.length > 0) {
@@ -245,7 +253,13 @@ const Post = (props) => {
               <textarea
                 rows={3}
                 value={postContent}
-                onChange={(e) => setPostContent(e.target.value)}
+                onChange={(e) => {
+                  setPostContent(e.target.value);
+
+                  // Set auto height for textarea
+                  const qTA = document.querySelector(".post-edit-area textarea");
+                  qTA.style.height = qTA.scrollHeight + "px";
+                }}
               />
               <div className="post-edit-button">
                 <button
@@ -266,7 +280,7 @@ const Post = (props) => {
               </div>
             </div>
             :
-            content
+            viewContent
         }
       </div>
       <div className="post-footer">
