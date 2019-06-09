@@ -1282,6 +1282,12 @@ body {
   }
 }
 
+.wrap {
+  white-space: pre-wrap;
+  // word-wrap: break-word;
+  word-break: break-all;
+}
+
 .dim {
   color: map-get($map: $theme-colors, $key: dashHeaderBar)!important;
 }

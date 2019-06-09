@@ -1582,6 +1582,11 @@ body {
   margin: 0;
 }
 
+.wrap {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 .dim {
   color: #b6b6b685 !important;
 }

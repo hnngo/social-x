@@ -39,7 +39,7 @@ const Post = (props) => {
 
   // Set view content if it has new line character
   const viewContent = content.split('\n').map((item, i) => {
-    return <p key={i} className="post-body-p">{item}</p>;
+    return <p key={i} className="post-body-p wrap">{item}</p>;
   });
 
   // Get the path root
@@ -103,7 +103,7 @@ const Post = (props) => {
           onChange={(e) => {
             setCommentContent(e.target.value);
 
-            const qTA = document.querySelector(".comment-section textarea");
+            const qTA = document.querySelector("#cmt-area-" + postId);
             qTA.style.height = qTA.scrollHeight + "px";
           }}
           onKeyPress={(e) => {
@@ -111,8 +111,10 @@ const Post = (props) => {
               props.uploadComment(postId, commentContent, rootPath);
               setCommentContent("");
 
-              // Deselect the text area
-              document.querySelector("#cmt-area-" + postId).blur()
+              // Deselect the text area and set back the height
+              const qTA = document.querySelector("#cmt-area-" + postId);
+              qTA.style.height =  "36px";
+              qTA.blur()
             }
           }}
         />
@@ -147,7 +149,9 @@ const Post = (props) => {
                 className="cmt-name"
                 onClick={() => props.history.push(`/profile/${cmt.user._id}`)}
               >{cmt.user.name}</p>
-              <p className="cmt-content">{cmt.comment}</p>
+              <div>
+                <p className="cmt-content wrap">{cmt.comment}</p>
+              </div>
             </div>
           </div>
           <div className="cmt-util">

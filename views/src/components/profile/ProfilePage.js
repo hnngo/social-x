@@ -55,6 +55,10 @@ const ProfilePage = (props) => {
     if (postContent.length > 0 && !posting) {
       setPosting(true);
       uploadPost(postContent);
+
+      // Set back the height of post area
+      const qTA = document.querySelector("#profilePostArea");
+      qTA.style.height = "76px";
     }
   }
 
@@ -356,7 +360,11 @@ const ProfilePage = (props) => {
 
               // Auto increase the height
               const qTA = document.querySelector("#profilePostArea");
-              qTA.style.height = qTA.scrollHeight + "px";
+              if (e.target.value.length === 0) {
+                qTA.style.height = "76px";
+              } else {
+                qTA.style.height = qTA.scrollHeight + "px";
+              }
             }}
           />
         </div>
