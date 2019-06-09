@@ -70,7 +70,7 @@ const getFriendRequest = async (req, res) => {
     acLog(`${req.user.email} sent friend request to ${existingFriend.email}`);
 
     const updatedUser = await getPopulatedUserById(friendId);
-    console.log(updatedUser)
+
     return res.send(updatedUser);
   } catch (err) {
     acLog(err);

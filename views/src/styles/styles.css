@@ -633,6 +633,7 @@ body {
 }
 
 .p-container .p-friend-add .p-add-btn {
+  position: relative;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 0px;
@@ -1541,6 +1542,7 @@ body {
   height: 100%;
   left: 0px;
   background-color: rgba(0, 0, 0, 0.863);
+  opacity: 0.7;
   border-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1551,6 +1553,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  pointer-events: none;
 }
 
 .badge-container {

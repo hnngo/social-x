@@ -29,6 +29,7 @@ const ProfilePage = (props) => {
   const [viewTab, setViewTab] = useState(VIEW_POST);
   const [viewUnfriend, setViewUnfriend] = useState(false);
   const [viewCancelRequest, setViewCancelRequest] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   const {
     fetchProfileById,
@@ -76,6 +77,7 @@ const ProfilePage = (props) => {
                   onClick={() => {
                     props.unfriend(profile._id, auth.user.id);
                     setViewUnfriend(false);
+                    setIsAdding(false);
                   }}
                 >
                   <i className="fas fa-user-slash" />
@@ -104,6 +106,7 @@ const ProfilePage = (props) => {
                     () => {
                       props.cancelFriendRequest(profile._id, auth.user.id);
                       setViewCancelRequest(false);
+                      setIsAdding(false);
                     }
                   }
                 >
@@ -140,13 +143,32 @@ const ProfilePage = (props) => {
             <div
               className="p-add-btn"
               onClick={() => {
-                props.sendFriendRequest(profile._id);
+                if (isAdding) {
+                  return;
+                }
                 
-                document.querySelector(".p-add-btn").disabled = true;
+                props.sendFriendRequest(profile._id);
+                setIsAdding(true);
               }}
             >
               <i className="fas fa-user-plus" />
               Add Friend
+              {
+                isAdding ?
+                  <div className="updating-loading">
+                    <div className="spinner-grow spinner-grow-sm" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </div>
+                    <div className="spinner-grow spinner-grow-sm" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </div>
+                    <div className="spinner-grow spinner-grow-sm" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                  :
+                  <div />
+              }
             </div>
           </div>
         );
