@@ -12,7 +12,6 @@ import {
   declineFriendRequest,
   unfriend
 } from '../../actions';
-import BadgeNoti from './BadgeNoti';
 
 const FriendTab = (props) => {
   const [viewTab, setViewTab] = useState(VIEW_ALL_FRIENDS);
@@ -114,6 +113,12 @@ const FriendTab = (props) => {
                 onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
               >
                 Friend Requests
+                {
+                  profile.friend.requestFromList.length > 0 ?
+                    <span>&nbsp;({profile.friend.requestFromList.length})</span>
+                    :
+                    <span />
+                }
               </p>
             </div>
         }
@@ -128,6 +133,12 @@ const FriendTab = (props) => {
               onClick={() => setViewTab(VIEW_REQUEST_SENT)}
             >
               Requests Sent
+              {
+                profile.friend.requestToList.length > 0 ?
+                  <span>&nbsp;({profile.friend.requestToList.length})</span>
+                  :
+                  <span />
+              }
             </p>
         }
 

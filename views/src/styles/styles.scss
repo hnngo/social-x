@@ -531,6 +531,7 @@ body {
   }
 
   .p-friend-add {
+    position: relative;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -543,10 +544,32 @@ body {
       background-color: map-get($map: $theme-colors, $key: main);
       box-shadow: 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
       cursor: pointer;
+      margin: 5px;
 
       @include mq(tablet, min) {
         &:active {
           box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
+        }
+      }
+
+      i {
+        margin-right: 10px;
+      }
+    }
+
+    .p-danger-btn {
+      @include pStyle(treb, 16px, white, 0px);
+      padding: 5px 15px;
+      border: none;
+      border-radius: 10px;
+      background-color: map-get($map: $theme-colors, $key: dangerText);
+      box-shadow: 0px 0px 4px 0px map-get($map: $theme-colors, $key: dangerTextShadow);
+      cursor: pointer;
+      margin: 5px;
+
+      @include mq(tablet, min) {
+        &:active {
+          box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: dangerTextShadow);
         }
       }
 
@@ -1122,7 +1145,7 @@ body {
     .friend-head {
       @include pStyle(treb, 18px, main, 0px);
       cursor: pointer;
-      margin: 0px 20px 0px 0px;
+      margin: 0px 20px 20px 0px;
     }
   }
 
@@ -1194,6 +1217,30 @@ body {
         &:active {
           box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
         }
+      }
+    }
+  }
+}
+
+.hover-btn-container {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+
+  .hover-btn {
+    @include pStyle(treb, 16px, white, 0px);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin: 5px;
+    background-color: map-get($map: $theme-colors, $key: dangerText);          
+    box-shadow: 0px 0px 4px 0px map-get($map: $theme-colors, $key: dangerTextShadow);
+
+    @include mq(tablet, min) {
+      &:active {
+        box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: dangerTextShadow);
       }
     }
   }

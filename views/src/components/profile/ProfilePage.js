@@ -6,6 +6,7 @@ import Post from '../posts/Post';
 import Loading from '../Loading';
 import EditInfo from './EditInfo';
 import FriendTab from './FriendTab';
+import BadgeNoti from './BadgeNoti';
 import {
   VIEW_POST,
   VIEW_FRIEND
@@ -13,9 +14,12 @@ import {
 import {
   fetchProfileById,
   uploadPost,
-  sendFriendRequest
+  sendFriendRequest,
+  unfriend,
+  cancelFriendRequest,
+  acceptFriendRequest,
+  declineFriendRequest
 } from '../../actions';
-import BadgeNoti from './BadgeNoti';
 
 const ProfilePage = (props) => {
   const [postContent, setPostContent] = useState("");
@@ -23,6 +27,8 @@ const ProfilePage = (props) => {
   const [posting, setPosting] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [viewTab, setViewTab] = useState(VIEW_POST);
+  const [viewUnfriend, setViewUnfriend] = useState(false);
+  const [viewCancelRequest, setViewCancelRequest] = useState(false);
 
   const {
     fetchProfileById,
@@ -53,21 +59,78 @@ const ProfilePage = (props) => {
 
   const renderAddFriendBtn = () => {
     if (auth.user && (profile._id !== auth.user.id)) {
-      if (auth.user.friend.list.includes(profile._id)) {
+      if (_.findIndex(profile.friend.list, (f) => f._id.toString() === auth.user.id) >= 0) {
         return (
           <div className="p-friend-add">
-            <div className="p-add-btn">
+            <div
+              className="p-add-btn"
+              onClick={() => setViewUnfriend(!viewUnfriend)}
+            >
               <i className="fas fa-check" />
               Friend
             </div>
+            {
+              viewUnfriend ?
+                <div
+                  className="p-danger-btn animated fadeIn"
+                  onClick={() => {
+                    props.unfriend(profile._id, auth.user.id);
+                    setViewUnfriend(false);
+                  }}
+                >
+                  <i className="fas fa-user-slash" />
+                  Unfriend
+              </div>
+                :
+                <div />
+            }
           </div>
         );
-      } else if (auth.user.friend.requestToList.includes(profile._id)) {
+      } else if (_.findIndex(profile.friend.requestFromList, (f) => f._id.toString() === auth.user.id) >= 0 && auth.user.friend.requestToList.includes(profile._id)) {
         return (
           <div className="p-friend-add">
-            <div className="p-add-btn">
+            <div
+              className="p-add-btn"
+              onClick={() => setViewCancelRequest(!viewCancelRequest)}
+            >
               <i className="fas fa-user-plus" />
               Friend Request Sent
+            </div>
+            {
+              viewCancelRequest ?
+                <div
+                  className="p-danger-btn animated fadeIn"
+                  onClick={
+                    () => {
+                      props.cancelFriendRequest(profile._id, auth.user.id);
+                      setViewCancelRequest(false);
+                    }
+                  }
+                >
+                  <i className="fas fa-user-slash" />
+                  Cancel Request
+                </div>
+                :
+                <div />
+            }
+          </div>
+        );
+      } else if (_.findIndex(profile.friend.requestToList, (f) => f._id.toString() === auth.user.id) >= 0 && auth.user.friend.requestFromList.includes(profile._id)) {
+        return (
+          <div className="p-friend-add">
+            <div
+              className="p-add-btn"
+              onClick={() => props.acceptFriendRequest(profile._id, auth.user.id)}
+            >
+              <i className="fas fa-user-plus" />
+              Accept Request
+            </div>
+            <div
+              className="p-danger-btn"
+              onClick={() => props.declineFriendRequest(profile._id, auth.user.id)}
+            >
+              <i className="fas fa-user-slash" />
+              Decline Request
             </div>
           </div>
         );
@@ -76,7 +139,11 @@ const ProfilePage = (props) => {
           <div className="p-friend-add">
             <div
               className="p-add-btn"
-              onClick={() => props.sendFriendRequest(profile._id)}
+              onClick={() => {
+                props.sendFriendRequest(profile._id);
+                
+                document.querySelector(".p-add-btn").disabled = true;
+              }}
             >
               <i className="fas fa-user-plus" />
               Add Friend
@@ -355,5 +422,9 @@ const mapStateToProps = ({ auth, profile }) => {
 export default connect(mapStateToProps, {
   fetchProfileById,
   uploadPost,
-  sendFriendRequest
+  sendFriendRequest,
+  unfriend,
+  cancelFriendRequest,
+  acceptFriendRequest,
+  declineFriendRequest
 })(ProfilePage);

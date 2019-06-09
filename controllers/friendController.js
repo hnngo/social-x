@@ -2,6 +2,36 @@ const acLog = require('../utils/activityLog');
 const User = require('../models/User');
 const _ = require('lodash');
 
+const selectUserPopulate = "_id name avatar"
+const getPopulatedUserById = async (userId) => {
+  const existingUser = await User.findById(userId)
+      .select({
+        password: false
+      })
+      .populate({
+        path: "post",
+        populate: {
+          path: "comments.content.user",
+          model: "User",
+          select: selectUserPopulate
+        }
+      })
+      .populate({
+        path: "friend.list",
+        select: selectUserPopulate
+      })
+      .populate({
+        path: "friend.requestFromList",
+        select: selectUserPopulate
+      })
+      .populate({
+        path: "friend.requestToList",
+        select: selectUserPopulate
+      });
+
+  return existingUser;
+}
+
 // @Method    GET
 // @Path      /friend/request/:userId
 // @Desc      Sending friend request to a user
@@ -23,6 +53,7 @@ const getFriendRequest = async (req, res) => {
       acLog(`${req.user.email} sent friend request to an already friend ${existingFriend.email}`);
       return res.status(200).send({ message: "Already friend" });
     } 
+
     // Check if user sent friend request already
     else if (existingFriend.friend.requestFromList.includes(userId) && existingUser.friend.requestToList.includes(friendId)) {
       acLog(`${req.user.email} sent friend request again to ${existingFriend.email}`);
@@ -37,7 +68,10 @@ const getFriendRequest = async (req, res) => {
     await existingUser.save();
 
     acLog(`${req.user.email} sent friend request to ${existingFriend.email}`);
-    return res.status(200).send();
+
+    const updatedUser = await getPopulatedUserById(friendId);
+    console.log(updatedUser)
+    return res.send(updatedUser);
   } catch (err) {
     acLog(err);
     return res.send(err);

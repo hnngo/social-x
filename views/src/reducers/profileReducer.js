@@ -9,9 +9,13 @@ import {
   ACT_POST_LIKE_P,
   ACT_CMT_DELTE_P,
   ACT_CMT_UPLOAD_P,
+  ACT_FRIEND_SEND_REQUEST_P,
   ACT_FRIEND_CANCEL_REQUEST,
+  ACT_FRIEND_CANCEL_REQUEST_P,
   ACT_FRIEND_ACCEPT_REQUEST,
+  ACT_FRIEND_ACCEPT_REQUEST_P,
   ACT_FRIEND_DECLINE_REQUEST,
+  ACT_FRIEND_DECLINE_REQUEST_P,
   ACT_FRIEND_UNFRIEND
 } from '../constants';
 
@@ -80,6 +84,17 @@ export default (state = {}, action) => {
       return { ...action.payload, updatingProfile: false };
     case ACT_PROFILE_UPDATING:
       return { ...state, updatingProfile: true };
+    case ACT_FRIEND_SEND_REQUEST_P:
+      return { ...state, friend: action.payload.friend };
+    case ACT_FRIEND_CANCEL_REQUEST_P:
+      {
+        const newFriendList = state.friend;
+
+        // Remove friend request
+        _.remove(newFriendList.requestFromList, (f) => f._id === action.payload);
+
+        return { ...state, friend: newFriendList };
+      }
     case ACT_FRIEND_CANCEL_REQUEST:
       {
         const newFriendList = state.friend;
@@ -99,12 +114,31 @@ export default (state = {}, action) => {
 
         return { ...state, friend: newFriendList };
       }
+    case ACT_FRIEND_ACCEPT_REQUEST_P:
+      {
+        const newFriendList = state.friend;
+
+        // Remove friend request in RequestToList and add to Friend list
+        const addedUser = _.remove(newFriendList.requestToList, (f) => f._id === action.payload);
+        newFriendList.list.push(addedUser[0]);
+
+        return { ...state, friend: newFriendList };
+      }
     case ACT_FRIEND_DECLINE_REQUEST:
       {
         const newFriendList = state.friend;
 
         // Remove friend request in RequestToList
         _.remove(newFriendList.requestFromList, (f) => f._id === action.payload);
+
+        return { ...state, friend: newFriendList };
+      }
+    case ACT_FRIEND_DECLINE_REQUEST_P:
+      {
+        const newFriendList = state.friend;
+
+        // Remove friend request in RequestToList
+        _.remove(newFriendList.requestToList, (f) => f._id === action.payload);
 
         return { ...state, friend: newFriendList };
       }
