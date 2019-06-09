@@ -18,10 +18,15 @@ const getFriendRequest = async (req, res) => {
       return res.send({ message: "Request to invalid user" });
     }
 
-    // Check if both are friend already
+    // Check if both are friend already friend
     if (existingFriend.friend.list.includes(userId) && existingUser.friend.list.includes(friendId)) {
       acLog(`${req.user.email} sent friend request to an already friend ${existingFriend.email}`);
       return res.status(200).send({ message: "Already friend" });
+    } 
+    // Check if user sent friend request already
+    else if (existingFriend.friend.requestFromList.includes(userId) && existingUser.friend.requestToList.includes(friendId)) {
+      acLog(`${req.user.email} sent friend request again to ${existingFriend.email}`);
+      return res.status(200).send({ message: "Already sent friend request" });
     }
 
     // Adding request on both sides

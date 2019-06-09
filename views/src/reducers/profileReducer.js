@@ -9,7 +9,10 @@ import {
   ACT_POST_LIKE_P,
   ACT_CMT_DELTE_P,
   ACT_CMT_UPLOAD_P,
-  ACT_FRIEND_CANCEL_REQUEST
+  ACT_FRIEND_CANCEL_REQUEST,
+  ACT_FRIEND_ACCEPT_REQUEST,
+  ACT_FRIEND_DECLINE_REQUEST,
+  ACT_FRIEND_UNFRIEND
 } from '../constants';
 
 export default (state = {}, action) => {
@@ -83,10 +86,37 @@ export default (state = {}, action) => {
 
         // Remove friend request
         _.remove(newFriendList.requestToList, (f) => f._id === action.payload);
-        
+
         return { ...state, friend: newFriendList };
       }
+    case ACT_FRIEND_ACCEPT_REQUEST:
+      {
+        const newFriendList = state.friend;
 
+        // Remove friend request in RequestToList and add to Friend list
+        _.remove(newFriendList.requestFromList, (f) => f._id === action.payload._id);
+        newFriendList.list.push(action.payload);
+
+        return { ...state, friend: newFriendList };
+      }
+    case ACT_FRIEND_DECLINE_REQUEST:
+      {
+        const newFriendList = state.friend;
+
+        // Remove friend request in RequestToList
+        _.remove(newFriendList.requestFromList, (f) => f._id === action.payload);
+
+        return { ...state, friend: newFriendList };
+      }
+    case ACT_FRIEND_UNFRIEND:
+      {
+        const newFriendList = state.friend;
+
+        // Remove friend request in RequestToList
+        _.remove(newFriendList.list, (f) => f._id === action.payload);
+
+        return { ...state, friend: newFriendList };
+      }
     default:
       return state;
   }

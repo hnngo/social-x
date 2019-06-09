@@ -32,7 +32,6 @@ const ProfilePage = (props) => {
   } = props;
 
   useEffect(() => {
-    setViewTab(VIEW_POST);
     fetchProfileById(match.params.userId)
   }, [fetchProfileById, match.params.userId]);
 
@@ -315,7 +314,9 @@ const ProfilePage = (props) => {
           }
         </div>
       </div>
-      <HeaderBar />
+      <HeaderBar
+        onSignOut={() => setViewTab(VIEW_POST)}
+      />
     </div>
   );
 };

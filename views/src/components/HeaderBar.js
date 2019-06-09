@@ -55,7 +55,12 @@ const HeaderBar = (props) => {
             <img src={`/image/${props.user.avatar}`} alt="avatar" />
             {props.user.name}
           </li>
-          <li onClick={() => props.logOut()}>
+          <li onClick={
+            () => {
+              props.logOut();
+              props.onSignOut();
+            }
+          }>
             Sign Out
           </li>
         </ul>

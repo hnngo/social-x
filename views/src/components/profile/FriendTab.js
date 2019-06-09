@@ -7,7 +7,10 @@ import {
   VIEW_REQUEST_SENT
 } from '../../constants';
 import {
-  cancelFriendRequest
+  cancelFriendRequest,
+  acceptFriendRequest,
+  declineFriendRequest,
+  unfriend
 } from '../../actions';
 
 const FriendTab = (props) => {
@@ -24,7 +27,7 @@ const FriendTab = (props) => {
             numberOfBtn={1}
             btnName1={"Unfriend"}
             optionalClassBtn1={"f-btn-danger"}
-            onClickBtn1={() => console.log("AA")}
+            onClickBtn1={() => props.unfriend(f._id)}
           />
         );
       })
@@ -43,10 +46,10 @@ const FriendTab = (props) => {
             numberOfBtn={2}
             btnName1={"Accept"}
             optionalClassBtn1={"f-btn-approve"}
-            onClickBtn1={() => console.log("AA")}
+            onClickBtn1={() => props.acceptFriendRequest(f)}
             btnName2={"Decline"}
             optionalClassBtn2={"f-btn-danger"}
-            onClickBtn2={() => console.log("AA")}
+            onClickBtn2={() => props.declineFriendRequest(f._id)}
           />
         );
       })
@@ -136,5 +139,8 @@ const mapStateToProps = ({ auth, profile }) => {
 }
 
 export default connect(mapStateToProps, {
-  cancelFriendRequest
+  cancelFriendRequest,
+  acceptFriendRequest,
+  declineFriendRequest,
+  unfriend
 })(FriendTab);
