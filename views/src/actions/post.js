@@ -11,7 +11,9 @@ import {
   ACT_CMT_DELTE_F,
   ACT_CMT_DELTE_P,
   ACT_CMT_UPLOAD_F,
-  ACT_CMT_UPLOAD_P
+  ACT_CMT_UPLOAD_P,
+  ACT_CMT_UPLOADING_F,
+  ACT_CMT_UPLOADING_P
 } from '../constants';
 
 export const fetchAllPosts = () => {
@@ -102,9 +104,13 @@ export const deleteComment = (commentId, postId, rootPath) => {
 
 export const uploadComment = (postId, comment, rootPath) => {
   return async (dispatch) => {
+    let type = rootPath === "feed" ? ACT_CMT_UPLOADING_F : ACT_CMT_UPLOADING_P;
+
+    dispatch({ type });
+
     const res = await axios.post(`/post/comment/${postId}`, { comment });
 
-    let type = rootPath === "feed" ? ACT_CMT_UPLOAD_F : ACT_CMT_UPLOAD_P;
+    type = rootPath === "feed" ? ACT_CMT_UPLOAD_F : ACT_CMT_UPLOAD_P;
 
     dispatch({
       type,

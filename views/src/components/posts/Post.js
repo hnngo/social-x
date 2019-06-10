@@ -104,20 +104,48 @@ const Post = (props) => {
             setCommentContent(e.target.value);
 
             const qTA = document.querySelector("#cmt-area-" + postId);
-            qTA.style.height = qTA.scrollHeight + "px";
+            if (e.target.value < 20) {
+              qTA.style.height = "36px";
+            } else {
+              qTA.style.height = qTA.scrollHeight + "px";
+            }
           }}
           onKeyPress={(e) => {
             if (e.key === "Enter" && commentContent.length > 0) {
+              const qTA = document.querySelector("#cmt-area-" + postId);
+
+              if (e.altKey) {
+                setCommentContent(e.target.value + "\n");
+                qTA.style.height = (+qTA.scrollHeight + 24) + "px";
+
+                return;
+              }
+
               props.uploadComment(postId, commentContent, rootPath);
               setCommentContent("");
 
               // Deselect the text area and set back the height
-              const qTA = document.querySelector("#cmt-area-" + postId);
-              qTA.style.height =  "36px";
+              qTA.style.height = "36px";
               qTA.blur()
             }
           }}
         />
+        {
+          (props.profile.isUploadingCmt || props.feed.isUploadingCmt)  ?
+            <div className="updating-loading">
+              <div className="spinner-border text-info" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div className="spinner-border text-info" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <div className="spinner-border text-info" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            </div>
+            :
+            <div />
+        }
       </div>
     );
   }
@@ -315,8 +343,8 @@ const Post = (props) => {
   );
 }
 
-const mapStateToProps = ({ auth }) => {
-  return { auth };
+const mapStateToProps = ({ auth, profile, feed }) => {
+  return { auth, profile, feed };
 }
 
 export default withRouter(

@@ -9,6 +9,7 @@ import {
   ACT_POST_LIKE_P,
   ACT_CMT_DELTE_P,
   ACT_CMT_UPLOAD_P,
+  ACT_CMT_UPLOADING_P,
   ACT_FRIEND_SEND_REQUEST_P,
   ACT_FRIEND_CANCEL_REQUEST,
   ACT_FRIEND_CANCEL_REQUEST_P,
@@ -71,6 +72,8 @@ export default (state = {}, action) => {
 
         return { ...state, post: newPostArr };
       }
+    case ACT_CMT_UPLOADING_P:
+      return { ...state, isUploadingCmt: true };
     case ACT_CMT_UPLOAD_P:
       {
         const oldPostIndex = _.findIndex(state.post, ['_id', action.payload._id]);
@@ -78,7 +81,7 @@ export default (state = {}, action) => {
 
         newPostArr[oldPostIndex] = action.payload;
 
-        return { ...state, post: newPostArr };
+        return { ...state, post: newPostArr, isUploadingCmt: false };
       }
     case ACT_PROFILE_UPDATE:
       return { ...action.payload, updatingProfile: false };

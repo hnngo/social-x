@@ -20,6 +20,8 @@ export const ACT_POST_LIKE_P = "act_post_like_p";
 export const ACT_POST_LIKE_F = "act_post_like_f";
 
 // COMMENTS
+export const ACT_CMT_UPLOADING_P = "act_cmt_uploading_p";
+export const ACT_CMT_UPLOADING_F = "act_cmt_uploading_f";
 export const ACT_CMT_UPLOAD_P = "act_cmt_upload_p";
 export const ACT_CMT_UPLOAD_F = "act_cmt_upload_f";
 export const ACT_CMT_DELTE_P = "act_cmt_delete_p";

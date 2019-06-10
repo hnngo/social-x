@@ -931,6 +931,7 @@ body {
   }
 
   .comment-section {
+    position: relative;
     margin-top: 10px;
     border-top: 1px solid map-get($map: $theme-colors, $key: lightMain);
 

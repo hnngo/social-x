@@ -5,7 +5,8 @@ import {
   ACT_POST_UPDATE_F,
   ACT_POST_LIKE_F,
   ACT_CMT_DELTE_F,
-  ACT_CMT_UPLOAD_F
+  ACT_CMT_UPLOAD_F,
+  ACT_CMT_UPLOADING_F
 } from '../constants';
 
 export default (state = [], action) => {
@@ -57,12 +58,17 @@ export default (state = [], action) => {
 
         return newPostArr;
       }
+    case ACT_CMT_UPLOADING_F:
+      const newState = [...state];
+      newState.isUploadingCmt = true;
+      return newState;
     case ACT_CMT_UPLOAD_F:
       {
         const oldPostIndex = _.findIndex(state, ['_id', action.payload._id]);
         const newPostArr = [...state];
 
         newPostArr[oldPostIndex] = action.payload;
+        newPostArr.isUploadingCmt = false;
 
         return newPostArr;
       }
