@@ -547,15 +547,19 @@ body {
 }
 
 .hb-background .hb-container .hb-rootname {
+  margin: 5px 40px;
+}
+
+.hb-background .hb-container .hb-rootname a:active,
+.hb-background .hb-container .hb-rootname a:hover,
+.hb-background .hb-container .hb-rootname a:link,
+.hb-background .hb-container .hb-rootname a:visited {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 30px;
   letter-spacing: 2px;
   color: white;
-  margin: 5px 40px;
-}
-
-.hb-background .hb-container .hb-rootname p {
   cursor: pointer;
+  text-decoration: none;
 }
 
 .hb-background .hb-container .hb-auth-features ul {
@@ -572,6 +576,18 @@ body {
   margin: 0px 10px;
   position: relative;
   cursor: pointer;
+}
+
+.hb-background .hb-container .hb-auth-features ul li a:active,
+.hb-background .hb-container .hb-auth-features ul li a:hover,
+.hb-background .hb-container .hb-auth-features ul li a:link,
+.hb-background .hb-container .hb-auth-features ul li a:visited {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .hb-background .hb-container .hb-auth-features ul li:nth-child(1)::after {

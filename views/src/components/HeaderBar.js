@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import SignInForm from './forms/SignInForm';
 import SignUpForm from './forms/SignUpForm';
 import { logOut, fetchUser } from '../actions';
@@ -51,9 +50,11 @@ const HeaderBar = (props) => {
     if (props.user) {
       return (
         <ul>
-          <li onClick={() => props.history.push(`/profile/${props.user.id}`)}>
-            <img src={`/image/${props.user.avatar}`} alt="avatar" />
-            {props.user.name}
+          <li>
+            <a href={`/profile/${props.user.id}`}>
+              <img src={`/image/${props.user.avatar}`} alt="avatar" />
+              {props.user.name}
+            </a>
           </li>
           <li onClick={
             () => {
@@ -85,9 +86,9 @@ const HeaderBar = (props) => {
         <div className="container">
           <div className="hb-container">
             <div className="hb-rootname">
-              <p
-                onClick={() => props.history.push("/feed")}
-              >Feeds</p>
+              <a
+                href="/feed"
+              >Feeds</a>
             </div>
             <div className="hb-auth-features">
               {renderContent()}
@@ -108,9 +109,7 @@ const mapStateToProps = ({ auth, profile }) => {
   };
 }
 
-export default withRouter(
-  connect(mapStateToProps, {
-    logOut,
-    fetchUser
-  })(HeaderBar)
-);
+export default connect(mapStateToProps, {
+  logOut,
+  fetchUser
+})(HeaderBar);

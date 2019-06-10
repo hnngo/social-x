@@ -106,7 +106,10 @@ export const uploadComment = (postId, comment, rootPath) => {
   return async (dispatch) => {
     let type = rootPath === "feed" ? ACT_CMT_UPLOADING_F : ACT_CMT_UPLOADING_P;
 
-    dispatch({ type });
+    dispatch({
+      type,
+      payload: postId
+    });
 
     const res = await axios.post(`/post/comment/${postId}`, { comment });
 

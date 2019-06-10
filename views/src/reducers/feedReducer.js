@@ -59,16 +59,20 @@ export default (state = [], action) => {
         return newPostArr;
       }
     case ACT_CMT_UPLOADING_F:
-      const newState = [...state];
-      newState.isUploadingCmt = true;
-      return newState;
+      {
+        const oldPostIndex = _.findIndex(state, ['_id', action.payload]);
+        const newPostArr = [...state];
+
+        newPostArr[oldPostIndex].isUploadingCmt = true;
+
+        return newPostArr;
+      }
     case ACT_CMT_UPLOAD_F:
       {
         const oldPostIndex = _.findIndex(state, ['_id', action.payload._id]);
         const newPostArr = [...state];
 
         newPostArr[oldPostIndex] = action.payload;
-        newPostArr.isUploadingCmt = false;
 
         return newPostArr;
       }

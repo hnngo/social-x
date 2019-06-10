@@ -131,7 +131,7 @@ const Post = (props) => {
           }}
         />
         {
-          (props.profile.isUploadingCmt || props.feed.isUploadingCmt)  ?
+          (postInfo.isUploadingCmt)  ?
             <div className="updating-loading">
               <div className="spinner-border text-info" role="status">
                 <span className="sr-only">Loading...</span>

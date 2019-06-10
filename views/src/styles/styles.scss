@@ -462,11 +462,15 @@ body {
     justify-content: space-between;
 
     .hb-rootname {
-      @include pStyle(lucida, 30px, white, 2px);
       margin: 5px 40px;
 
-      p {
+      a:active,
+      a:hover,
+      a:link,
+      a:visited {
+        @include pStyle(lucida, 30px, white, 2px);
         cursor: pointer;
+        text-decoration: none;
       }
     }
 
@@ -481,6 +485,15 @@ body {
           margin: 0px 10px;
           position: relative;
           cursor: pointer;
+
+          a:active,
+          a:hover,
+          a:link,
+          a:visited {
+            @include pStyle(treb, 18px, white, 2px);
+            cursor: pointer;
+            text-decoration: none;
+          }
 
           &:nth-child(1)::after {
             content: "";
@@ -931,7 +944,6 @@ body {
   }
 
   .comment-section {
-    position: relative;
     margin-top: 10px;
     border-top: 1px solid map-get($map: $theme-colors, $key: lightMain);
 
