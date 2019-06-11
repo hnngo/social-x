@@ -42,8 +42,12 @@ const ProfilePage = (props) => {
   useEffect(() => {
     // Set the view back to post
     setViewTab(VIEW_POST);
-    fetchProfileById(match.params.userId)
-  }, [fetchProfileById, match.params.userId]);
+    fetchProfileById(match.params.userId);
+
+    if (auth.socketInfo) {
+      auth.socketInfo.on("change", (change) => console.log(change));
+    }
+  }, [fetchProfileById, match.params.userId, auth.socketInfo]);
 
   if (Object.keys(profile).length > 0 && !_.isEqual(previousPosts, profile.post)) {
     setPreviousPosts(profile.post);

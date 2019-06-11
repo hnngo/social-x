@@ -471,13 +471,8 @@ body {
       a:hover,
       a:link,
       a:visited {
-        // @include pStyle(lucida, 30px, white, 2px);
         cursor: pointer;
         text-decoration: none;
-
-        // @include mq(tablet, max) {
-        //   @include pStyle(lucida, 26px, white, 2px);
-        // }
 
         img {
           width: 45px;
