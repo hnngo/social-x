@@ -550,6 +550,12 @@ body {
   margin: 5px 40px;
 }
 
+@media only screen and (max-width: 767px) {
+  .hb-background .hb-container .hb-rootname {
+    margin: 8px 0;
+  }
+}
+
 .hb-background .hb-container .hb-rootname a:active,
 .hb-background .hb-container .hb-rootname a:hover,
 .hb-background .hb-container .hb-rootname a:link,
@@ -562,9 +568,28 @@ body {
   text-decoration: none;
 }
 
+@media only screen and (max-width: 767px) {
+  .hb-background .hb-container .hb-rootname a:active,
+  .hb-background .hb-container .hb-rootname a:hover,
+  .hb-background .hb-container .hb-rootname a:link,
+  .hb-background .hb-container .hb-rootname a:visited {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: white;
+  }
+}
+
 .hb-background .hb-container .hb-auth-features ul {
-  margin: 8px 5px;
+  margin: 8px 0px 8px 5px;
   list-style: none;
+  padding: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .hb-background .hb-container .hb-auth-features ul {
+    margin-top: 14px;
+  }
 }
 
 .hb-background .hb-container .hb-auth-features ul li {
@@ -578,6 +603,15 @@ body {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 767px) {
+  .hb-background .hb-container .hb-auth-features ul li {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: white;
+  }
+}
+
 .hb-background .hb-container .hb-auth-features ul li a:active,
 .hb-background .hb-container .hb-auth-features ul li a:hover,
 .hb-background .hb-container .hb-auth-features ul li a:link,
@@ -588,6 +622,18 @@ body {
   color: white;
   cursor: pointer;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .hb-background .hb-container .hb-auth-features ul li a:active,
+  .hb-background .hb-container .hb-auth-features ul li a:hover,
+  .hb-background .hb-container .hb-auth-features ul li a:link,
+  .hb-background .hb-container .hb-auth-features ul li a:visited {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: white;
+  }
 }
 
 .hb-background .hb-container .hb-auth-features ul li:nth-child(1)::after {
@@ -606,6 +652,13 @@ body {
   border-radius: 50%;
   border: 1px solid #00CBF5;
   margin-right: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+  .hb-background .hb-container .hb-auth-features ul li img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .p-container {
@@ -914,6 +967,12 @@ body {
   transition: 0.5s;
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter {
+    padding: 10px 5px;
+  }
+}
+
 .post-containter .post-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -932,6 +991,14 @@ body {
   margin-right: 80px;
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .post-header img {
+    width: 35px;
+    height: 35px;
+    margin: 0px 80px 0px 5px;
+  }
+}
+
 .post-containter .post-header .post-owner {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 22px;
@@ -947,12 +1014,30 @@ body {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .post-header .post-owner {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    letter-spacing: 0px;
+    color: #00CBF5;
+  }
+}
+
 .post-containter .post-header .post-date {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 0px;
   color: gray;
   margin: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .post-containter .post-header .post-date {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: gray;
+  }
 }
 
 .post-containter .post-header .post-auth-edit i {
@@ -969,6 +1054,12 @@ body {
   color: #d84b4b;
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .post-header .post-auth-edit i {
+    font-size: 16px;
+  }
+}
+
 .post-containter .post-body {
   padding: 5px;
   margin: 10px 0;
@@ -980,6 +1071,16 @@ body {
   letter-spacing: 0px;
   color: black;
   margin: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .post-containter .post-body .post-body-p {
+    padding: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: black;
+  }
 }
 
 .post-containter .post-body .post-edit-area textarea {
@@ -1042,6 +1143,12 @@ body {
           justify-content: space-between;
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .post-footer {
+    padding: 0px 10px;
+  }
+}
+
 .post-containter .post-footer .footer-likes {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 16px;
@@ -1089,11 +1196,26 @@ body {
           transform: translateY(-50%);
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .post-delete-ask .post-delete-content {
+    padding: 20px;
+  }
+}
+
 .post-containter .post-delete-ask .post-delete-content .delete-question {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 24px;
   letter-spacing: 1px;
   color: white;
+}
+
+@media only screen and (max-width: 767px) {
+  .post-containter .post-delete-ask .post-delete-content .delete-question {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: white;
+  }
 }
 
 .post-containter .post-delete-ask .post-delete-content .delete-btn-group button {
@@ -1245,6 +1367,16 @@ body {
   margin: 0;
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .comment-view .cmt-see-more p {
+    margin-top: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #00CBF5;
+  }
+}
+
 .post-containter .comment-view .cmt-util {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1261,6 +1393,15 @@ body {
   margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 767px) {
+  .post-containter .comment-view .cmt-util .cmt-time {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0px;
+    color: #8d8d8d;
+  }
+}
+
 .post-containter .comment-view .cmt-util .cmt-delete-btn {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 12px;
@@ -1268,6 +1409,15 @@ body {
   color: #d84b4b;
   margin-bottom: 5px;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
+  .post-containter .comment-view .cmt-util .cmt-delete-btn {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0px;
+    color: #d84b4b;
+  }
 }
 
 .post-loading {

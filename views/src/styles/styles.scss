@@ -463,6 +463,9 @@ body {
 
     .hb-rootname {
       margin: 5px 40px;
+      @include mq(tablet, max) {
+        margin: 8px 0;
+      }
 
       a:active,
       a:hover,
@@ -471,13 +474,21 @@ body {
         @include pStyle(lucida, 30px, white, 2px);
         cursor: pointer;
         text-decoration: none;
+
+        @include mq(tablet, max) {
+          @include pStyle(lucida, 26px, white, 2px);
+        }
       }
     }
 
     .hb-auth-features {
       ul {
-        margin: 8px 5px;
+        margin: 8px 0px 8px 5px;
         list-style: none;
+        padding: 0;
+        @include mq(tablet, max) {
+          margin-top: 14px;
+        }
 
         li {
           @include pStyle(treb, 18px, white, 2px);
@@ -485,6 +496,9 @@ body {
           margin: 0px 10px;
           position: relative;
           cursor: pointer;
+          @include mq(tablet, max) {
+            @include pStyle(treb, 14px, white, 1px);
+          }
 
           a:active,
           a:hover,
@@ -493,6 +507,10 @@ body {
             @include pStyle(treb, 18px, white, 2px);
             cursor: pointer;
             text-decoration: none;
+
+            @include mq(tablet, max) {
+              @include pStyle(treb, 14px, white, 1px);
+            }
           }
 
           &:nth-child(1)::after {
@@ -511,6 +529,11 @@ body {
             border-radius: 50%;
             border: 1px solid map-get($map: $theme-colors, $key: main);
             margin-right: 5px;
+
+            @include mq(tablet, max) {
+              width: 30px;
+              height: 30px;
+            }
           }
         }
       }
@@ -760,6 +783,9 @@ body {
   margin: 20px 0;
   padding: 20px;
   transition: 0.5s;
+  @include mq(tablet, max) {
+    padding: 10px 5px;
+  }
 
   .post-header {
     display: flex;
@@ -772,6 +798,12 @@ body {
       border-radius: 50%;
       border: 2px solid map-get($map: $theme-colors, $key: dashHeaderBar);
       margin-right: 80px;
+
+      @include mq(tablet, max) {
+        width: 35px;
+        height: 35px;
+        margin: 0px 80px 0px 5px;
+      }
     }
 
     .post-owner {
@@ -779,16 +811,24 @@ body {
       cursor: pointer;
       margin: 0;
 
-      @include mq("tablet", min) {
+      @include mq(tablet, min) {
         &:hover {
           color: map-get($map: $theme-colors, $key: mainName);
         }
+      }
+
+      @include mq(tablet, max) {
+        @include pStyle(lucida, 18px, main, 0px);
       }
     }
 
     .post-date {
       @include pStyle(treb, 16px, rgb(128, 128, 128), 0px);
       margin: 0;
+
+      @include mq(tablet, max) {
+        @include pStyle(treb, 13px, rgb(128, 128, 128), 0px);
+      }
     }
 
     .post-auth-edit i {
@@ -803,6 +843,10 @@ body {
       &:nth-child(2) {
         color: map-get($map: $theme-colors, $key: dangerText);
       }
+
+      @include mq(tablet, max) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -813,6 +857,11 @@ body {
     .post-body-p {
       @include pStyle(lucida, 16px, black, 0px);
       margin: 0;
+
+      @include mq(tablet, max) {
+        padding: 5px;
+        @include pStyle(lucida, 14px, black, 0px);
+      }
     }
 
     .post-edit-area {
@@ -865,6 +914,9 @@ body {
   .post-footer {
     display: flex;
     justify-content: space-between;
+    @include mq(tablet, max) {
+      padding: 0px 10px;
+    }
 
     .footer-likes {
       @include pStyle(treb, 16px, main, 0px);
@@ -904,8 +956,16 @@ body {
       top: 50%;
       transform: translateY(-50%);
 
+      @include mq(tablet, max) {
+        padding: 20px;
+      }
+
       .delete-question {
         @include pStyle(treb, 24px, white, 1px);
+
+        @include mq(tablet, max) {
+          @include pStyle(treb, 22px, white, 1px);
+        }
       }
 
       .delete-btn-group {
@@ -1013,6 +1073,11 @@ body {
         font-weight: bold;
         cursor: pointer;
         margin: 0;
+
+        @include mq(tablet, max) {
+          margin-top: 15px;
+          @include pStyle(lucida, 14px, main, 0px);
+        }
       }
     }
 
@@ -1024,12 +1089,20 @@ body {
         @include pStyle(lucida, 12px, rgb(141, 141, 141), 0px);
         margin-right: 10px;
         margin-bottom: 5px;
+        
+        @include mq(tablet, max) {
+          @include pStyle(lucida, 10px, rgb(141, 141, 141), 0px);
+        }
       }
 
       .cmt-delete-btn {
         @include pStyle(lucida, 12px, dangerText, 0px);
         margin-bottom: 5px;
         cursor: pointer;
+
+        @include mq(tablet, max) {
+          @include pStyle(lucida, 10px, dangerText, 0px);
+        }
       }
     }
   }

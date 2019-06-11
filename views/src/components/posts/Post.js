@@ -66,7 +66,7 @@ const Post = (props) => {
     props.likePost(postId, auth.user.id, rootPath);
   }
 
-  const renderEditPost = () => {
+  const renderEditPostBtn = () => {
     if (!auth.user || auth.user.id !== userId) {
       return <div />;
     }
@@ -84,6 +84,41 @@ const Post = (props) => {
           className="fas fa-trash"
           onClick={() => setIsDeleteAsking(true)}
         />
+      </div>
+    );
+  }
+
+  const renderEditPost = () => {
+    return (
+      <div className="post-edit-area">
+        <textarea
+          rows={3}
+          value={postContent}
+          onChange={(e) => {
+            setPostContent(e.target.value);
+
+            // Set auto height for textarea
+            const qTA = document.querySelector(".post-edit-area textarea");
+            qTA.style.height = qTA.scrollHeight + "px";
+          }}
+        />
+        <div className="post-edit-button">
+          <button
+            className="btn-confirm"
+            onClick={() => {
+              props.updatePost(postId, postContent, rootPath);
+              setEditPost(false);
+            }}
+          >
+            Confirm
+                </button>
+          <button
+            className="btn-discard"
+            onClick={() => setEditPost(false)}
+          >
+            Discard
+                </button>
+        </div>
       </div>
     );
   }
@@ -131,7 +166,7 @@ const Post = (props) => {
           }}
         />
         {
-          (postInfo.isUploadingCmt)  ?
+          (postInfo.isUploadingCmt) ?
             <div className="updating-loading">
               <div className="spinner-border text-info" role="status">
                 <span className="sr-only">Loading...</span>
@@ -276,41 +311,12 @@ const Post = (props) => {
             <p className="post-date">{timeAgo}</p>
           </div>
         </div>
-        {renderEditPost()}
+        {renderEditPostBtn()}
       </div>
       <div className="post-body">
         {
           editPost ?
-            <div className="post-edit-area">
-              <textarea
-                rows={3}
-                value={postContent}
-                onChange={(e) => {
-                  setPostContent(e.target.value);
-
-                  // Set auto height for textarea
-                  const qTA = document.querySelector(".post-edit-area textarea");
-                  qTA.style.height = qTA.scrollHeight + "px";
-                }}
-              />
-              <div className="post-edit-button">
-                <button
-                  className="btn-confirm"
-                  onClick={() => {
-                    props.updatePost(postId, postContent, rootPath);
-                    setEditPost(false);
-                  }}
-                >
-                  Confirm
-                </button>
-                <button
-                  className="btn-discard"
-                  onClick={() => setEditPost(false)}
-                >
-                  Discard
-                </button>
-              </div>
-            </div>
+            renderEditPost()
             :
             viewContent
         }

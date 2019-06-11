@@ -59,7 +59,11 @@ const HeaderBar = (props) => {
           <li onClick={
             () => {
               props.logOut();
-              props.onSignOut();
+
+              // Sign out for profile page
+              if (props.onSignOut) {
+                props.onSignOut();
+              }
             }
           }>
             Sign Out
