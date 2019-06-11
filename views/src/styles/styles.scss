@@ -6,7 +6,7 @@ $theme-colors: (
   "darkLight": rgba(0, 0, 0, 0.863),
   "dangerText": rgb(216, 75, 75),
   "dangerTextShadow": rgb(168, 64, 64),
-  "headerBarMain": #0085A1,
+  "headerBarMain": rgb(15, 162, 192),
   "dashHeaderBar": #b6b6b685,
   "mainName": rgb(6, 114, 136),
   "placeholderBg": rgba(235, 235, 235, 0.678)
@@ -471,12 +471,20 @@ body {
       a:hover,
       a:link,
       a:visited {
-        @include pStyle(lucida, 30px, white, 2px);
+        // @include pStyle(lucida, 30px, white, 2px);
         cursor: pointer;
         text-decoration: none;
 
-        @include mq(tablet, max) {
-          @include pStyle(lucida, 26px, white, 2px);
+        // @include mq(tablet, max) {
+        //   @include pStyle(lucida, 26px, white, 2px);
+        // }
+
+        img {
+          width: 45px;
+          height: 45px;
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
         }
       }
     }

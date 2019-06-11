@@ -530,7 +530,7 @@ body {
   top: 0px;
   width: 100vw;
   top: 0px;
-  background-color: #0085A1;
+  background-color: #0fa2c0;
   height: 60px;
   z-index: 2;
   position: fixed;
@@ -560,24 +560,20 @@ body {
 .hb-background .hb-container .hb-rootname a:hover,
 .hb-background .hb-container .hb-rootname a:link,
 .hb-background .hb-container .hb-rootname a:visited {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 30px;
-  letter-spacing: 2px;
-  color: white;
   cursor: pointer;
   text-decoration: none;
 }
 
-@media only screen and (max-width: 767px) {
-  .hb-background .hb-container .hb-rootname a:active,
-  .hb-background .hb-container .hb-rootname a:hover,
-  .hb-background .hb-container .hb-rootname a:link,
-  .hb-background .hb-container .hb-rootname a:visited {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 26px;
-    letter-spacing: 2px;
-    color: white;
-  }
+.hb-background .hb-container .hb-rootname a:active img,
+.hb-background .hb-container .hb-rootname a:hover img,
+.hb-background .hb-container .hb-rootname a:link img,
+.hb-background .hb-container .hb-rootname a:visited img {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 
 .hb-background .hb-container .hb-auth-features ul {

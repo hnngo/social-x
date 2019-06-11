@@ -52,6 +52,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+const User = require('./models/User');
+User.watch().on('change', change => console.log(change));
+
 // Server listen
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
