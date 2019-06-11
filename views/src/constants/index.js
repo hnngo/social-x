@@ -1,4 +1,7 @@
-// ACTIONS
+// SOCKET
+export const ACT_SAVE_SOCKET = "act_save_socket";
+
+// AUTHENTICATION
 export const ACT_FETCH_USER = "act_fetch_user";
 export const ACT_LOG_OUT = "act_log_out";
 export const ACT_CLEAR_ERROR_MSG = "act_clear_error_msg";

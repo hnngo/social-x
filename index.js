@@ -12,13 +12,17 @@ const friendRoute = require('./routes/friendRoute');
 
 // Create express app
 const app = express();
-acLog("Init Express Server", "SER");
+const server = require('http').createServer(app);
+acLog("Init Express Server");
 
 // Connect mongodb by mongoose
 require('./services/mongoose');
 
 // Passport Google OAuth init
 require('./services/passport');
+
+// Setup socket io
+require('./services/socketio')(server);
 
 // Expres Middlewares
 app.use(session({
@@ -41,21 +45,6 @@ app.use('/post', postRoute);
 app.use('/user', userRoute);
 app.use('/friend', friendRoute);
 
-// Setup socket io
-const server = require('http').createServer(app);
-const io = require('socket.io').listen(server);
-
-let connections = [];
-io.sockets.on('connection', (socket) => {
-  connections.push(socket);
-  acLog(`Connections: ${connections.length}`);
-
-  socket.on('disconnect', () => {
-    connections.splice(connections.indexOf(socket), 1);
-    acLog(`Connections: ${connections.length}`);
-  })
-})
-
 // Setup express static build folder
 if (process.env.NODE_ENV === "production") {
   // Retrieve stuff in build
@@ -69,7 +58,6 @@ if (process.env.NODE_ENV === "production") {
 
 // Server listen
 const PORT = process.env.PORT || 5000;
-// app.listen(PORT);
 server.listen(PORT);
 
 //TODO: Show message when cannot connect to DB server, tell user to reload or do something

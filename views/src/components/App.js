@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import socketIOClient from 'socket.io-client';
 import Homepage from './Homepage';
 import ProfilePage from './profile/ProfilePage';
 import FeedPage from './FeedPage';
-import socketIOClient from 'socket.io-client';
- 
-const App = () => {
-  // Connect to socket IO app
-  socketIOClient(process.env.REACT_APP_ROOT_URL);
+import { saveSocket } from '../actions';
+
+const App = (props) => {
+  const { saveSocket } = props;
+
+  useEffect(() => {
+    // Connect to socket IO app
+    const socket = socketIOClient(process.env.REACT_APP_ROOT_URL);
+
+    // Save socket info when first loading up
+    saveSocket(socket);
+  }, [saveSocket])
 
   return (
     <BrowserRouter>
@@ -22,4 +31,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default connect(null, { saveSocket })(App);

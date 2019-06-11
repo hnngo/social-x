@@ -8,8 +8,16 @@ import {
   ACT_AUTH_SIGN_IN_FAIL,
   ACT_AUTH_SIGNING_UP,
   ACT_AUTH_SIGN_UP_FAIL,
-  ACT_AUTH_SIGN_UP_SUCCESS
+  ACT_AUTH_SIGN_UP_SUCCESS,
+  ACT_SAVE_SOCKET
 } from '../constants';
+
+export const saveSocket = (socket) => {
+  return {
+    type: ACT_SAVE_SOCKET,
+    payload: socket
+  }
+};
 
 export const fetchUser = () => {
   return async (dispatch) => {
@@ -24,13 +32,13 @@ export const fetchUser = () => {
       console.log(err);
     }
   }
-}
+};
 
 export const clearErrMsg = () => {
   return ({
     type: ACT_CLEAR_ERROR_MSG
   })
-}
+};
 
 export const signInWithEmailAndPassword = ({ email, password }, history) => {
   return async (dispatch) => {
@@ -106,6 +114,4 @@ export const logOut = () => {
       console.log(err);
     }
   }
-}
-
-//TODO: Redirect to /profile/id
+};
