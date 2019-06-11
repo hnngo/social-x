@@ -41,6 +41,21 @@ app.use('/post', postRoute);
 app.use('/user', userRoute);
 app.use('/friend', friendRoute);
 
+// Setup socket io
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+
+let connections = [];
+io.sockets.on('connection', (socket) => {
+  connections.push(socket);
+  acLog(`Connections: ${connections.length}`);
+
+  socket.on('disconnect', () => {
+    connections.splice(connections.indexOf(socket), 1);
+    acLog(`Connections: ${connections.length}`);
+  })
+})
+
 // Setup express static build folder
 if (process.env.NODE_ENV === "production") {
   // Retrieve stuff in build
@@ -52,11 +67,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const User = require('./models/User');
-User.watch().on('change', change => console.log(change));
-
 // Server listen
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+// app.listen(PORT);
+server.listen(PORT);
 
 //TODO: Show message when cannot connect to DB server, tell user to reload or do something
