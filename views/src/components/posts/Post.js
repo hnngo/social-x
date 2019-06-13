@@ -39,6 +39,10 @@ const Post = (props) => {
 
   // Set view content if it has new line character
   const viewContent = content.split('\n').map((item, i) => {
+    if (item === "") {
+      return <p key={i} className="post-body-p wrap">&#32;</p>;
+    }
+
     return <p key={i} className="post-body-p wrap">{item}</p>;
   });
 
@@ -99,7 +103,12 @@ const Post = (props) => {
 
             // Set auto height for textarea
             const qTA = document.querySelector(".post-edit-area textarea");
-            qTA.style.height = qTA.scrollHeight + "px";
+
+            if (qTA.scrollHeight >= 100) {
+              qTA.style.height = qTA.scrollHeight + "px";
+            } else if (e.target.value.length === 0) {
+              qTA.style.height = "78px";
+            }
           }}
         />
         <div className="post-edit-button">

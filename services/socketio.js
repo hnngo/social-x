@@ -70,19 +70,19 @@ module.exports = (server) => {
       }
     });
 
-    // Setup the change
-    // Post.watch().on('change', async (change) => {
+    // // Setup the change
+    // Post.watch().on('change', change => {
     //   // Care about User change only
     //   if (change.ns.coll !== "posts") {
     //     return;
     //   }
 
-    //   const userId = change.documentKey._id.toString();
-      
+    //   const postId = change.documentKey._id.toString();
     //   let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
 
-    //   if (socketIndex >= 0 && connections[socketIndex].auth === userId) {
-    //     socket.emit('change', "reload");
+    //   // Check if client need to be informed the change
+    //   if (socketIndex >= 0 && connections[socketIndex].fetchProfile === userId.toString()) {
+    //     socket.emit('change', userId);
     //   }
     // });
   })
