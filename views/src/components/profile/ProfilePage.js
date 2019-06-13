@@ -44,7 +44,7 @@ const ProfilePage = (props) => {
     // Set the view back to post
     setViewTab(VIEW_POST);
     fetchProfileById(match.params.userId, auth.socketInfo);
-    
+
     if (auth.socketInfo) {
       auth.socketInfo.on("change", (userId) => {
         if (userId.toString() === match.params.userId) {
@@ -282,9 +282,18 @@ const ProfilePage = (props) => {
               (auth.user && match.params.userId === auth.user.id) ?
                 <div
                   className="p-basic-edit"
-                  onClick={() => setIsEditingInfo(true)}
+                  onClick={() => {
+                    if (isEditingInfo) {
+                      return;
+                    }
+
+                    setIsEditingInfo(true);
+
+                    const qVTab = document.querySelector(".view-tab");
+                    qVTab.scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
-                  Edit info
+                  Edit Info
                 </div>
                 :
                 <div />
@@ -304,6 +313,12 @@ const ProfilePage = (props) => {
               onClick={() => {
                 setViewTab(VIEW_FRIEND);
                 setIsEditingInfo(false);
+
+                // Scroll to view tab
+                const qVTab = document.querySelector(".view-tab");
+                if (qVTab) {
+                  qVTab.scrollIntoView({ behavior: "smooth" });
+                }
               }}
             >
               View all
@@ -404,7 +419,7 @@ const ProfilePage = (props) => {
   const renderPost = () => {
     if (profile.post.length === 0) {
       return (
-        <div className="post-containter">
+        <div className="post-containter view-no-post">
           <p>No posts to show</p>
         </div>
       );
@@ -447,7 +462,7 @@ const ProfilePage = (props) => {
       );
     })
   };
-  
+
   return (
     <div>
       <div className="p-container">

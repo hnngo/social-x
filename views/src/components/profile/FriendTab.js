@@ -105,22 +105,20 @@ const FriendTab = (props) => {
           (!auth.user || auth.user.id !== profile._id) ?
             <div />
             :
-            <div style={{ position: "relative" }}>
-              <p
-                className={
-                  viewTab === VIEW_FRIEND_REQUESTS ? "friend-head" : "friend-head dim"
-                }
-                onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
-              >
-                Friend Requests
+            <p
+              className={
+                viewTab === VIEW_FRIEND_REQUESTS ? "friend-head" : "friend-head dim"
+              }
+              onClick={() => setViewTab(VIEW_FRIEND_REQUESTS)}
+            >
+              Friend Requests
                 {
-                  profile.friend.requestFromList.length > 0 ?
-                    <span>&nbsp;({profile.friend.requestFromList.length})</span>
-                    :
-                    <span />
-                }
-              </p>
-            </div>
+                profile.friend.requestFromList.length > 0 ?
+                  <span>&nbsp;({profile.friend.requestFromList.length})</span>
+                  :
+                  <span />
+              }
+            </p>
         }
         {
           (!auth.user || auth.user.id !== profile._id) ?

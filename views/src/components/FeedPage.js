@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import HeaderBar from './HeaderBar';
 import { fetchAllPosts } from '../actions';
@@ -8,7 +8,7 @@ import Loading from './Loading';
 const FeedPage = (props) => {
   const { fetchAllPosts, feed } = props;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchAllPosts();
   }, [fetchAllPosts]);
 

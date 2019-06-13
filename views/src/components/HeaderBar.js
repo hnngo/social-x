@@ -7,7 +7,6 @@ import {
   SIGN_IN_FORM,
   SIGN_UP_FORM
 } from '../constants';
-import imageUrl from '../imgURL.json';
 
 const HeaderBar = (props) => {
   const [showForm, setShowForm] = useState(false);
@@ -94,7 +93,6 @@ const HeaderBar = (props) => {
               <a
                 href="/feed"
               >
-                {/* <img src={imageUrl.logoImage} alt="logo"/> */}
                 <div className="logo-wraper">
                   <p>S</p>
                 </div>

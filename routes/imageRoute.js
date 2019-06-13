@@ -25,7 +25,6 @@ conn.once('open', () => {
 const storage = new GridFsStorage({
   url: keys.mongoDbUrl,
   file: (req, file) => {
-    // console.log(req.file)
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
         if (err) {

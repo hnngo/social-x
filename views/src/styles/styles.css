@@ -302,8 +302,8 @@ body {
 
 @media only screen and (max-width: 767px) {
   .sin-sup-form-container form .input-field i {
-    top: 20px;
-    font-size: 26px;
+    top: 18px;
+    font-size: 24px;
   }
 }
 
@@ -320,6 +320,13 @@ body {
   padding: 10px 0px;
   padding-left: 55px;
   border: 2px #00CBF5 solid;
+}
+
+@media only screen and (max-width: 767px) {
+  .sin-sup-form-container form .input-field input {
+    font-size: 18px;
+    padding: 60px 0px;
+  }
 }
 
 .sin-sup-form-container form .input-field input::-webkit-input-placeholder {
@@ -711,6 +718,13 @@ body {
           transform: translateX(-50%);
 }
 
+@media only screen and (max-width: 767px) {
+  .p-container .p-ava img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 .p-container .p-ava p {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 25px;
@@ -789,6 +803,7 @@ body {
   border: 1px solid #b6b6b685;
   border-radius: 10px;
   padding: 5px 0;
+  background-color: rgba(248, 248, 248, 0.555);
 }
 
 .p-container .p-basic-info .info-row {
@@ -833,6 +848,7 @@ body {
   margin-top: 20px;
   border: 1px solid #b6b6b685;
   border-radius: 10px;
+  background-color: rgba(248, 248, 248, 0.555);
 }
 
 .p-container .p-friend-list .fl-title {
@@ -971,6 +987,10 @@ body {
           box-shadow: inset 0px 0px 5px 0px #58a0ae;
 }
 
+.p-container .view-no-post p {
+  padding: 10px;
+}
+
 .p-container .view-tab {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -995,6 +1015,7 @@ body {
   padding: 20px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  background-color: rgba(248, 248, 248, 0.555);
 }
 
 @media only screen and (max-width: 767px) {
@@ -1025,7 +1046,7 @@ body {
   .post-containter .post-header img {
     width: 35px;
     height: 35px;
-    margin: 0px 80px 0px 5px;
+    margin: 5px 80px 0px 5px;
   }
 }
 
@@ -1469,6 +1490,7 @@ body {
   border: 1px solid #b6b6b685;
   border-radius: 10px;
   padding: 15px;
+  background-color: rgba(248, 248, 248, 0.555);
 }
 
 .edit-container .edit-title {
@@ -1481,6 +1503,15 @@ body {
 
 .edit-container .edit-form-container form .edit-row {
   margin: 5px 0px;
+}
+
+@media only screen and (max-width: 767px) {
+  .edit-container .edit-form-container form .edit-row .col-2 {
+    padding-left: 0;
+  }
+  .edit-container .edit-form-container form .edit-row .col-10 {
+    padding-left: 25px;
+  }
 }
 
 .edit-container .edit-form-container form .edit-row p {
@@ -1600,12 +1631,22 @@ body {
   border-radius: 10px;
   margin-top: 20px;
   padding: 20px;
+  background-color: rgba(248, 248, 248, 0.555);
+}
+
+@media only screen and (max-width: 767px) {
+  .friend-container {
+    padding: 20px 10px;
+  }
 }
 
 .friend-container .friend-view-select-tab {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 .friend-container .friend-view-select-tab .friend-head {
@@ -1614,7 +1655,18 @@ body {
   letter-spacing: 0px;
   color: #00CBF5;
   cursor: pointer;
-  margin: 0px 20px 20px 0px;
+  margin: 0px 0px 20px 0px;
+  padding: 0px 15px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .friend-container .friend-view-select-tab .friend-head {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #00CBF5;
+  }
 }
 
 .friend-container .friend-row-container {
@@ -1628,6 +1680,12 @@ body {
   border-radius: 10px;
   padding: 10px;
   margin: 10px 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .friend-container .friend-row-container {
+    padding: 10px 0px;
+  }
 }
 
 .friend-container .friend-row-container .friend-info {
@@ -1680,6 +1738,15 @@ body {
           box-shadow: 0px 0px 4px 0px #a84040;
 }
 
+@media only screen and (max-width: 767px) {
+  .friend-container .friend-row-container .f-btn-danger {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: white;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .friend-container .friend-row-container .f-btn-danger:active {
     -webkit-box-shadow: inset 0px 0px 4px 0px #a84040;
@@ -1701,6 +1768,15 @@ body {
   background-color: #00CBF5;
   -webkit-box-shadow: 0px 0px 4px 0px #58a0ae;
           box-shadow: 0px 0px 4px 0px #58a0ae;
+}
+
+@media only screen and (max-width: 767px) {
+  .friend-container .friend-row-container .f-btn-approve {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: white;
+  }
 }
 
 @media only screen and (min-width: 768px) {
