@@ -21,7 +21,8 @@ module.exports = (server) => {
     // Create new socket information
     const newConnection = {
       socket,
-      auth: null
+      auth: null,
+      fetchProfile: null
     }
 
     // Add to connection array
@@ -45,7 +46,6 @@ module.exports = (server) => {
       let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
 
       connections[socketIndex].fetchProfile = userId;
-      console.log(connections)
     });
 
     socket.on('disconnect', () => {

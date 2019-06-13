@@ -250,11 +250,11 @@ body {
 
 @media only screen and (max-width: 575px) {
   .sin-sup-form-container {
-    top: 50%;
+    top: 55%;
     left: 50%;
     width: 280px;
-    -webkit-transform: translate(-50%, -60%);
-            transform: translate(-50%, -60%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
   }
 }
 
@@ -300,9 +300,10 @@ body {
   color: #00CBF5;
 }
 
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 767px) {
   .sin-sup-form-container form .input-field i {
-    top: 16px;
+    top: 20px;
+    font-size: 26px;
   }
 }
 
@@ -552,7 +553,7 @@ body {
 
 @media only screen and (max-width: 767px) {
   .hb-background .hb-container .hb-rootname {
-    margin: 8px 0;
+    margin: 5px 0;
   }
 }
 
@@ -562,6 +563,39 @@ body {
 .hb-background .hb-container .hb-rootname a:visited {
   cursor: pointer;
   text-decoration: none;
+}
+
+.hb-background .hb-container .hb-rootname a:active .logo-wraper,
+.hb-background .hb-container .hb-rootname a:hover .logo-wraper,
+.hb-background .hb-container .hb-rootname a:link .logo-wraper,
+.hb-background .hb-container .hb-rootname a:visited .logo-wraper {
+  background-color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  margin-top: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0px 0px 12px 1px #b6b6b685;
+          box-shadow: 0px 0px 12px 1px #b6b6b685;
+}
+
+.hb-background .hb-container .hb-rootname a:active .logo-wraper p,
+.hb-background .hb-container .hb-rootname a:hover .logo-wraper p,
+.hb-background .hb-container .hb-rootname a:link .logo-wraper p,
+.hb-background .hb-container .hb-rootname a:visited .logo-wraper p {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #00CBF5;
+  margin: 0;
 }
 
 .hb-background .hb-container .hb-rootname a:active img,

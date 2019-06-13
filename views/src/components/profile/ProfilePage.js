@@ -301,7 +301,10 @@ const ProfilePage = (props) => {
             {renderFriend()}
             <div
               className="fl-edit"
-              onClick={() => setViewTab(VIEW_FRIEND)}
+              onClick={() => {
+                setViewTab(VIEW_FRIEND);
+                setIsEditingInfo(false);
+              }}
             >
               View all
             </div>
@@ -401,8 +404,8 @@ const ProfilePage = (props) => {
   const renderPost = () => {
     if (profile.post.length === 0) {
       return (
-        <div>
-          <p>No post has been uploaded</p>
+        <div className="post-containter">
+          <p>No posts to show</p>
         </div>
       );
     }

@@ -94,7 +94,10 @@ const HeaderBar = (props) => {
               <a
                 href="/feed"
               >
-                <img src={imageUrl.logoImage} alt="logo"/>
+                {/* <img src={imageUrl.logoImage} alt="logo"/> */}
+                <div className="logo-wraper">
+                  <p>S</p>
+                </div>
               </a>
             </div>
             <div className="hb-auth-features">
