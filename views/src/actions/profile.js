@@ -5,7 +5,7 @@ import {
   ACT_PROFILE_UPDATING
 } from '../constants';
 
-export const fetchProfileById = (userId) => {
+export const fetchProfileById = (userId, socket) => {
   return async (dispatch) => {
     try {
       const res = await axios.get(`/user/profile/${userId}`);
@@ -14,6 +14,11 @@ export const fetchProfileById = (userId) => {
         type: ACT_PROFILE_FETCH_BY_USERID,
         payload: res.data
       });
+
+      // Acknowledge to Socket Io which profile are watching
+      if (userId && socket) {
+        socket.emit('watch profile', userId);
+      }
     } catch (err) {
       // TODO: Render no user profile found here
       console.log(err);

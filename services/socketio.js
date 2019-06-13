@@ -1,6 +1,7 @@
 const acLog = require('../utils/activityLog');
 const _ = require('lodash');
 const User = require('../models/User');
+const Post = require('../models/Post')
 
 module.exports = (server) => {
   // Setup socket io
@@ -10,7 +11,8 @@ module.exports = (server) => {
     Cnnections: [
       {
         socket: socket,
-        auth: null / userId
+        auth: null / userId,
+        fetchProfile: null/ userId
       }
     ]
   */
@@ -24,19 +26,26 @@ module.exports = (server) => {
 
     // Add to connection array
     connections.push(newConnection);
-    acLog(`Connections: ${connections.length}`);
+    acLog(`Total connections: ${connections.length}`);
 
     // Listen to activities
-    socket.on('signIn', (user) => {
-      if (!user) { return; }
+    socket.on('signIn', (userId) => {
+      if (!userId) { return; }
 
       let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
-      connections[socketIndex].auth = user;
+      connections[socketIndex].auth = userId;
     });
 
     socket.on('signOut', () => {
       let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
       connections[socketIndex].auth = null;
+    });
+
+    socket.on('watch profile', (userId) => {
+      let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
+
+      connections[socketIndex].fetchProfile = userId;
+      console.log(connections)
     });
 
     socket.on('disconnect', () => {
@@ -55,9 +64,26 @@ module.exports = (server) => {
       const userId = change.documentKey._id.toString();
       let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
 
-      if (socketIndex >= 0 && connections[socketIndex].auth === userId) {
-        socket.emit('change', "reload");
+      // Check if client need to be informed the change
+      if (socketIndex >= 0 && connections[socketIndex].auth && connections[socketIndex].fetchProfile === userId.toString()) {
+        socket.emit('change', userId);
       }
     });
+
+    // Setup the change
+    // Post.watch().on('change', async (change) => {
+    //   // Care about User change only
+    //   if (change.ns.coll !== "posts") {
+    //     return;
+    //   }
+
+    //   const userId = change.documentKey._id.toString();
+      
+    //   let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
+
+    //   if (socketIndex >= 0 && connections[socketIndex].auth === userId) {
+    //     socket.emit('change', "reload");
+    //   }
+    // });
   })
 }

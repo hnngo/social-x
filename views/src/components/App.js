@@ -16,6 +16,8 @@ const App = (props) => {
 
     // Save socket info when first loading up
     saveSocket(socket);
+
+    return () => socket.close();
   }, [saveSocket])
 
   return (
@@ -24,7 +26,7 @@ const App = (props) => {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/feed" component={FeedPage} />
-          <Route path="/profile/:userId" component={ProfilePage} />
+          <Route path="/profile/:userId" component={ProfilePage}/>
         </Switch>
       </div>
     </BrowserRouter>

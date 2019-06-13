@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import HeaderBar from '../HeaderBar';
@@ -39,14 +39,20 @@ const ProfilePage = (props) => {
     auth
   } = props;
 
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     // Set the view back to post
     setViewTab(VIEW_POST);
-    fetchProfileById(match.params.userId);
-
+    fetchProfileById(match.params.userId, auth.socketInfo);
+    
     if (auth.socketInfo) {
-      auth.socketInfo.on("change", (change) => console.log(change));
+      auth.socketInfo.on("change", (userId) => {
+        if (userId.toString() === match.params.userId) {
+          fetchProfileById(userId.toString());
+        }
+      });
     }
+
   }, [fetchProfileById, match.params.userId, auth.socketInfo]);
 
   if (Object.keys(profile).length > 0 && !_.isEqual(previousPosts, profile.post)) {
@@ -438,7 +444,7 @@ const ProfilePage = (props) => {
       );
     })
   };
-
+  
   return (
     <div>
       <div className="p-container">
