@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { formatTime } from './formatTime';
+import Linkify from 'react-linkify';
+import { formatTime } from './utils';
 import {
   deletePost,
   updatePost,
@@ -35,8 +36,8 @@ const Post = (props) => {
     comments
   } = postInfo
 
-  const numberOfLikes = likes.total
-  const numberOfCmts = comments.total
+  const numberOfLikes = likes.total;
+  const numberOfCmts = comments.total;
 
   // Set view content if it has new line character
   const viewContent = content.split('\n').map((item, i) => {
@@ -44,7 +45,11 @@ const Post = (props) => {
       return <p key={i} className="post-body-p wrap">&#32;</p>;
     }
 
-    return <p key={i} className="post-body-p wrap">{item}</p>;
+    return (
+      <Linkify key={i}>
+        <p className="post-body-p wrap">{item}</p>
+      </Linkify>
+    );
   });
 
   // Get the path root

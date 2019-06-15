@@ -10,7 +10,7 @@ import {
 
 const HeaderBar = (props) => {
   const [showForm, setShowForm] = useState(false);
-  const { user, fetchUser, profile } = props;
+  const { user, fetchUser } = props;
 
   useEffect(() => {
     fetchUser();
@@ -18,7 +18,7 @@ const HeaderBar = (props) => {
     if (user) {
       setShowForm(false);
     }
-  }, [user, fetchUser, profile]);
+  }, [user, fetchUser]);
 
   const renderForm = () => {
     if (showForm === SIGN_IN_FORM) {
