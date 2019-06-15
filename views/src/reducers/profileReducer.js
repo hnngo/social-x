@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import {
   ACT_PROFILE_FETCH_BY_USERID,
+  ACT_PROFILE_FETCH_FAIL,
   ACT_PROFILE_UPDATE,
   ACT_PROFILE_UPDATING,
   ACT_POST_UPLOAD,
@@ -28,6 +29,8 @@ export default (state = {}, action) => {
   switch (action.type) {
     case ACT_PROFILE_FETCH_BY_USERID:
       return action.payload;
+    case ACT_PROFILE_FETCH_FAIL:
+      return { ...state, fetchFail: true };
     case ACT_POST_UPLOAD:
       return { ...state, post: [action.payload, ...state.post] };
     case ACT_POST_DELETE_P:

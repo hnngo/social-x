@@ -2,14 +2,18 @@ import axios from 'axios';
 import {
   ACT_PROFILE_FETCH_BY_USERID,
   ACT_PROFILE_UPDATE,
-  ACT_PROFILE_UPDATING
+  ACT_PROFILE_UPDATING,
+  ACT_PROFILE_FETCH_FAIL
 } from '../constants';
+import { retryAsyncActionExp } from './utils';
 
 export const fetchProfileById = (userId, socket) => {
   return async (dispatch) => {
-    try {
-      const res = await axios.get(`/user/profile/${userId}`);
+    const res = await retryAsyncActionExp(3, async () => {
+      return await axios.get(`/user/profile/${userId}`);
+    });
 
+    if (res) {
       dispatch({
         type: ACT_PROFILE_FETCH_BY_USERID,
         payload: res.data
@@ -19,9 +23,8 @@ export const fetchProfileById = (userId, socket) => {
       if (userId && socket) {
         socket.emit('watch profile', userId);
       }
-    } catch (err) {
-      // TODO: Render no user profile found here
-      console.log(err);
+    } else {
+      dispatch({ type: ACT_PROFILE_FETCH_FAIL });
     }
   }
 }
@@ -49,7 +52,7 @@ export const updateProfileById = (userId, content) => {
       if (content.file) {
         let formData = new FormData();
         formData.append("file", content.file);
-        
+
         res = await axios.post(`/image/upload`, formData);
       }
 
@@ -61,4 +64,4 @@ export const updateProfileById = (userId, content) => {
       console.log(err);
     }
   }
-}
+};

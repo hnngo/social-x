@@ -701,6 +701,7 @@ body {
 .p-container {
   position: relative;
   top: 60px;
+  overflow-x: hidden;
 }
 
 .p-container .p-ava {

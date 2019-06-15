@@ -20,6 +20,7 @@ import {
   acceptFriendRequest,
   declineFriendRequest
 } from '../../actions';
+import PageNotFound from '../PageNotFound';
 
 const ProfilePage = (props) => {
   const [postContent, setPostContent] = useState("");
@@ -463,16 +464,26 @@ const ProfilePage = (props) => {
     })
   };
 
+  const renderCheckingFetch = () => {
+    if (Object.keys(profile).length > 0 && profile._id === match.params.userId) {
+      return renderContent();
+    }
+
+    return <Loading />;
+  }
+
   return (
     <div>
-      <div className="p-container">
-        <div className="container">
-          {
-            (Object.keys(profile).length > 0 && profile._id === match.params.userId) ?
-              renderContent() : <Loading />
-          }
-        </div>
-      </div>
+      {
+        profile.fetchFail ?
+          <PageNotFound />
+          :
+          <div className="p-container">
+            <div className="container">
+              {renderCheckingFetch()}
+            </div>
+          </div>
+      }
       <HeaderBar
         onSignOut={() => setViewTab(VIEW_POST)}
       />

@@ -44,9 +44,8 @@ export const ACT_FRIEND_UNFRIEND = "act_friend_unfriend";
 // PROFILE
 export const ACT_PROFILE_UPDATING = "act_profile_updating";
 export const ACT_PROFILE_UPDATE = "act_profile_update";
-
-// PROFILE
 export const ACT_PROFILE_FETCH_BY_USERID = "act_profile_fetch_by_userid";
+export const ACT_PROFILE_FETCH_FAIL = "act_profile_fetch_fail";
 
 // FORMS
 export const SIGN_IN_FORM = "sign_in_form";
