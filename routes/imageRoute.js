@@ -48,7 +48,6 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 router.post('/upload', isLogin, upload.single('file'), async (req, res) => {
-  //TODO: Send back the image name or do something to let client know
   try {
     const existingUser = await User.findById(req.user._id)
       .select({

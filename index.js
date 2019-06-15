@@ -9,6 +9,8 @@ const imageRoute = require('./routes/imageRoute');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
 const friendRoute = require('./routes/friendRoute');
+// const RedisStore = require('connect-redis')(session);
+// const redis = require("redis").createClient();
 
 // Create express app
 const app = express();
@@ -27,9 +29,10 @@ require('./services/socketio')(server);
 // Expres Middlewares
 app.use(session({
   //PENDING: Express Session store/ mongo/ redis
+  // store: new RedisStore({ host: 'localhost', port: 3000, client: redis }),
   secret: keys.sessionKey,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -59,5 +62,3 @@ if (process.env.NODE_ENV === "production") {
 // Server listen
 const PORT = process.env.PORT || 5000;
 server.listen(PORT);
-
-//TODO: Show message when cannot connect to DB server, tell user to reload or do something
