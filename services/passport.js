@@ -19,9 +19,7 @@ passport.use(
       const existingUser = await User.findOne({ email: profile._json.email });
 
       if (existingUser) {
-        //TODO: Check if that user has googleId, if not assign the new one
         acLog(`Google OAuth login ${profile._json.email}`);
-
         return done(null, existingUser);
       }
 

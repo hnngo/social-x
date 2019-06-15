@@ -9,6 +9,7 @@ import {
   deleteComment,
   uploadComment
 } from '../../actions';
+import UploadingLayout from './UploadingLayout';
 
 const Post = (props) => {
   const [editPost, setEditPost] = useState(false);
@@ -176,17 +177,7 @@ const Post = (props) => {
         />
         {
           (postInfo.isUploadingCmt) ?
-            <div className="updating-loading">
-              <div className="spinner-border text-info" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-border text-info" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="spinner-border text-info" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            </div>
+            <UploadingLayout />
             :
             <div />
         }

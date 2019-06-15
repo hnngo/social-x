@@ -175,10 +175,15 @@ const patchPostById = async (req, res) => {
     }
 
     // Check if existing a post
-    const existingPost = await Post.findById(postId).populate({
-      path: 'user',
-      select: userPopulateSelect
-    });
+    const existingPost = await Post.findById(postId)
+      .populate({
+        path: 'user',
+        select: userPopulateSelect
+      }).populate({
+        path: "comments.content.user",
+        model: "User",
+        select: userPopulateSelect
+      });;
 
     if (!existingPost || existingPost.user._id.toString() !== req.user._id.toString()) {
       acLog(`${req.user.email} is not allowed to edit post id ${postId}`);

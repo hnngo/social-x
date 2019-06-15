@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import EditInfoForm from '../forms/EditInfoForm';
+import UploadingLayout from '../posts/UploadingLayout';
 
 const EditInfo = (props) => {
   const [isUpdating, setIsUpdating] = useState(false)
@@ -27,17 +28,7 @@ const EditInfo = (props) => {
       />
       {
         isUpdating ?
-          <div className="updating-loading">
-            <div className="spinner-border text-info" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-            <div className="spinner-border text-info" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-            <div className="spinner-border text-info" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </div>
+          <UploadingLayout />
           :
           <div />
       }

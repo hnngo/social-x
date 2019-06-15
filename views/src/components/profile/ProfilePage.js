@@ -21,6 +21,7 @@ import {
   declineFriendRequest
 } from '../../actions';
 import PageNotFound from '../PageNotFound';
+import UploadingLayout from '../posts/UploadingLayout';
 
 const ProfilePage = (props) => {
   const [postContent, setPostContent] = useState("");
@@ -170,17 +171,9 @@ const ProfilePage = (props) => {
               Add Friend
               {
                 isAdding ?
-                  <div className="updating-loading">
-                    <div className="spinner-grow spinner-grow-sm" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                    <div className="spinner-grow spinner-grow-sm" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                    <div className="spinner-grow spinner-grow-sm" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  </div>
+                  <UploadingLayout
+                    smallSpiner={true}
+                  />
                   :
                   <div />
               }
