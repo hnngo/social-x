@@ -45,6 +45,7 @@ const ProfilePage = (props) => {
   useLayoutEffect(() => {
     // Set the view back to post
     setViewTab(VIEW_POST);
+    setIsAdding(false);
     fetchProfileById(match.params.userId, auth.socketInfo);
 
     if (auth.socketInfo) {

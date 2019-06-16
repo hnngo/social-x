@@ -51,7 +51,7 @@ module.exports = (server) => {
     socket.on('disconnect', () => {
       let socketIndex = _.findIndex(connections, (c) => c.socket === socket);
       connections.splice(socketIndex, 1);
-      acLog(`Connections: ${connections.length}`);
+      acLog(`Total connections: ${connections.length}`);
     });
 
     // Setup the change

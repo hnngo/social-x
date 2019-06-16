@@ -74,7 +74,7 @@ const Post = (props) => {
     }
 
     props.likePost(postId, auth.user.id, rootPath);
-  }
+  };
 
   const renderEditPostBtn = () => {
     if (!auth.user || auth.user.id !== userId) {
@@ -96,7 +96,7 @@ const Post = (props) => {
         />
       </div>
     );
-  }
+  };
 
   const renderEditPost = () => {
     return (
@@ -136,7 +136,7 @@ const Post = (props) => {
         </div>
       </div>
     );
-  }
+  };
 
   const renderCommentArea = () => {
     if (!auth.user) {
@@ -188,7 +188,7 @@ const Post = (props) => {
         }
       </div>
     );
-  }
+  };
 
   const renderCommentView = () => {
     if (comments.total === 0) {
@@ -202,6 +202,19 @@ const Post = (props) => {
 
       // Re-format the time
       let cmtTime = formatTime(new Date() - new Date(cmt.commentDate));
+
+      // Check authorize comment
+      let authorize = false;
+      if (auth.user) {
+        authorize = authorize ||
+          (auth.user.id === postInfo.user) ||
+          (auth.user.id === cmt.user._id);
+
+        if (postInfo.user._id) {
+          authorize = authorize ||
+            (auth.user.id === postInfo.user._id);
+        }
+      }
 
       return (
         <div key={cmt._id}>
@@ -217,20 +230,15 @@ const Post = (props) => {
                 className="cmt-name"
                 onClick={() => props.history.push(`/profile/${cmt.user._id}`)}
               >{cmt.user.name}</p>
-              <div>
+              <Linkify>
                 <p className="cmt-content wrap">{cmt.comment}</p>
-              </div>
+              </Linkify>
             </div>
           </div>
           <div className="cmt-util">
             <p className="cmt-time">{cmtTime}</p>
             {
-              (auth.user &&
-                (auth.user.id.toString() ===
-                  postInfo.user.toString() ||
-                  auth.user.id.toString() ===
-                  cmt.user._id.toString())) ?
-
+              authorize ?
                 <p
                   className="cmt-delete-btn"
                   onClick={() => props.deleteComment(
