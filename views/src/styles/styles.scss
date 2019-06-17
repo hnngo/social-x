@@ -1160,6 +1160,10 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  
+  .spinner-border {
+    margin: 0 5px;
+  }
 }
 
 .edit-container {
@@ -1435,6 +1439,10 @@ body {
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  
+  .spinner-border {
+    margin: 0px 5px;
+  }
 }
 
 .badge-container {

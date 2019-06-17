@@ -1495,6 +1495,10 @@ body {
   height: 100vh;
 }
 
+.post-loading .spinner-border {
+  margin: 0 5px;
+}
+
 .edit-container {
   position: relative;
   margin-top: 20px;
@@ -1849,6 +1853,10 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   pointer-events: none;
+}
+
+.updating-loading .spinner-border {
+  margin: 0px 5px;
 }
 
 .badge-container {
