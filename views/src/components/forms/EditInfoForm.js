@@ -19,13 +19,14 @@ const EditInfoForm = (props) => {
 
     if (profile.birthday) {
       bday = new Date(profile.birthday);
+      let [bdayDay, bdayMonth, bdayYear] = bday.toLocaleDateString().split('/');
 
-      let bdayMonth = bday.toLocaleDateString().slice(3, 5);
-      let bdayDay = bday.toLocaleDateString().slice(0, 2);
+      bdayDay = +bdayDay < 10 ? "0" + (+bdayDay) : bdayDay;
+      bdayMonth = +bdayMonth < 10 ? "0" + (+bdayMonth) : bdayMonth;
 
-      bday = `${bday.getFullYear()}-${bdayMonth}-${bdayDay}`;
+      bday = `${bdayYear}-${bdayMonth}-${bdayDay}`;
     }
-
+    
     // Initialize value for form
     if (initialize) {
       initialize({
