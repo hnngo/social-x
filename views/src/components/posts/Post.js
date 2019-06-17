@@ -110,10 +110,10 @@ const Post = (props) => {
             // Set auto height for textarea
             const qTA = document.querySelector(".post-edit-area textarea");
 
-            if (qTA.scrollHeight >= 100) {
+            if (e.target.value.length === 0) {
+              qTA.style.height = "76px";
+            } else {
               qTA.style.height = qTA.scrollHeight + "px";
-            } else if (e.target.value.length === 0) {
-              qTA.style.height = "78px";
             }
           }}
         />
@@ -164,13 +164,24 @@ const Post = (props) => {
             if (e.key === "Enter" && commentContent.length > 0) {
               const qTA = document.querySelector("#cmt-area-" + postId);
 
+              // Check if it is a new line or submit enter
               if (e.altKey) {
-                setCommentContent(e.target.value + "\n");
+                const startPosition = qTA.selectionStart;
+                const endPosition = qTA.selectionEnd;
+                let formattedText = e.target.value;
+  
+                // Check if you've selected text
+                if (startPosition == endPosition) {
+                  formattedText = e.target.value.slice(0, startPosition) + "\n" + e.target.value.slice(startPosition);
+                }
+
+                setCommentContent(formattedText);
                 qTA.style.height = (+qTA.scrollHeight + 24) + "px";
 
                 return;
               }
 
+              // Upload comment
               props.uploadComment(postId, commentContent, rootPath);
               setCommentContent("");
 
