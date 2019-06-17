@@ -171,7 +171,7 @@ const Post = (props) => {
                 let formattedText = e.target.value;
   
                 // Check if you've selected text
-                if (startPosition == endPosition) {
+                if (startPosition === endPosition) {
                   formattedText = e.target.value.slice(0, startPosition) + "\n" + e.target.value.slice(startPosition);
                 }
 
