@@ -571,9 +571,25 @@ body {
 }
 
 .p-container {
+  height: calc(100vh - 60px);
   position: relative;
   top: 60px;
   overflow-x: hidden;
+  
+  .col-sm-4,
+  .col-sm-8 {
+    @include mq(tablet, min) {
+      height: calc(100vh - 60px);
+      overflow-y: scroll;
+      overflow: -moz-scrollbars-none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        width: 0!important;
+      }
+    }
+  }
 
   .p-ava {
     padding-top: 20px;
@@ -1397,6 +1413,23 @@ body {
         &:active {
           box-shadow: inset 0px 0px 4px 0px map-get($map: $theme-colors, $key: shadowMain);
         }
+      }
+    }
+  }
+}
+
+.footer-container {
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+
+  p {
+    color: #bebebe71;
+    cursor: pointer;
+
+    @include mq(tablet, min) {
+      &:hover {
+        color: white;
       }
     }
   }

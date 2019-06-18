@@ -701,9 +701,25 @@ body {
 }
 
 .p-container {
+  height: calc(100vh - 60px);
   position: relative;
   top: 60px;
   overflow-x: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .p-container .col-sm-4,
+  .p-container .col-sm-8 {
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .p-container .col-sm-4::-webkit-scrollbar,
+  .p-container .col-sm-8::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }
 
 .p-container .p-ava {
@@ -1802,6 +1818,23 @@ body {
   .friend-container .friend-row-container .f-btn-approve:active {
     -webkit-box-shadow: inset 0px 0px 4px 0px #58a0ae;
             box-shadow: inset 0px 0px 4px 0px #58a0ae;
+  }
+}
+
+.footer-container {
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+}
+
+.footer-container p {
+  color: #bebebe71;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .footer-container p:hover {
+    color: white;
   }
 }
 

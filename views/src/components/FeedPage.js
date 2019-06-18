@@ -33,7 +33,7 @@ const FeedPage = (props) => {
   }
 
   return (
-    <div>
+    <div className="mb-3 pb-5">
       <div className="container">
         <div className="feed-post-container">
           {renderPost()}

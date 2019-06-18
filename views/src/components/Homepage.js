@@ -1,6 +1,7 @@
 import React from 'react';
 import imgURL from '../imgURL.json';
 import Navbar from './Navbar.js';
+import Footer from './Footer.js';
 
 const Homepage = (props) => {
   return (
@@ -27,6 +28,7 @@ const Homepage = (props) => {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
