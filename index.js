@@ -9,8 +9,6 @@ const imageRoute = require('./routes/imageRoute');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
 const friendRoute = require('./routes/friendRoute');
-const redisClient = require('redis').createClient();
-const redisStore = require('connect-redis')(session);
 
 
 // Create express app
@@ -36,6 +34,9 @@ if (process.env.NODE_ENV === "production") {
     saveUninitialized: false
   }));
 } else {
+  const redisClient = require('redis').createClient();
+  const redisStore = require('connect-redis')(session);
+  
   app.use(session({
     secret: keys.sessionKey,
     name: '_redisStore',
