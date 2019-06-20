@@ -53,8 +53,12 @@ const getCurrentUser = (req, res) => {
 // @Desc      User log out
 const getLogOut = (req, res) => {
   acLog(`User ${req.user.email} has logged out`);
-  req.logOut();
-  res.send();
+  req.session.destroy(err => {
+    if (err) return acLog(err);
+
+    req.logOut();
+    res.send();
+  });
   // res.redirect('/');
 };
 

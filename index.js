@@ -9,8 +9,9 @@ const imageRoute = require('./routes/imageRoute');
 const postRoute = require('./routes/postRoute');
 const userRoute = require('./routes/userRoute');
 const friendRoute = require('./routes/friendRoute');
-// const RedisStore = require('connect-redis')(session);
-// const redis = require("redis").createClient();
+const redisClient = require('redis').createClient();
+const redisStore = require('connect-redis')(session);
+
 
 // Create express app
 const app = express();
@@ -27,13 +28,21 @@ require('./services/passport');
 require('./services/socketio')(server);
 
 // Expres Middlewares
+// app.use(session({
+//   secret: keys.sessionKey,
+//   resave: false,
+//   saveUninitialized: false
+// }));
+
 app.use(session({
-  //PENDING: Express Session store/ mongo/ redis
-  // store: new RedisStore({ host: 'localhost', port: 3000, client: redis }),
   secret: keys.sessionKey,
+  name: '_redisStore',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { secure: false },
+  store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 6*60*60 })
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
