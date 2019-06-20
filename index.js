@@ -28,21 +28,23 @@ require('./services/passport');
 require('./services/socketio')(server);
 
 // Expres Middlewares
-// app.use(session({
-//   secret: keys.sessionKey,
-//   resave: false,
-//   saveUninitialized: false
-// }));
-
-app.use(session({
-  secret: keys.sessionKey,
-  name: '_redisStore',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false },
-  store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 6*60*60 })
-}));
-
+// Setup session storage for mode
+if (process.env.NODE_ENV === "production") {
+  app.use(session({
+    secret: keys.sessionKey,
+    resave: false,
+    saveUninitialized: false
+  }));
+} else {
+  app.use(session({
+    secret: keys.sessionKey,
+    name: '_redisStore',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
+    store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 6 * 60 * 60 })
+  }));
+}
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false

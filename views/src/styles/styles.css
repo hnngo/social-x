@@ -1827,15 +1827,24 @@ body {
   bottom: 0px;
 }
 
-.footer-container p {
+.footer-container a {
   color: #bebebe71;
   cursor: pointer;
 }
 
+.footer-container a:hover, .footer-container a:active, .footer-container a:link, .footer-container a:visited {
+  text-decoration: none;
+  color: #bebebe71;
+}
+
 @media only screen and (min-width: 768px) {
-  .footer-container p:hover {
+  .footer-container a:hover {
     color: white;
   }
+}
+
+.footer-container a i {
+  margin-right: 5px;
 }
 
 .hover-btn-container {
